@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月工作台 · 总览首页</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item active" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">📊</div>
+                <div>
+                    <h1>8月</h1>
+                    <div class="ph-sub">本月工作总览 · 核心指标一览</div>
+                </div>
+        </div>
+        <div class="ph-date">
+            <div class="d-main" id="currentDate">2026年8月</div>
+            <div id="currentWeek">第1周</div>
+        </div>
+    </div>
+
+    <!-- 欢迎横幅 -->
+    <div class="ov-hero">
+        <div class="ov-hero-text">
+            <div class="ov-hero-h" id="ovHello">👋 你好</div>
+            <div class="ov-hero-sub" id="ovHeroSub">本月核心指标与最新进展，一目了然。</div>
+        </div>
+        <div class="ov-hero-badge" id="ovWeekBadge">📅 第1周</div>
+    </div>
+
+    <div class="section-label">核心指标</div>
+    <div class="overview-metrics">
+        <div class="mini-stat"><div class="ms-label">🎯 客户询单</div><div class="ms-value" id="ovInquiry">0 <small>/ 5</small></div></div>
+        <div class="mini-stat success"><div class="ms-label">📝 工作日志</div><div class="ms-value" id="ovLog">0 <small>天</small></div></div>
+        <div class="mini-stat warning"><div class="ms-label">📦 上架链接</div><div class="ms-value" id="ovLinks">0 <small>/ 300</small></div></div>
+        <div class="mini-stat"><div class="ms-label">💰 获得询盘</div><div class="ms-value" id="ovInquiryGot">0 <small>/ 10</small></div></div>
+        <div class="mini-stat danger"><div class="ms-label">🎬 主图视频</div><div class="ms-value" id="ovVideos">0 <small>/ 9</small></div></div>
+    </div>
+
+    <div class="section-label">本月进度看板</div>
+    <div class="ov-progress-grid">
+        <div class="ov-progress-card" id="ovpLinks">
+            <div class="ovp-head"><span class="ovp-label">📦 上架链接</span><span class="ovp-pct">0%</span></div>
+            <div class="ovp-nums"><span class="ovp-done">0</span> / <span class="ovp-target">300</span></div>
+            <div class="stat-progress"><div class="stat-progress-bar ovp-bar" style="width:0%"></div></div>
+        </div>
+        <div class="ov-progress-card" id="ovpVideos">
+            <div class="ovp-head"><span class="ovp-label">🎬 主图视频</span><span class="ovp-pct">0%</span></div>
+            <div class="ovp-nums"><span class="ovp-done">0</span> / <span class="ovp-target">9</span></div>
+            <div class="stat-progress"><div class="stat-progress-bar ovp-bar" style="width:0%"></div></div>
+        </div>
+        <div class="ov-progress-card" id="ovpInquiry">
+            <div class="ovp-head"><span class="ovp-label">🎯 客户询单</span><span class="ovp-pct">0%</span></div>
+            <div class="ovp-nums"><span class="ovp-done">0</span> / <span class="ovp-target">5</span></div>
+            <div class="stat-progress"><div class="stat-progress-bar ovp-bar" style="width:0%"></div></div>
+        </div>
+        <div class="ov-progress-card" id="ovpLog">
+            <div class="ovp-head"><span class="ovp-label">📝 工作日志</span><span class="ovp-pct">0%</span></div>
+            <div class="ovp-nums"><span class="ovp-done">0</span> / <span class="ovp-target">0</span> 天</div>
+            <div class="stat-progress"><div class="stat-progress-bar ovp-bar" style="width:0%"></div></div>
+        </div>
+    </div>
+
+    <!-- 快捷入口 + 最新询单 -->
+    <div class="ov-two-col">
+        <div class="module">
+            <div class="module-header"><div class="module-title"><span class="icon">🧭</span> 快捷入口</div></div>
+            <div class="module-body">
+                <div class="ov-nav-grid">
+                    <a class="ov-nav-card" href="platform.html"><span class="ov-nav-ico">🏭</span><span class="ov-nav-meta"><span class="ov-nav-title">中国制造网</span><span class="ov-nav-desc">上架 / 视频 / 询盘</span></span></a>
+                    <a class="ov-nav-card" href="social.html"><span class="ov-nav-ico">🌐</span><span class="ov-nav-meta"><span class="ov-nav-title">外媒运营</span><span class="ov-nav-desc">6平台发布追踪</span></span></a>
+                    <a class="ov-nav-card" href="okr.html"><span class="ov-nav-ico">🎯</span><span class="ov-nav-meta"><span class="ov-nav-title">OKR工作计划</span><span class="ov-nav-desc">目标与进度</span></span></a>
+                    <a class="ov-nav-card" href="worklog.html"><span class="ov-nav-ico">📝</span><span class="ov-nav-meta"><span class="ov-nav-title">工作日志</span><span class="ov-nav-desc">每日打卡</span></span></a>
+                    <a class="ov-nav-card" href="inquiry.html"><span class="ov-nav-ico">📊</span><span class="ov-nav-meta"><span class="ov-nav-title">询单统计</span><span class="ov-nav-desc">登记与分布</span></span></a>
+                    <a class="ov-nav-card" href="docs.html"><span class="ov-nav-ico">📁</span><span class="ov-nav-meta"><span class="ov-nav-title">工作汇报与文档</span><span class="ov-nav-desc">月志 / 报告</span></span></a>
+                    <a class="ov-nav-card" href="portal.html"><span class="ov-nav-ico">🚪</span><span class="ov-nav-meta"><span class="ov-nav-title">任意门</span><span class="ov-nav-desc">常用链接</span></span></a>
+                    <a class="ov-nav-card" href="#" id="ovTopLink"><span class="ov-nav-ico">⬆️</span><span class="ov-nav-meta"><span class="ov-nav-title">返回顶部</span><span class="ov-nav-desc">快速置顶</span></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-header"><div class="module-title"><span class="icon">📨</span> 最新询单</div><span class="tag tag-blue">实时</span></div>
+            <div class="module-body">
+                <div class="ov-recent" id="ovRecent"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>8月 · 数据自动保存于本地浏览器 · 建议使用 Chrome / Edge 浏览器打开</p>
+        <p style="margin-top:4px;">按 Ctrl+P 可打印当前页面供领导审阅</p>
+    </div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+(function () {
+    var ov = {};
+    try { ov = JSON.parse(localStorage.getItem('wb_overview') || '{}'); } catch (e) {}
+    var h = document.getElementById('ovHello');
+    if (h) {
+        var hr = new Date().getHours();
+        var g = hr < 6 ? '夜深了' : hr < 11 ? '早上好' : hr < 13 ? '中午好' : hr < 18 ? '下午好' : '晚上好';
+        h.textContent = '👋 ' + g + '，欢迎查看本月工作总览';
+    }
+    var wk = document.getElementById('currentWeek'), wb = document.getElementById('ovWeekBadge');
+    if (wb && wk) wb.textContent = '📅 ' + wk.textContent;
+    var linksDone = ov.linksDone !== undefined ? ov.linksDone : 45;
+    var videosDone = ov.videosDone !== undefined ? ov.videosDone : 5;
+    var inquiryTotal = ov.inquiryTotal !== undefined ? ov.inquiryTotal : 6;
+    var logCount = ov.logCount !== undefined ? ov.logCount : 11;
+    var elapsed = new Date().getDate();
+    var heroSub = document.getElementById('ovHeroSub');
+    if (heroSub) {
+        heroSub.textContent = '本月已上架 ' + linksDone + ' 个链接 · 完成主图视频 ' + videosDone + ' 条 · 新增客户询单 ' + inquiryTotal + ' 单 · 工作日志 ' + logCount + ' 天。';
+    }
+    function setCard(id, done, target) {
+        var c = document.getElementById(id); if (!c) return;
+        var pct = target > 0 ? Math.min(100, Math.round(done / target * 100)) : 0;
+        c.querySelector('.ovp-done').textContent = done;
+        c.querySelector('.ovp-target').textContent = target;
+        c.querySelector('.ovp-pct').textContent = pct + '%';
+        c.querySelector('.ovp-bar').style.width = pct + '%';
+    }
+    setCard('ovpLinks', linksDone, 300);
+    setCard('ovpVideos', videosDone, 9);
+    setCard('ovpInquiry', inquiryTotal, 5);
+    setCard('ovpLog', logCount, Math.max(elapsed, 1));
+    var SRC_LABEL = { tiktok: '🎵 TikTok', instagram: '📷 Instagram', facebook: '👤 Facebook', youtube: '▶️ YouTube', twitter: '🐦 推特 X', douyin: '🎵 抖音', mic: '🏭 制造网', other: '📌 其他' };
+    var box = document.getElementById('ovRecent');
+    if (box) {
+        var cards = [];
+        try {
+            var raw = localStorage.getItem('workbench_inquiry_v2');
+            if (raw) {
+                var d = JSON.parse(raw);
+                if (d && d.rows) {
+                    var tmp = document.createElement('tbody'); tmp.innerHTML = d.rows;
+                    tmp.querySelectorAll('tr').forEach(function (tr) {
+                        var filled = false;
+                        tr.querySelectorAll('input,select').forEach(function (i) { if (i.value && i.value.trim()) filled = true; });
+                        if (!filled) return;
+                        var get = function (idx) { var c = tr.children[idx]; return c ? (c.querySelector('input') || c.querySelector('select')) : null; };
+                        var date = get(0), src = get(1), cust = get(2), need = get(4);
+                        cards.push({ date: date ? date.value : '', src: src ? src.value : '', cust: cust ? cust.value : '', need: need ? need.value : '' });
+                    });
+                }
+            }
+        } catch (e) {}
+        if (cards.length === 0) {
+            box.innerHTML = '<div class="empty-state" style="padding:18px;"><div class="icon">📭</div><div>暂无询单记录</div></div>';
+        } else {
+            cards.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+            box.innerHTML = cards.slice(0, 5).map(function (c) {
+                var s = SRC_LABEL[c.src] || c.src || '未填';
+                return '<div class="ov-rec-card"><div class="ov-rec-top"><span class="ov-rec-src">' + s + '</span><span class="ov-rec-date">' + (c.date || '') + '</span></div><div class="ov-rec-cust">👤 ' + (c.cust || '—') + '</div><div class="ov-rec-need">💡 ' + (c.need || '—') + '</div></div>';
+            }).join('');
+        }
+    }
+    var top = document.getElementById('ovTopLink');
+    if (top) top.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+</script>
+</body>
+</html>
