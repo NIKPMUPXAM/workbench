@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>任意门 · 8月工作台</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item active" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">🚪</div>
+            <div>
+                <div class="ph-title">任意门</div>
+                <div class="ph-sub">常用网站 · 外媒账号 · 共享空间 一键直达（可自由新增 / 删除）</div>
+            </div>
+        </div>
+        <div class="ph-right">
+            <span class="tag tag-blue">快捷入口</span>
+        </div>
+    </div>
+
+    <div class="portal-grid" id="portalGrid">
+        <div class="portal-col" data-col="site">
+            <div class="portal-col-title">🌐 网站 <button class="portal-add" data-col="site" type="button" title="新增">＋</button></div>
+            <div class="portal-links" data-col="site"></div>
+            <div class="portal-add-form" data-col="site" hidden>
+                <input class="pa-name" placeholder="名称（如：制造网）">
+                <input class="pa-url" placeholder="链接地址 https://...">
+                <div class="pa-btns"><button class="pa-ok" type="button">添加</button><button class="pa-cancel" type="button">取消</button></div>
+            </div>
+        </div>
+
+        <div class="portal-col" data-col="media">
+            <div class="portal-col-title">📱 外媒 <button class="portal-add" data-col="media" type="button" title="新增">＋</button></div>
+            <div class="portal-links" data-col="media"></div>
+            <div class="portal-add-form" data-col="media" hidden>
+                <input class="pa-name" placeholder="名称（如：TikTok）">
+                <input class="pa-url" placeholder="链接地址 https://...">
+                <div class="pa-btns"><button class="pa-ok" type="button">添加</button><button class="pa-cancel" type="button">取消</button></div>
+            </div>
+        </div>
+
+        <div class="portal-col" data-col="share">
+            <div class="portal-col-title">📂 共享空间 <button class="portal-add" data-col="share" type="button" title="新增">＋</button></div>
+            <div class="portal-links" data-col="share"></div>
+            <div class="portal-add-form" data-col="share" hidden>
+                <input class="pa-name" placeholder="名称（如：市场部\产品主图）">
+                <input class="pa-url" placeholder="UNC 路径 \\\\192.168.50.77\\...">
+                <div class="pa-btns"><button class="pa-ok" type="button">添加</button><button class="pa-cancel" type="button">取消</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:16px;">
+        💡 <strong>一键打开方法：</strong>用本机「打开工作台(本地).bat」双击启动（以 file:// 打开），再点共享空间任意一项即可<strong>直接唤起资源管理器</strong>跳到对应文件夹。<br>
+        若通过 https 分享链接打开，浏览器会拦截 file:// 跳转，此时点击会<strong>复制该路径</strong>并提示用本地启动器打开即可。需本人电脑已连公司局域网（192.168.50.77）。<br>
+        每条链接右上角 🗑 可删除；列标题旁的 ＋ 可新增。
+    </div>
+
+    <div class="footer"><p>任意门模块 · 网站/外媒新窗口打开 · 共享空间点击唤起本机文件资源管理器 · 改动自动保存</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+(function () {
+    var KEY = 'wb_portal';
+    var defaults = {
+        site: [
+            { name: '制造网', url: 'https://cn1524439495ubad.m.en.alibaba.com/productlist.html?spm=a2700.shop_index.88.12.3cbe40a3O0wgU4' },
+            { name: '制造网后台', url: 'https://login.made-in-china.com/sign-in/?baseNextPage=https%3A%2F%2Fwww.made-in-china.com%2F' },
+            { name: '阿里国际站', url: 'https://cn1524439495ubad.m.en.alibaba.com/productlist.html?spm=a2700.shop_index.88.12.3cbe40a3O0wgU4' },
+            { name: '百汇利官网', url: 'http://www.logotouyingdeng.com/xinwenzixun/' },
+            { name: '阿拉丁官网', url: 'https://www.aladdin-noparde.com/information' }
+        ],
+        media: [
+            { name: 'TIKTOK', url: 'https://www.tiktok.com/@aladdinwanglang?lang=zh-Hans' },
+            { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61570812323421' },
+            { name: 'INS', url: 'https://www.instagram.com/direct/inbox/' },
+            { name: '推特', url: 'https://x.com/AladdinGobo' },
+            { name: 'YOUTUBE', url: 'https://studio.youtube.com/channel/UC7ZuW5DsaIet9NEc1synh0g/activity/mentions' }
+        ],
+        share: [
+            { name: '市场部\\各类产品规格书说明书资料\\2.规格书资料', path: '\\\\192.168.50.77\\市场部\\各类产品规格书说明书资料\\2.规格书资料' },
+            { name: '市场部\\丁楠\\运营\\产品主图', path: '\\\\192.168.50.77\\市场部\\丁楠\\运营\\产品主图' },
+            { name: '外贸部\\Tang Tang', path: '\\\\192.168.50.77\\外贸部\\Tang Tang' },
+            { name: '外贸部\\Tang Tang\\外国客户效果图nice', path: '\\\\192.168.50.77\\外贸部\\Tang Tang\\外国客户效果图nice' },
+            { name: '公共文件\\00效果图及视频分类整理\\国外门店广告', path: '\\\\192.168.50.77\\公共文件\\00效果图及视频分类整理\\国外门店广告' },
+            { name: '公共文件\\00效果图及视频分类整理\\国外工厂天车行车警示', path: '\\\\192.168.50.77\\公共文件\\00效果图及视频分类整理\\国外工厂天车行车警示' },
+            { name: '市场部\\彭桂青\\5.A项目案例手册-全国\\A已完成案例', path: '\\\\192.168.50.77\\市场部\\彭桂青\\5.A项目案例手册-全国\\A已完成案例' },
+            { name: '公共文件\\李云鸽\\买家秀2021-9月后', path: '\\\\192.168.50.77\\公共文件\\李云鸽\\买家秀2021-9月后' },
+            { name: '电商客服部\\客户图案效果图', path: '\\\\192.168.50.77\\电商客服部\\客户图案效果图' },
+            { name: '公共文件\\00效果图及视频分类整理', path: '\\\\192.168.50.77\\公共文件\\00效果图及视频分类整理' }
+        ]
+    };
+
+    function load() {
+        try {
+            var d = JSON.parse(localStorage.getItem(KEY) || '{}');
+            if (d && d.site && d.media && d.share) return d;
+        } catch (e) {}
+        return JSON.parse(JSON.stringify(defaults));
+    }
+    function save(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    function render() {
+        var d = load();
+        ['site', 'media', 'share'].forEach(function (col) {
+            var box = document.querySelector('.portal-links[data-col="' + col + '"]');
+            if (!box) return;
+            box.innerHTML = d[col].map(function (it, idx) {
+                if (col === 'share') {
+                    var href = 'file://' + (it.path || '').replace(/\\/g, '/');
+                    return '<div class="portal-item">' +
+                        '<a class="portal-link file-link" href="' + esc(href) + '" target="_blank" rel="noopener">' +
+                            '<div class="pl-name">' + esc(it.name) + '</div>' +
+                            '<div class="pl-url">' + esc(it.path || '') + '</div>' +
+                        '</a>' +
+                        '<button class="portal-del" data-col="' + col + '" data-i="' + idx + '" title="删除">🗑</button>' +
+                    '</div>';
+                }
+                return '<div class="portal-item">' +
+                    '<a class="portal-link" href="' + esc(it.url) + '" target="_blank" rel="noopener">' +
+                        '<div class="pl-name">' + esc(it.name) + '</div>' +
+                        '<div class="pl-url">' + esc(it.url) + '</div>' +
+                    '</a>' +
+                    '<button class="portal-del" data-col="' + col + '" data-i="' + idx + '" title="删除">🗑</button>' +
+                '</div>';
+            }).join('');
+        });
+    }
+
+    // 删除
+    document.getElementById('portalGrid').addEventListener('click', function (e) {
+        var del = e.target.closest('.portal-del');
+        if (del) {
+            if (!confirm('确定删除该链接？此操作不可撤销。')) return;
+            var col = del.getAttribute('data-col');
+            var i = +del.getAttribute('data-i');
+            var d = load();
+            d[col].splice(i, 1);
+            save(d); render();
+            return;
+        }
+        var addBtn = e.target.closest('.portal-add');
+        if (addBtn) {
+            var c = addBtn.getAttribute('data-col');
+            var form = document.querySelector('.portal-add-form[data-col="' + c + '"]');
+            if (form) form.hidden = !form.hidden;
+            return;
+        }
+        var ok = e.target.closest('.pa-ok');
+        if (ok) {
+            var fc = ok.closest('.portal-add-form');
+            var col2 = fc.getAttribute('data-col');
+            var name = fc.querySelector('.pa-name').value.trim();
+            var url = fc.querySelector('.pa-url').value.trim();
+            if (!name) { alert('请输入名称'); return; }
+            var d2 = load();
+            if (col2 === 'share') {
+                if (!url) { alert('请输入 UNC 路径'); return; }
+                d2.share.push({ name: name, path: url });
+            } else {
+                if (!url) { alert('请输入链接地址'); return; }
+                d2[col2].push({ name: name, url: url });
+            }
+            save(d2); render();
+            fc.hidden = true;
+            fc.querySelector('.pa-name').value = '';
+            fc.querySelector('.pa-url').value = '';
+            return;
+        }
+        var cancel = e.target.closest('.pa-cancel');
+        if (cancel) { var f2 = cancel.closest('.portal-add-form'); if (f2) { f2.hidden = true; f2.querySelector('.pa-name').value = ''; f2.querySelector('.pa-url').value = ''; } }
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>
