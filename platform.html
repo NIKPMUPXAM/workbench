@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月工作台 · 中国制造网</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item active" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">🏭</div>
+            <div><h1>中国制造网 · 平台运营</h1><div class="ph-sub">上架链接 / 主图视频 / 询盘 / 数据</div></div>
+        </div>
+        <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第3周</div></div>
+    </div>
+
+    <!-- 左右栏，底部对齐 -->
+    <div class="two-col two-col-stretch">
+
+        <!-- 左栏：运营内容 -->
+        <div class="col-left">
+            <!-- 核心数字 -->
+            <div class="main-grid">
+                <div class="big-number">
+                    <div class="number" id="bnLinks">45</div>
+                    <div class="label">已上架链接</div>
+                    <div class="target">目标：300个</div>
+                </div>
+                <div class="big-number">
+                    <div class="number" id="bnVideos">5</div>
+                    <div class="label">主图视频</div>
+                    <div class="target">目标：9条</div>
+                </div>
+            </div>
+
+            <!-- 产品待上架清单（一字激光5条，其余各1条，共9条） -->
+            <div class="module">
+                <div class="module-header">
+                    <div class="module-title"><span class="icon">📦</span> 产品待上架清单</div>
+                    <span class="tag tag-orange">进行中</span>
+                </div>
+                <div class="module-body">
+                    <div id="prodGroups"></div>
+                    <button class="btn-add-month" type="button">+ 新增月份分组</button>
+                    <div class="product-note" contenteditable="true" data-store="wb_prod_note" title="可编辑：填写上架进度，如「已上架 45 个 / 目标 300 个」">💡 已上架进度：45 / 300（点击此处可直接编辑，填写实际已上架数量）</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右栏：数据看板 + 入口（底部对齐） -->
+        <div class="col-right">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <div class="data-card-title"><span>🏭</span> 制造网运营核心指标</div>
+                    <span class="tag tag-blue">运营数据</span>
+                </div>
+                <div class="data-card-body">
+                        <div class="metric-row">
+                            <div class="metric-mini"><div class="m-value" id="pfLinks" contenteditable="true" title="点击直接修改">45</div><div class="m-label">上架链接</div><div class="m-target">目标 300</div></div>
+                            <div class="metric-mini"><div class="m-value" id="pfInquiry" contenteditable="true" title="点击直接修改">0</div><div class="m-label">获得询盘</div><div class="m-target">目标 10</div></div>
+                            <div class="metric-mini"><div class="m-value" id="pfVideos" contenteditable="true" title="点击直接修改">5</div><div class="m-label">主图视频</div><div class="m-target">目标 9</div></div>
+                        </div>
+
+                    <div class="chart-title">📈 每周上架链接趋势（真实）</div>
+                    <div class="bar-chart">
+                        <div class="bar-col"><div class="bar" style="height:0%"></div><div class="bar-label">W1<br>0</div></div>
+                        <div class="bar-col"><div class="bar" style="height:50%"></div><div class="bar-label">W2<br>15</div></div>
+                        <div class="bar-col"><div class="bar" style="height:100%"></div><div class="bar-label">W3<br>30</div></div>
+                        <div class="bar-col"><div class="bar" style="height:0%"></div><div class="bar-label">W4<br>0</div></div>
+                        <div class="bar-col"><div class="bar" style="height:0%"></div><div class="bar-label">W5<br>0</div></div>
+                    </div>
+
+                    <div class="tip-box" style="margin-top:12px;">💡 上架链接趋势为真实运营数据（W1–W5）；真实询单请在「询单统计」页登记。</div>
+                </div>
+            </div>
+
+            <!-- 中国制造网入口（移到右栏底部） -->
+            <div class="module">
+                <div class="module-header">
+                    <div class="module-title"><span class="icon">🔗</span> 中国制造网入口</div>
+                    <span class="tag tag-blue">官方链接</span>
+                </div>
+                <div class="module-body">
+                    <div class="link-row">
+                        <a class="tool-link" href="https://www.made-in-china.com/" target="_blank" rel="noopener"><span class="tl-icon">🔗</span><span class="tl-text">官网首页</span></a>
+                        <a class="tool-link" href="https://membercenter.made-in-china.com/" target="_blank" rel="noopener"><span class="tl-icon">⚙️</span><span class="tl-text">商家后台</span></a>
+                    </div>
+                    <div class="info-box" style="margin-top:12px;">提示：登录商家后台可查看上架链接、询盘消息与产品数据，与上方运营进度对应核对。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"><p>中国制造网模块 · 数据自动保存于本地浏览器</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+// 产品待上架清单：按月分组、可折叠、可直接编辑（名称/备注/状态/视频/增删/重命名月份）
+(function () {
+    var KEY = 'wb_products';
+    var COLL = 'wb_prod_collapsed';
+    var DEFAULT_MONTH = '八月 2026';
+    var wrap = document.getElementById('prodGroups');
+    if (!wrap) return;
+
+    var STATUS = ['pending', 'review', 'done'];
+    var STATUS_LABEL = { pending: '待上架', review: '待确认', done: '已上架' };
+
+    function seed() {
+        return [
+            { id: 'p1', month: DEFAULT_MONTH, name: '一字激光红光绿蓝单色链接款', detail: '规格：红/绿/蓝 各45', status: 'pending', videos: 5, done: [false, false, false, false, false] },
+            { id: 'p2', month: DEFAULT_MONTH, name: '励影pro300瓦单图', detail: '⚠️ 需询问许总：做哪种效果为主', status: 'review', videos: 1, done: [false] },
+            { id: 'p3', month: DEFAULT_MONTH, name: '考虑80瓦励影单图', detail: '⚠️ 需询问许总：做哪种效果为主', status: 'review', videos: 1, done: [false] },
+            { id: 'p4', month: DEFAULT_MONTH, name: '标识指引 50-100-200 系列', detail: '做励影，励影pro', status: 'review', videos: 1, done: [false] },
+            { id: 'p5', month: DEFAULT_MONTH, name: '双头灯 160-200-300 雷达款 + 摄像头', detail: '⚠️ 需询问许总：做哪种效果为主', status: 'review', videos: 1, done: [false] }
+        ];
+    }
+    function load() {
+        try {
+            var a = JSON.parse(localStorage.getItem(KEY));
+            if (a && a.length) { a.forEach(function (p) { if (!p.month) p.month = DEFAULT_MONTH; }); return a; }
+        } catch (e) {}
+        var s = seed(); save(s); return s;
+    }
+    function save(arr) { try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch (e) {} }
+    function loadCollapsed() { try { return JSON.parse(localStorage.getItem(COLL)) || {}; } catch (e) { return {}; } }
+    function saveCollapsed(o) { try { localStorage.setItem(COLL, JSON.stringify(o)); } catch (e) {} }
+    function esc(s) { var d = document.createElement('div'); d.textContent = (s == null ? '' : s); return d.innerHTML; }
+    function find(arr, id) { for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i]; return null; }
+    function months(arr) {
+        var seen = {}, order = [];
+        arr.forEach(function (p) { if (!seen[p.month]) { seen[p.month] = 1; order.push(p.month); } });
+        return order;
+    }
+
+    function render() {
+        var arr = load();
+        var collapsed = loadCollapsed();
+        var ms = months(arr);
+        wrap.innerHTML = ms.map(function (m) {
+            var items = arr.filter(function (p) { return p.month === m; });
+            var isC = collapsed[m] ? ' collapsed' : '';
+            var caret = collapsed[m] ? '▸' : '▾';
+            var prods = items.map(function (p) {
+                var n = p.videos || 1, done = p.done || [];
+                var vids = '';
+                for (var v = 0; v < n; v++) {
+                    vids += '<label class="pv-tag">🎬 视频' + (v + 1) + ' <input type="checkbox" data-p="' + p.id + '" data-v="' + v + '"' + (done[v] ? ' checked' : '') + '></label>';
+                }
+                return '<li class="product-item" data-id="' + p.id + '">' +
+                    '<div class="product-top">' +
+                        '<input class="product-name" type="text" value="' + esc(p.name) + '" placeholder="产品名称">' +
+                        '<button class="product-del" title="删除该产品">🗑</button>' +
+                    '</div>' +
+                    '<input class="product-detail" type="text" value="' + esc(p.detail) + '" placeholder="规格 / 备注">' +
+                    '<div class="product-bottom">' +
+                        '<select class="product-status status-' + (p.status || 'pending') + '">' +
+                            STATUS.map(function (s) { return '<option value="' + s + '"' + (p.status === s ? ' selected' : '') + '>' + STATUS_LABEL[s] + '</option>'; }).join('') +
+                        '</select>' +
+                        '<div class="product-videos">' + vids + '</div>' +
+                    '</div>' +
+                '</li>';
+            }).join('');
+            return '<div class="prod-month' + isC + '" data-month="' + esc(m) + '">' +
+                '<div class="pm-head">' +
+                    '<span class="pm-caret">' + caret + '</span>' +
+                    '<span class="pm-name" contenteditable="true" title="点击重命名月份">' + esc(m) + '</span>' +
+                    '<span class="pm-count">' + items.length + ' 项</span>' +
+                '</div>' +
+                '<div class="pm-body">' +
+                    '<ul class="product-list">' + prods + '</ul>' +
+                    '<button class="btn-add-prod" data-month="' + esc(m) + '" type="button">+ 新增产品</button>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    wrap.addEventListener('click', function (e) {
+        var head = e.target.closest('.pm-head');
+        if (head) {
+            var monthDiv = head.closest('.prod-month');
+            var m = monthDiv.getAttribute('data-month');
+            var c = loadCollapsed();
+            c[m] = !c[m];
+            saveCollapsed(c);
+            monthDiv.classList.toggle('collapsed');
+            head.querySelector('.pm-caret').textContent = c[m] ? '▸' : '▾';
+            return;
+        }
+        var del = e.target.closest('.product-del');
+        if (del) {
+            if (!confirm('确定删除该产品？')) return;
+            var id = del.closest('.product-item').getAttribute('data-id');
+            save(load().filter(function (x) { return x.id !== id; }));
+            render();
+            return;
+        }
+        var add = e.target.closest('.btn-add-prod');
+        if (add) {
+            var m2 = add.getAttribute('data-month');
+            var arr = load();
+            arr.push({ id: 'p' + Date.now(), month: m2, name: '新待上架产品', detail: '', status: 'pending', videos: 1, done: [false] });
+            save(arr); render();
+        }
+    });
+
+    wrap.addEventListener('input', function (e) {
+        var inp = e.target.closest('.product-name, .product-detail');
+        if (!inp) return;
+        var p = find(load(), inp.closest('.product-item').getAttribute('data-id'));
+        if (p) { p[inp.classList.contains('product-name') ? 'name' : 'detail'] = inp.value; var arr = load(); save(arr.map(function (x) { return x.id === p.id ? p : x; })); }
+    });
+    wrap.addEventListener('change', function (e) {
+        var sel = e.target.closest('select.product-status');
+        if (sel) {
+            var p = find(load(), sel.closest('.product-item').getAttribute('data-id'));
+            if (p) { p.status = sel.value; var arr = load(); save(arr.map(function (x) { return x.id === p.id ? p : x; })); render(); }
+            return;
+        }
+        var cb = e.target.closest('input[type=checkbox]');
+        if (cb) {
+            var p2 = find(load(), cb.getAttribute('data-p'));
+            if (p2) { if (!p2.done) p2.done = []; p2.done[+cb.getAttribute('data-v')] = cb.checked; var arr = load(); save(arr.map(function (x) { return x.id === p2.id ? p2 : x; })); }
+        }
+    });
+    // 月份重命名（focusout 冒泡）
+    wrap.addEventListener('focusout', function (e) {
+        var nm = e.target.closest('.pm-name');
+        if (!nm) return;
+        var monthDiv = nm.closest('.prod-month');
+        var oldM = monthDiv.getAttribute('data-month');
+        var newM = nm.textContent.trim();
+        if (!newM) { nm.textContent = oldM; return; }
+        if (newM === oldM) return;
+        var arr = load();
+        arr.forEach(function (p) { if (p.month === oldM) p.month = newM; });
+        save(arr);
+        monthDiv.setAttribute('data-month', newM);
+        var add = monthDiv.querySelector('.btn-add-prod'); if (add) add.setAttribute('data-month', newM);
+        var c = loadCollapsed();
+        if (c[oldM] !== undefined) { c[newM] = c[oldM]; delete c[oldM]; saveCollapsed(c); }
+    });
+
+    var addMonthBtn = document.querySelector('.btn-add-month');
+    if (addMonthBtn) addMonthBtn.addEventListener('click', function () {
+        var arr = load();
+        var m = '新月份 ' + (months(arr).length + 1);
+        arr.push({ id: 'p' + Date.now(), month: m, name: '新待上架产品', detail: '', status: 'pending', videos: 1, done: [false] });
+        save(arr); render();
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>
