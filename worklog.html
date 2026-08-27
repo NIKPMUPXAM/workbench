@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月工作台 · 工作日志</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item active" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">📝</div>
+            <div><h1>工作日志</h1><div class="ph-sub">每日执行记录 · 留痕可追溯</div></div>
+        </div>
+        <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第3周</div></div>
+    </div>
+
+    <!-- 左右等大 -->
+    <div class="two-col two-col-equal two-col-stretch">
+
+        <!-- 左：记录今日工作 + 日历 -->
+        <div class="module">
+            <div class="module-header">
+                <div class="module-title"><span class="icon">✍️</span> 记录今日工作</div>
+                <span class="tag tag-blue">覆盖保存</span>
+            </div>
+            <div class="module-body">
+                <label class="okr-label">📅 日期</label>
+                <input type="date" id="logDate" class="okr-o">
+                <label class="okr-label" style="margin-top:12px;">📝 工作内容</label>
+                <textarea id="logContent" rows="7" class="log-input" placeholder="记录今日完成的工作、遇到的问题、明日计划……"></textarea>
+                <button class="btn-add-row" id="logSave" type="button" style="margin-top:12px;">💾 保存日志（覆盖当日）</button>
+
+                <!-- 日历栏 -->
+                <div style="margin-top:18px;padding-top:16px;border-top:1px dashed var(--border-color);">
+                    <div class="cal-nav">
+                        <button type="button" id="logCalPrev" aria-label="上一月">◀</button>
+                        <span class="cal-label" id="logCalLabel">2026年 8月</span>
+                        <button type="button" id="logCalNext" aria-label="下一月">▶</button>
+                    </div>
+                    <div class="cal-hint">点击日期可加载当日日志（有日志的日期高亮）　·　可翻到未来月份提前记录</div>
+                    <div class="log-calendar" id="logCalendar"></div>
+                </div>
+
+                <div class="tip-box" style="margin-top:10px;">💡 同一日期多次保存会<strong>覆盖</strong>原有内容；点击日历日期可快速加载当日日志。</div>
+            </div>
+        </div>
+
+        <!-- 右：日志列表（等大） -->
+        <div class="module">
+            <div class="module-header">
+                <div class="module-title"><span class="icon">📚</span> 日志列表</div>
+                <div class="module-header-right">
+                    <span class="tag tag-blue">历史记录</span>
+                    <button class="module-toggle" type="button" title="折叠 / 展开">▾</button>
+                </div>
+            </div>
+            <div class="module-body" style="display:flex;flex-direction:column;">
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <span class="fg-label">范围</span>
+                        <button class="filter-btn active" data-range="all">全部</button>
+                        <button class="filter-btn" data-range="week">本周</button>
+                        <button class="filter-btn" data-range="month">本月</button>
+                        <button class="filter-btn" data-range="year">本年</button>
+                    </div>
+                </div>
+                <div id="logList" style="flex:1;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"><p>工作日志模块 · 数据自动保存于本地浏览器</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+(function () {
+    var KEY = 'wb_worklog';
+    try {
+        var d = JSON.parse(localStorage.getItem(KEY) || '[]');
+        var defaults = [
+            { date: '2026-08-01', text: '1. 分类整理电脑所有素材，上传到共享，清出了70GB位置\n2. 制定8月OKR\n3. 剪辑视频一条\n4. 抖音、快手、视频号更新1条\n5. 收集抖音各个账号数据\n6. 做数据总结PPT' },
+            { date: '2026-08-03', text: '1. 登记上周询单，统计数据\n2. 抖音、快手、视频号更新3条\n3. 数据汇报PPT制作\n4. 剪辑视频两条（一条未完成）\n5. 全员营销账号数据统计\n6. 了解抖音置顶三联封面制作方法\n7. 给近期视频打上投影灯词条，15个' },
+            { date: '2026-08-04', text: '1. 剪辑视频一条\n2. 抖音、快手、视频号更新1条\n3. 给近期视频打上投影灯词条，15个\n4. 7月月度数据汇报\n5. 了解workbuddy如何使用\n6. 尝试生成工作台\n7. AI生成了视频一条' },
+            { date: '2026-08-05', text: '1. 尝试搭建workbuddy工作台（待改进）\n2. 查看制造网相关群聊的过往聊天记录，了解基础工作内容，登录制造网熟悉页面，看王总发的文件\n3. 重新整理工作日志表。确认明天工作内容' },
+            { date: '2026-08-06', text: '1. 运营早会\n2. 完成了第一个产品的上架，优化修改了多次（后续铺链接要等更新主图）\n3. 登录王总给的社媒账号\n4. AI生成了三条外墙视频（未二次剪辑完成）\n5. 找刘斐要了阿里国际站的网址，尝试拿图片过来上；向刘斐学习GPT生图，看她做的一个ppt\n6. 找张楠问主图是怎么做的，视频绑定问题，还有产品上架的问题，看张楠设计需求如何下单的\n7. 找若彤收集了外国的图案效果' },
+            { date: '2026-08-07', text: '1. 向张楠询问产品上新数量，做上新计划\n2. 收集优质主图，下单美工工作图\n3. 二次剪辑ai视频\n4. 登录外媒各平台账号\n5. 更新外媒抖音三条\n6. 工作台分享及7月总结会' },
+            { date: '2026-08-10', text: '1. 向许总了解链接问题，修改提到的问题\n2. 查看行业关键词，重新做修改；找产品主图，重新上传\n3. 找刘斐要了国际站的后台，在后台下载了图片用作制造网的主图和详情图\n4. 用AI生成视频2条（今天生成的效果一直不尽人意，不断修改，额度也用完了）\n5. 更新视频到外媒\n6. 拿谷歌账号，登录chatgpt' },
+            { date: '2026-08-11', text: '1. 收集关键词，优质主图\n2. 登记上周询单，统计数据\n3. 尝试使用GPT生成产品主图，细节问题还需要优化\n4. 查看各外媒的私信路径，重新登录了一个脸书账号\n5. 与设计部沟通主图修改问题\n6. 制造网会议\n7. AI生成视频两条，二次剪辑\n8. 更新视频到外媒，国内抖音两条' },
+            { date: '2026-08-12', text: '1. AI生成视频两条，重新改指令三次，二次剪辑两条\n2. INS, YOUTUBE, TK, X, FACEBOOK, 抖音更新两条\n3. 与许总美工沟通主图修改问题三次\n4. CHATGPT生成产品主图四张\n5. 观看中国制造网展会专题直播\n6. 国内外短视频拍摄主题与内容沟通会' },
+            { date: '2026-08-13', text: '1. 运营早会\n2. AI生成视频两条；二次剪辑两条\n3. INS, 油管, TK, X, 脸书更新两条\n4. 优化workbuddy工作台\n5. 下单更改主图，红绿蓝三色\n6. GPT生成主图三张；优化产品副图5张\n7. 优化产品链接一条\n8. 上架产品链接14个（一键发品，草稿出来了，还要改一下内容）\n帮若彤解决电脑内存问题；给许总发社媒账号网址' },
+            { date: '2026-08-14', text: '1. 拍摄视频六条\n2. 产品亮点，FAQ重新做了一份模板\n3. AI生成视频两条；二次剪辑两条\n4. INS, 油管, TK, X, 脸书更新两条\n5. 上一字激光10W绿色链接15个' },
+            { date: '2026-08-17', text: '1. 登记上周询单，统计数据\n2. 剪辑视频两条\n3. INS, YOUTUBE, TK, X, FACEBOOK更新两条，格式太高了，发布不了，重新导出了一版\n4. 主图重复，重新给GPT修改\n5. 优化链接两条，分配15个链接给5个业务员（张楠协助）\n6. 优化workbuddy工作台\n7. 下单主图修改颜色；准备下单励影pro300瓦主图，确认标题卖点主图需求' },
+            { date: '2026-08-18', text: '1. 下单励影PRO主图30张需求\n2. 收集优质详情图，做励影PRO详情图需求表，下单\n3. INS, 油管, TK, 推特, 脸书, 领英, Pinterest更新两条\n4. 填写OKR完成情况\n5. 上架链接15条，一字激光的10W红色分配给业务' },
+            { date: '2026-08-19', text: '1. INS，油管，TK，推特，脸书，领英，Pinterest更新两条\n2. 收集一字线外媒成片五条\n3. 领英，脸书更新头像简介背景图\n4. 做励影指引标识详情图需求表，下单\n5. 拍摄一字线蓝色素材；协助诗妍拍摄视频；上传蓝色一字激光素材库，上架链接15条，一字激光的10W蓝色分给超业务\n6. 优化workbuddy工作台' }
+        ];
+        var changed = false;
+        defaults.forEach(function (def) {
+            var exists = d.some(function (it) { return it.date === def.date; });
+            if (!exists) { d.push(def); changed = true; }
+        });
+        if (changed) {
+            d.sort(function (a, b) { return b.date.localeCompare(a.date); });
+            localStorage.setItem(KEY, JSON.stringify(d));
+        }
+    } catch (e) {}
+    // 同步日志条数到总览快照
+    try {
+        var _ov = JSON.parse(localStorage.getItem('wb_overview') || '{}');
+        _ov.logCount = (JSON.parse(localStorage.getItem(KEY) || '[]')).length || 0;
+        _ov.updatedAt = new Date().toISOString();
+        localStorage.setItem('wb_overview', JSON.stringify(_ov));
+    } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+    var KEY = 'wb_worklog';
+    var list = document.getElementById('logList');
+    var dateI = document.getElementById('logDate');
+    var contentI = document.getElementById('logContent');
+    var calEl = document.getElementById('logCalendar');
+    if (dateI && !dateI.value) dateI.value = new Date().toISOString().slice(0, 10);
+
+    function get() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; } }
+    function save(arr) { try { localStorage.setItem(KEY, JSON.stringify(arr)); var _ov = JSON.parse(localStorage.getItem('wb_overview') || '{}'); _ov.logCount = arr.length; _ov.updatedAt = new Date().toISOString(); localStorage.setItem('wb_overview', JSON.stringify(_ov)); } catch (e) {} }
+    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    // 按日期查找索引
+    function findByDate(dateStr) {
+        var d = get();
+        for (var i = 0; i < d.length; i++) { if (d[i].date === dateStr) return i; }
+        return -1;
+    }
+
+    // 渲染日志列表（支持按周 / 月 / 年筛选）
+    var curLogFilter = 'all';
+    function inLogRange(ds) {
+        if (curLogFilter === 'all' || !ds) return true;
+        var d = new Date(ds + 'T00:00:00');
+        if (isNaN(d)) return true;
+        var now = new Date();
+        if (curLogFilter === 'year') return d.getFullYear() === now.getFullYear();
+        if (curLogFilter === 'month') return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+        if (curLogFilter === 'week') {
+            var day = (now.getDay() + 6) % 7; // 周一为0
+            var monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - day);
+            monday.setHours(0, 0, 0, 0);
+            var sunday = new Date(monday); sunday.setDate(monday.getDate() + 7);
+            return d >= monday && d < sunday;
+        }
+        return true;
+    }
+    function render() {
+        var d = get();
+        if (!d.length) {
+            list.innerHTML = '<div class="empty-state"><div class="icon">📝</div><div>暂无日志，开始记录吧</div></div>';
+        } else {
+            var html = '';
+            d.forEach(function (it, idx) {
+                if (!inLogRange(it.date)) return;
+                html += '<div class="log-item"><div class="log-meta"><span>📅 ' + esc(it.date) + '</span><button class="log-del" data-i="' + idx + '">删除</button></div><div class="log-text">' + esc(it.text) + '</div></div>';
+            });
+            list.innerHTML = html || '<div class="empty-state"><div class="icon">📝</div><div>该范围内暂无日志</div></div>';
+        }
+        list.querySelectorAll('.log-del').forEach(function (b) {
+            b.addEventListener('click', function () {
+                if (!confirm('确定删除该工作日志？此操作不可撤销。')) return;
+                var arr = get(); arr.splice(+b.getAttribute('data-i'), 1);
+                save(arr); render(); renderCalendar();
+            });
+        });
+    }
+
+    // 渲染日历（高亮有日志的日期，支持月份翻页）
+    var MONTHS = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+    var _now = new Date();
+    var viewY = _now.getFullYear(), viewM = _now.getMonth();
+    var calPrev = document.getElementById('logCalPrev');
+    var calNext = document.getElementById('logCalNext');
+    var calLabel = document.getElementById('logCalLabel');
+
+    function renderCalendar() {
+        if (!calEl) return;
+        var d = get();
+        var datesWithLogs = {};
+        d.forEach(function (it) { datesWithLogs[it.date] = true; });
+
+        var y = viewY, m = viewM;
+        var firstDay = new Date(y, m, 1).getDay(); // 0=周日
+        var daysInMonth = new Date(y, m + 1, 0).getDate();
+        var adjFirst = firstDay === 0 ? 6 : firstDay - 1; // 周一起
+        var isCurMonth = (y === _now.getFullYear() && m === _now.getMonth());
+
+        if (calLabel) calLabel.textContent = y + '年 ' + MONTHS[m];
+
+        var html = '<div class="cal-row">';
+        ['一', '二', '三', '四', '五', '六', '日'].forEach(function (dn) {
+            html += '<div class="cal-cell cal-head">' + dn + '</div>';
+        });
+        html += '</div><div class="cal-row">';
+        for (var i = 0; i < adjFirst; i++) html += '<div class="cal-cell cal-empty"></div>';
+        for (var day = 1; day <= daysInMonth; day++) {
+            var ds = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+            var hasLog = datesWithLogs[ds];
+            var isToday = isCurMonth && (day === _now.getDate());
+            var cls = 'cal-cell' + (hasLog ? ' cal-has-log' : '') + (isToday ? ' cal-today' : '');
+            html += '<div class="' + cls + '" data-date="' + ds + '">' + day + '</div>';
+            if ((adjFirst + day) % 7 === 0 && day < daysInMonth) html += '</div><div class="cal-row">';
+        }
+        html += '</div>';
+        calEl.innerHTML = html;
+
+        // 点击日历加载对应日志
+        calEl.querySelectorAll('.cal-cell[data-date]').forEach(function (cell) {
+            cell.addEventListener('click', function () {
+                var dt = cell.getAttribute('data-date');
+                dateI.value = dt;
+                var idx = findByDate(dt);
+                contentI.value = idx >= 0 ? get()[idx].text : '';
+                contentI.focus();
+            });
+        });
+    }
+
+    if (calPrev) calPrev.addEventListener('click', function () {
+        viewM--; if (viewM < 0) { viewM = 11; viewY--; }
+        renderCalendar();
+    });
+    if (calNext) calNext.addEventListener('click', function () {
+        viewM++; if (viewM > 11) { viewM = 0; viewY++; }
+        renderCalendar();
+    });
+
+    // 保存：覆盖当日
+    var saveBtn = document.getElementById('logSave');
+    if (saveBtn) saveBtn.addEventListener('click', function () {
+        var t = contentI.value.trim();
+        if (!t) { alert('请输入日志内容'); return; }
+        var dt = dateI.value || new Date().toISOString().slice(0, 10);
+        var arr = get();
+        var idx = findByDate(dt);
+        if (idx >= 0) {
+            arr[idx].text = t; // 覆盖
+        } else {
+            arr.unshift({ date: dt, text: t }); // 新增
+        }
+        save(arr);
+        render(); renderCalendar();
+        contentI.value = '';
+    });
+
+    // 周 / 月 / 年 筛选
+    var lf = document.querySelector('.filter-bar');
+    if (lf) {
+        lf.querySelectorAll('.filter-btn').forEach(function (b) {
+            b.addEventListener('click', function () {
+                lf.querySelectorAll('.filter-btn').forEach(function (x) { x.classList.remove('active'); });
+                b.classList.add('active');
+                curLogFilter = b.getAttribute('data-range');
+                render();
+            });
+        });
+    }
+
+    render();
+    renderCalendar();
+})();
+</script>
+</body>
+</html>
