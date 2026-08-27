@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月工作台 · 询单统计</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item active" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">📊</div>
+            <div><h1>询单统计</h1><div class="ph-sub">询盘登记 · 数据追踪</div></div>
+        </div>
+        <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第3周</div></div>
+    </div>
+
+    <!-- 统计概览 -->
+    <div class="overview-metrics" style="margin-bottom:18px;">
+        <div class="mini-stat"><div class="ms-label">询单总数</div><div class="ms-value" id="statTotal">0</div></div>
+        <div class="mini-stat success"><div class="ms-label">本月目标</div><div class="ms-value">5<small> 个</small></div></div>
+        <div class="mini-stat warning"><div class="ms-label">完成率</div><div class="ms-value" id="statRate">0<small>%</small></div></div>
+    </div>
+
+    <!-- 询单数据表（5列） -->
+    <div class="module">
+        <div class="module-header">
+            <div class="module-title"><span class="icon">📨</span> 询单登记表</div>
+            <div class="module-header-right">
+                <span class="tag tag-blue">实时保存</span>
+                <button class="module-toggle" type="button" title="折叠 / 展开">▾</button>
+            </div>
+        </div>
+        <div class="module-body">
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <span class="fg-label">时间</span>
+                    <button class="filter-btn active" data-range="all">全部</button>
+                    <button class="filter-btn" data-range="week">本周</button>
+                    <button class="filter-btn" data-range="month">本月</button>
+                    <button class="filter-btn" data-range="quarter">本季</button>
+                    <button class="filter-btn" data-range="year">本年</button>
+                </div>
+                <div class="filter-group">
+                    <span class="fg-label">来源</span>
+                    <select class="filter-source" id="filterSource">
+                        <option value="">全部来源</option>
+                        <option value="tiktok">TikTok</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="twitter">推特 X</option>
+                        <option value="douyin">抖音</option>
+                        <option value="mic">中国制造网</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="inquiry-table-wrapper">
+                <table class="inquiry-table" id="inquiryTable" data-key="workbench_inquiry_v2">
+                    <colgroup>
+                        <col style="width:13%">
+                        <col style="width:15%">
+                        <col style="width:17%">
+                        <col style="width:13%">
+                        <col style="width:37%">
+                        <col style="width:5%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>询单来源</th>
+                            <th>客户名字</th>
+                            <th>分配业务</th>
+                            <th>大致需求</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="date" value="2026-08-03"></td>
+                            <td>
+                                <select>
+                                    <option value="">— 选择来源 —</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitter">推特 X</option>
+                                    <option value="douyin" selected>抖音</option>
+                                    <option value="mic">中国制造网</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </td>
+                            <td><input type="text" value="陈世利（13808806459）wxid_1ezq4mmiarwi22"></td>
+                            <td><input type="text" value="文凤"></td>
+                            <td><input type="text" value="图案：150W的图案灯50台现在什么价格？四图全彩的DMX512"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" value="2026-08-08"></td>
+                            <td>
+                                <select>
+                                    <option value="">— 选择来源 —</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitter">推特 X</option>
+                                    <option value="douyin" selected>抖音</option>
+                                    <option value="mic">中国制造网</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </td>
+                            <td><input type="text" value="SF18163593333"></td>
+                            <td><input type="text" value="俊彬"></td>
+                            <td><input type="text" value="文安：行人过街激光警示柱"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" value="2026-08-08"></td>
+                            <td>
+                                <select>
+                                    <option value="">— 选择来源 —</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitter">推特 X</option>
+                                    <option value="douyin" selected>抖音</option>
+                                    <option value="mic">中国制造网</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </td>
+                            <td><input type="text" value="SleepingSun_125"></td>
+                            <td><input type="text" value="俊彬"></td>
+                            <td><input type="text" value="文旅：商业街亮化"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" value="2026-08-12"></td>
+                            <td>
+                                <select>
+                                    <option value="">— 选择来源 —</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitter">推特 X</option>
+                                    <option value="douyin" selected>抖音</option>
+                                    <option value="mic">中国制造网</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </td>
+                            <td><input type="text" value="加我微信13925475295"></td>
+                            <td><input type="text" value="志良"></td>
+                            <td><input type="text" value="广告：需要广告投影灯"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" value="2026-08-14"></td>
+                            <td>
+                                <select>
+                                    <option value="">— 选择来源 —</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitter">推特 X</option>
+                                    <option value="douyin" selected>抖音</option>
+                                    <option value="mic">中国制造网</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </td>
+                            <td><input type="text" value="18643338867"></td>
+                            <td><input type="text" value="志良"></td>
+                            <td><input type="text" value="文旅：彩虹灯"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" value="2026-08-17"></td>
+                            <td>
+                                <select>
+                                    <option value="">— 选择来源 —</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitter">推特 X</option>
+                                    <option value="douyin" selected>抖音</option>
+                                    <option value="mic">中国制造网</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </td>
+                            <td><input type="text" value="13692814327"></td>
+                            <td><input type="text" value="文凤"></td>
+                            <td><input type="text" value="其他"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date"></td>
+                            <td>
+                                <select>
+                                    <option value="">— 选择来源 —</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitter">推特 X</option>
+                                    <option value="douyin">抖音</option>
+                                    <option value="mic">中国制造网</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </td>
+                            <td><input type="text" placeholder="客户名/公司名"></td>
+                            <td><input type="text" placeholder="业务员姓名"></td>
+                            <td><input type="text" placeholder="客户大致需求描述..."></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn-add-row" type="button">+ 新增一行</button>
+            <div class="tip-box">💡 数据自动保存到本地浏览器；来源支持外媒平台 / 制造网 / 其他渠道。</div>
+        </div>
+    </div>
+
+    <!-- 来源分布（可点击筛选） -->
+    <div class="module">
+        <div class="module-header">
+            <div class="module-title"><span class="icon">📈</span> 来源分布</div>
+            <span class="tag tag-blue">点击筛选</span>
+        </div>
+        <div class="module-body">
+            <div class="source-row">
+                <div id="sourceStats" class="source-chips"></div>
+                <button id="sourceClear" class="source-clear" type="button">✕ 清除来源筛选</button>
+            </div>
+            <div id="sourceResult" class="source-result"></div>
+            <div class="empty-state" id="noStatsHint" style="padding:16px;"><div class="icon">📊</div><div>登记询单后自动显示来源分布</div></div>
+        </div>
+    </div>
+
+    <div class="footer"><p>询单统计模块 · 数据自动保存于本地浏览器</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+(function () {
+    var table = document.getElementById('inquiryTable');
+    var body = table ? table.querySelector('tbody') : null;
+    var curSource = '';
+    var curRange = 'all';
+
+    var SRC_NAMES = {
+        tiktok: '🎵 TikTok', instagram: '📷 Instagram', facebook: '👤 Facebook',
+        youtube: '▶️ YouTube', twitter: '🐦 推特 X', douyin: '🎵 抖音',
+        mic: '🏭 制造网', other: '📌 其他'
+    };
+    var SOURCES_ORDER = ['tiktok','instagram','facebook','youtube','twitter','douyin','mic','other'];
+
+    // 日期是否在指定范围内
+    function inRange(ds) {
+        if (curRange === 'all' || !ds) return true;
+        var d = new Date(ds + 'T00:00:00');
+        if (isNaN(d)) return true;
+        var now = new Date();
+        if (curRange === 'year') return d.getFullYear() === now.getFullYear();
+        if (curRange === 'month') return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+        if (curRange === 'quarter') {
+            var q = Math.floor(now.getMonth() / 3), qd = Math.floor(d.getMonth() / 3);
+            return d.getFullYear() === now.getFullYear() && q === qd;
+        }
+        if (curRange === 'week') {
+            var day = (now.getDay() + 6) % 7; // 周一为0
+            var monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - day);
+            monday.setHours(0, 0, 0, 0);
+            var sunday = new Date(monday); sunday.setDate(monday.getDate() + 7);
+            return d >= monday && d < sunday;
+        }
+        return true;
+    }
+
+    function rowSource(tr) {
+        var sel = tr.children[1] ? tr.children[1].querySelector('select') : null;
+        return sel ? sel.value : '';
+    }
+    function rowDate(tr) {
+        var inp = tr.children[0] ? tr.children[0].querySelector('input') : null;
+        return inp ? inp.value : '';
+    }
+    function rowHasData(tr) {
+        for (var i = 0; i < tr.children.length; i++) {
+            var inp = tr.children[i].querySelector('input');
+            var sel = tr.children[i].querySelector('select');
+            if (inp && inp.value.trim()) return true;
+            if (sel && sel.value) return true;
+        }
+        return false;
+    }
+
+    // 统计 + 分布 + 过滤
+    function refresh() {
+        if (!body) return;
+        var rows = body.querySelectorAll('tr');
+        var total = 0, matched = 0;
+        var sourceCount = {};
+        rows.forEach(function (tr) {
+            if (!rowHasData(tr)) { tr.style.display = 'none'; return; }
+            total++;
+            var src = rowSource(tr);
+            if (src) sourceCount[src] = (sourceCount[src] || 0) + 1;
+            var ok = inRange(rowDate(tr)) && (!curSource || src === curSource);
+            tr.style.display = ok ? '' : 'none';
+            if (ok) matched++;
+        });
+
+        var g = function (id) { return document.getElementById(id); };
+        if (g('statTotal')) g('statTotal').textContent = total;
+        if (g('statRate')) g('statRate').innerHTML = Math.min(100, Math.round(total / 5 * 100)) + '<small>%</small>';
+
+        // 来源分布 chips（展示全部来源，点击即筛选）
+        var ssEl = document.getElementById('sourceStats');
+        var nsEl = document.getElementById('noStatsHint');
+        var clearBtn = document.getElementById('sourceClear');
+        var resultEl = document.getElementById('sourceResult');
+        if (ssEl && nsEl) {
+            var keys = Object.keys(sourceCount);
+            if (keys.length === 0) {
+                ssEl.innerHTML = ''; nsEl.style.display = '';
+            } else {
+                nsEl.style.display = 'none';
+                ssEl.innerHTML = SOURCES_ORDER.map(function (k) {
+                    var c = sourceCount[k] || 0;
+                    var cls = 'source-chip' + (curSource === k ? ' active' : '') + (c === 0 ? ' empty' : '');
+                    return '<button type="button" class="' + cls + '" data-src="' + k + '">' +
+                        (SRC_NAMES[k] || k) + ' <span class="cnt">' + c + '</span></button>';
+                }).join('');
+            }
+            if (clearBtn) clearBtn.classList.toggle('show', !!curSource);
+            if (resultEl) {
+                if (curSource) {
+                    resultEl.innerHTML = '正在按 <b>' + (SRC_NAMES[curSource] || curSource) + '</b> 筛选 · 显示 ' + matched + ' / ' + total + ' 条';
+                    resultEl.style.display = '';
+                } else {
+                    resultEl.style.display = 'none';
+                }
+            }
+        }
+    }
+
+    // 过滤按钮（时间）
+    var fbar = document.querySelector('.filter-bar');
+    if (fbar) {
+        fbar.querySelectorAll('.filter-btn').forEach(function (b) {
+            b.addEventListener('click', function () {
+                fbar.querySelectorAll('.filter-btn').forEach(function (x) { x.classList.remove('active'); });
+                b.classList.add('active');
+                curRange = b.getAttribute('data-range');
+                refresh();
+            });
+        });
+        var srcSel = document.getElementById('filterSource');
+        if (srcSel) srcSel.addEventListener('change', function () { curSource = srcSel.value; refresh(); });
+    }
+
+    // 来源分布 chips 点击 → 设置来源筛选
+    var ssEl = document.getElementById('sourceStats');
+    if (ssEl) ssEl.addEventListener('click', function (e) {
+        var chip = e.target.closest('.source-chip');
+        if (!chip) return;
+        var k = chip.getAttribute('data-src');
+        curSource = (curSource === k) ? '' : k; // 再点取消
+        var srcSel = document.getElementById('filterSource');
+        if (srcSel) srcSel.value = curSource;
+        refresh();
+    });
+
+    // 清除来源筛选
+    var clearBtn = document.getElementById('sourceClear');
+    if (clearBtn) clearBtn.addEventListener('click', function () {
+        curSource = '';
+        var srcSel = document.getElementById('filterSource');
+        if (srcSel) srcSel.value = '';
+        refresh();
+    });
+
+    if (body) {
+        body.addEventListener('input', refresh);
+        body.addEventListener('change', refresh);
+        if (window.MutationObserver) { new MutationObserver(refresh).observe(body, { childList: true, subtree: true }); }
+        refresh();
+    }
+})();
+</script>
+</body>
+</html>
