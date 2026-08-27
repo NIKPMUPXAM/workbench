@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月工作台 · 外媒运营</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item active" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">🌐</div>
+            <div><h1>外媒运营</h1><div class="ph-sub">海外社媒矩阵运营 · AI 内容生产与 6 平台发布追踪</div></div>
+        </div>
+        <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第3周</div></div>
+    </div>
+
+    <!-- ============ ① 内容生产 · AI 辅助（内容创作扩大 / AI视频缩小） ============ -->
+    <div class="social-section">
+        <div class="section-bar"><span class="sb-index">1</span> 内容生产 · AI 辅助</div>
+        <div class="two-col two-col-wide">
+            <!-- 左：内容创作 · AI文案生成（扩大） -->
+            <div class="module">
+                <div class="module-header">
+                    <div class="module-title"><span class="icon">🎨</span> 内容创作 · AI文案生成</div>
+                    <span class="tag tag-blue">智能文案</span>
+                </div>
+                <div class="module-body">
+                    <div class="creator-form">
+                        <div class="creator-grid">
+                            <div class="creator-field">
+                                <label>发布平台</label>
+                                <select id="ccPlatform">
+                                    <option value="tiktok">🎵 TikTok</option>
+                                    <option value="instagram">📷 Instagram</option>
+                                    <option value="facebook">👤 Facebook</option>
+                                    <option value="youtube">▶️ YouTube</option>
+                                    <option value="twitter">🐦 推特 X</option>
+                                    <option value="douyin">🎵 抖音</option>
+                                </select>
+                            </div>
+                            <div class="creator-field">
+                                <label>目标语言</label>
+                                <select id="ccLang">
+                                    <option value="zh">中文</option>
+                                    <option value="en">英文</option>
+                                    <option value="bi">中英双语</option>
+                                </select>
+                            </div>
+                            <div class="creator-field">
+                                <label>文案风格</label>
+                                <select id="ccTone">
+                                    <option value="hook">🔥 吸睛种草</option>
+                                    <option value="pro">🧪 专业测评</option>
+                                    <option value="casual">😌 轻松日常</option>
+                                    <option value="promo">💰 促销转化</option>
+                                </select>
+                            </div>
+                            <div class="creator-field">
+                                <label>内容主题 / 产品</label>
+                                <input type="text" id="ccTopic" placeholder="例如：便携榨汁杯 / 无线耳机 / 工业阀门">
+                            </div>
+                            <div class="creator-field col-2">
+                                <label>核心卖点（用逗号分隔）</label>
+                                <input type="text" id="ccSelling" placeholder="例如：大容量,便携,长续航,性价比高">
+                            </div>
+                        </div>
+                        <div class="creator-actions">
+                            <button class="btn-ai primary" id="ccGenerate">🚀 AI生成文案</button>
+                            <button class="btn-ai ghost" id="ccCopy">📋 复制文案</button>
+                            <button class="btn-ai ghost" id="ccChat">🤖 交给ChatGPT精修</button>
+                        </div>
+                        <div class="cc-result" id="ccResult">
+                            <div class="cc-result-item">
+                                <div class="cc-rlabel">📌 标题</div>
+                                <textarea class="cc-box" id="ccTitle" placeholder="点击「AI生成文案」后，标题显示在这里"></textarea>
+                            </div>
+                            <div class="cc-result-item">
+                                <div class="cc-rlabel">📝 正文文案</div>
+                                <textarea class="cc-box" id="ccBody" placeholder="点击「AI生成文案」后，正文文案显示在这里"></textarea>
+                            </div>
+                            <div class="cc-result-item">
+                                <div class="cc-rlabel">#️⃣ 话题标签</div>
+                                <textarea class="cc-box" id="ccTags" placeholder="点击「AI生成文案」后，话题标签显示在这里"></textarea>
+                            </div>
+                        </div>
+                        <div class="creator-tip">💡 生成器基于模板在<b>前端即时产出</b>可发布初稿（无需联网），标题 / 正文 / 话题分开显示；如需更精细的文案，可点「交给ChatGPT精修」。</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右：AI视频生成工具（缩小） -->
+            <div class="module module-compact">
+                <div class="module-header">
+                    <div class="module-title"><span class="icon">🎬</span> AI视频生成工具</div>
+                    <span class="tag tag-blue">路径网址</span>
+                </div>
+                <div class="module-body">
+                    <a class="tool-link" href="https://jimeng.jianying.com/ai-tool/generate?type=video" target="_blank" rel="noopener">
+                        <span class="tl-icon">✨</span><span class="tl-text">即梦 · 生成视频</span><span class="tl-arrow">↗</span>
+                    </a>
+                    <a class="tool-link" href="https://www.doubao.com/chat/?channel=RSX4N" target="_blank" rel="noopener" style="margin-top:10px;">
+                        <span class="tl-icon">🤖</span><span class="tl-text">豆包 · 生成视频</span><span class="tl-arrow">↗</span>
+                    </a>
+                    <div class="info-box" style="margin-top:12px;">登录后制作 AI 视频，再同步发布至 6 大平台。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ ② 发布执行（紧凑对齐） ============ -->
+    <div class="social-section">
+        <div class="section-bar"><span class="sb-index">2</span> 发布执行</div>
+        <div class="two-col two-col-stretch">
+            <!-- 平台矩阵 + 日历 -->
+            <div class="module">
+                <div class="module-header">
+                    <div class="module-title"><span class="icon">🌐</span> 平台矩阵 · 发布日历</div>
+                    <span class="tag tag-blue">TK + 6平台</span>
+                </div>
+                <div class="module-body">
+                    <div class="platform-icons">
+                        <span class="platform-tag">🎵 TikTok</span>
+                        <span class="platform-tag">📷 Instagram</span>
+                        <span class="platform-tag">👤 Facebook</span>
+                        <span class="platform-tag">▶️ YouTube</span>
+                        <span class="platform-tag">🐦 推特 X</span>
+                        <span class="platform-tag">🎵 抖音</span>
+                    </div>
+                    <div class="cal-nav">
+                        <button type="button" class="cal-prev" aria-label="上一月">◀</button>
+                        <span class="cal-label" id="calLabel"></span>
+                        <button type="button" class="cal-next" aria-label="下一月">▶</button>
+                    </div>
+                    <div class="cal-hint" id="calHint"></div>
+                    <div class="publish-calendar" id="publishCalendar"></div>
+                </div>
+            </div>
+
+            <!-- 客户询单跟踪 -->
+            <div class="module">
+                <div class="module-header">
+                    <div class="module-title"><span class="icon">💬</span> 客户询单跟踪</div>
+                    <span class="tag tag-blue">来自外媒</span>
+                </div>
+                <div class="module-body">
+                    <div class="mini-stat" style="margin-bottom:12px;">
+                        <div class="ms-label">外媒询单累计</div>
+                        <div class="ms-value" id="trackCount">0 <small>/ 5</small></div>
+                    </div>
+                    <div id="inquiryTrack" class="inquiry-track"></div>
+                    <div class="tip-box" style="margin-top:10px;">💡 数据来自「询单统计」中来源为外媒平台的登记，自动同步。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ ③ 外媒后台 · 数据监控 ============ -->
+    <div class="social-section">
+        <div class="section-bar"><span class="sb-index">3</span> 外媒后台 · 数据监控</div>
+        <div class="link-grid">
+            <div class="platform-block">
+                <div class="pb-head">🎵 TikTok</div>
+                <div class="pb-links">
+                    <a class="tool-link" href="https://www.tiktok.com" target="_blank" rel="noopener"><span class="tl-icon">🔗</span><span class="tl-text">首页</span></a>
+                    <a class="tool-link" href="https://www.tiktok.com/tiktok-studio/analytics" target="_blank" rel="noopener"><span class="tl-icon">📊</span><span class="tl-text">播放量</span></a>
+                    <a class="tool-link" href="https://www.tiktok.com/tiktok-studio/inbox" target="_blank" rel="noopener"><span class="tl-icon">💬</span><span class="tl-text">消息</span></a>
+                </div>
+            </div>
+            <div class="platform-block">
+                <div class="pb-head">📷 Instagram</div>
+                <div class="pb-links">
+                    <a class="tool-link" href="https://www.instagram.com" target="_blank" rel="noopener"><span class="tl-icon">🔗</span><span class="tl-text">首页</span></a>
+                    <a class="tool-link" href="https://business.instagram.com/insights" target="_blank" rel="noopener"><span class="tl-icon">📊</span><span class="tl-text">播放量</span></a>
+                    <a class="tool-link" href="https://www.instagram.com/direct/inbox/" target="_blank" rel="noopener"><span class="tl-icon">💬</span><span class="tl-text">消息</span></a>
+                </div>
+            </div>
+            <div class="platform-block">
+                <div class="pb-head">👤 Facebook</div>
+                <div class="pb-links">
+                    <a class="tool-link" href="https://www.facebook.com" target="_blank" rel="noopener"><span class="tl-icon">🔗</span><span class="tl-text">首页</span></a>
+                    <a class="tool-link" href="https://business.facebook.com/insights" target="_blank" rel="noopener"><span class="tl-icon">📊</span><span class="tl-text">播放量</span></a>
+                    <a class="tool-link" href="https://business.facebook.com/latest/inbox" target="_blank" rel="noopener"><span class="tl-icon">💬</span><span class="tl-text">消息</span></a>
+                </div>
+            </div>
+            <div class="platform-block">
+                <div class="pb-head">▶️ YouTube</div>
+                <div class="pb-links">
+                    <a class="tool-link" href="https://www.youtube.com" target="_blank" rel="noopener"><span class="tl-icon">🔗</span><span class="tl-text">首页</span></a>
+                    <a class="tool-link" href="https://studio.youtube.com/analytics" target="_blank" rel="noopener"><span class="tl-icon">📊</span><span class="tl-text">播放量</span></a>
+                    <a class="tool-link" href="https://studio.youtube.com/messages" target="_blank" rel="noopener"><span class="tl-icon">💬</span><span class="tl-text">消息</span></a>
+                </div>
+            </div>
+            <div class="platform-block">
+                <div class="pb-head">🎵 抖音</div>
+                <div class="pb-links">
+                    <a class="tool-link" href="https://www.douyin.com" target="_blank" rel="noopener"><span class="tl-icon">🔗</span><span class="tl-text">首页</span></a>
+                    <a class="tool-link" href="https://creator.douyin.com/" target="_blank" rel="noopener"><span class="tl-icon">📊</span><span class="tl-text">播放量</span></a>
+                    <a class="tool-link" href="https://creator.douyin.com/creator-micro/home" target="_blank" rel="noopener"><span class="tl-icon">💬</span><span class="tl-text">消息</span></a>
+                </div>
+            </div>
+            <div class="platform-block">
+                <div class="pb-head">🐦 推特 X</div>
+                <div class="pb-links">
+                    <a class="tool-link" href="https://x.com" target="_blank" rel="noopener"><span class="tl-icon">🔗</span><span class="tl-text">首页</span></a>
+                    <a class="tool-link" href="https://analytics.twitter.com/" target="_blank" rel="noopener"><span class="tl-icon">📊</span><span class="tl-text">播放量</span></a>
+                    <a class="tool-link" href="https://x.com/messages" target="_blank" rel="noopener"><span class="tl-icon">💬</span><span class="tl-text">消息</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"><p>外媒运营模块 · 数据自动保存于本地浏览器</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+(function () {
+    var box = document.getElementById('publishCalendar');
+    var label = document.getElementById('calLabel');
+    var hint = document.getElementById('calHint');
+    if (!box) return;
+    var now = new Date();
+    var today = now.getDate();
+    var monthNames = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+
+    // 当前查看的年月（翻页状态）
+    var vy = now.getFullYear(), vm = now.getMonth();
+
+    function monthKey(y, m) { return y + '_' + (m + 1); }
+    function loadMonth(y, m) { try { return JSON.parse(localStorage.getItem('wb_social_cal_' + monthKey(y, m)) || '{}'); } catch (e) { return {}; } }
+    function saveMonth(y, m, d) { try { localStorage.setItem('wb_social_cal_' + monthKey(y, m), JSON.stringify(d)); } catch (e) {} }
+
+    function renderGrid(y, m, data) {
+        var first = new Date(y, m, 1);
+        var lead = (first.getDay() + 6) % 7; // 周一为索引0
+        var days = new Date(y, m + 1, 0).getDate();
+        var heads = ['一', '二', '三', '四', '五', '六', '日'];
+        var html = '';
+        heads.forEach(function (h) { html += '<div class="cal-day header">' + h + '</div>'; });
+        for (var i = 0; i < lead; i++) html += '<div class="cal-day"></div>';
+        for (var d = 1; d <= days; d++) {
+            var rec = data[d] || {};
+            var cls = 'cal-day clickable';
+            var isToday = (y === now.getFullYear() && m === now.getMonth() && d === today);
+            if (rec.updated === true) cls += ' updated';
+            else if (rec.updated === false) cls += ' notupdated';
+            if (isToday) cls += ' today';
+            var status = rec.updated === true ? '<span class="cal-status">✓已更新</span>' : rec.updated === false ? '<span class="cal-status">✗未更新</span>' : '';
+            var num = isToday ? d + '<span class="count">今天</span>' : d;
+            html += '<div class="' + cls + '" data-day="' + d + '"><span class="cd-num">' + num + '</span>' + status + '</div>';
+        }
+        return html;
+    }
+
+    function render() {
+        var data = loadMonth(vy, vm);
+        box.innerHTML = renderGrid(vy, vm, data);
+        label.textContent = vy + '年 ' + monthNames[vm] + ((vy === now.getFullYear() && vm === now.getMonth()) ? ' · 本月' : '');
+        var updated = 0, marked = 0;
+        for (var d in data) { if (data[d] && data[d].updated === true) updated++; if (data[d] && data[d].updated !== undefined) marked++; }
+        hint.innerHTML = '✓ 已更新 <b style="color:var(--success)">' + updated + '</b> 天' + (marked ? ' · 共打卡 ' + marked + ' 天' : ' · 本月还没打卡');
+    }
+
+    document.querySelector('.cal-prev').addEventListener('click', function () {
+        vm--; if (vm < 0) { vm = 11; vy--; } render();
+    });
+    document.querySelector('.cal-next').addEventListener('click', function () {
+        vm++; if (vm > 11) { vm = 0; vy++; } render();
+    });
+
+    box.addEventListener('click', function (e) {
+        var cell = e.target.closest('.cal-day.clickable');
+        if (!cell || !cell.getAttribute('data-day')) return;
+        var data = loadMonth(vy, vm);
+        var d = cell.getAttribute('data-day');
+        if (!data[d]) data[d] = {};
+        // 三态循环：未点击(空) → 已更新 → 未更新 → 未点击(空)
+        var cur = data[d].updated;
+        var next = (cur === undefined) ? true : (cur === true ? false : undefined);
+        if (next === undefined) delete data[d].updated;
+        else data[d].updated = next;
+        saveMonth(vy, vm, data);
+        render();
+    });
+
+    render();
+
+    // ===== 客户询单跟踪：与「询单统计」同步（仅外媒来源） =====
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    var TRACK_KEY = 'workbench_inquiry_v2';
+    var WMEDIA = { tiktok: 1, instagram: 1, facebook: 1, youtube: 1, twitter: 1, douyin: 1 };
+    var SRC_NAME = { tiktok: '🎵 TikTok', instagram: '📷 Instagram', facebook: '👤 Facebook', youtube: '▶️ YouTube', twitter: '🐦 推特 X', douyin: '🎵 抖音', mic: '🏭 制造网', other: '📌 其他' };
+    var trackEl = document.getElementById('inquiryTrack');
+    var trackCount = document.getElementById('trackCount');
+    function renderTrack() {
+        if (!trackEl) return;
+        var rows = [];
+        try {
+            var raw = localStorage.getItem(TRACK_KEY);
+            if (raw) {
+                var d = JSON.parse(raw);
+                if (d && d.rows) {
+                    var tmp = document.createElement('div');
+                    tmp.innerHTML = d.rows;
+                    tmp.querySelectorAll('tr').forEach(function (tr) {
+                        var sel = tr.children[1] ? tr.children[1].querySelector('select') : null;
+                        var src = sel ? sel.value : '';
+                        if (src && WMEDIA[src]) {
+                            var date = tr.children[0] ? (tr.children[0].querySelector('input') || {}).value || '' : '';
+                            var cust = tr.children[2] ? (tr.children[2].querySelector('input') || {}).value || '' : '';
+                            var biz = tr.children[3] ? (tr.children[3].querySelector('input') || {}).value || '' : '';
+                            var dem = tr.children[4] ? (tr.children[4].querySelector('input') || {}).value || '' : '';
+                            if (date || cust || biz || dem) rows.push({ date: date, src: src, cust: cust, biz: biz, dem: dem });
+                        }
+                    });
+                }
+            }
+        } catch (e) {}
+        if (trackCount) trackCount.innerHTML = rows.length + ' <small>/ 5</small>';
+        if (!rows.length) {
+            trackEl.innerHTML = '<div class="empty-state" style="padding:18px 10px;"><div class="icon">📭</div><div style="font-size:13px;">暂无外媒询单数据</div></div>';
+            return;
+        }
+        trackEl.innerHTML = rows.map(function (r) {
+            return '<div class="track-item">' +
+                '<div class="track-top"><span class="track-src">' + (SRC_NAME[r.src] || r.src) + '</span>' +
+                (r.date ? '<span class="track-date">📅 ' + esc(r.date) + '</span>' : '') + '</div>' +
+                (r.cust ? '<div class="track-cust">👤 ' + esc(r.cust) + (r.biz ? ' · 分配：' + esc(r.biz) : '') + '</div>' : '') +
+                (r.dem ? '<div class="track-dem">💡 ' + esc(r.dem) + '</div>' : '') +
+            '</div>';
+        }).join('');
+    }
+    renderTrack();
+    window.addEventListener('storage', function (e) { if (e.key === TRACK_KEY) renderTrack(); });
+})();
+</script>
+</body>
+</html>
