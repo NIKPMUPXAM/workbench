@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月工作台 · 工作汇报与文档</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item active" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">📁</div>
+            <div><h1>工作汇报与文档</h1><div class="ph-sub">交付物汇总 · 文件集中存放 · 模块可自由增减</div></div>
+        </div>
+        <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第1周</div></div>
+    </div>
+
+    <!-- 交付物模块（动态：可新增/删除，每项带文件区） -->
+    <div class="module">
+        <div class="module-header">
+            <div class="module-title"><span class="icon">📋</span> 交付物与文件</div>
+            <button class="module-add-btn" id="addDelivBtn" type="button">➕ 新增模块</button>
+        </div>
+        <div class="module-body">
+            <div class="deliverable-list" id="deliverableList"></div>
+            <div class="tip-box">💡 每个交付物模块都可<strong>放文件</strong>（点击或拖入）；点模块右上角 ✕ 可<strong>删除</strong>该模块；上方「新增模块」可自由<strong>增加</strong>。</div>
+        </div>
+    </div>
+
+    <!-- 开放性文件区 -->
+    <div class="module">
+        <div class="module-header">
+            <div class="module-title"><span class="icon">🗂️</span> 开放性文件区（随便放）</div>
+            <span class="tag tag-blue">自由存放</span>
+        </div>
+        <div class="module-body">
+            <div class="file-zone" data-zone="free">
+                <div class="fz-drop">
+                    <div class="fz-drop-icon">⬆️</div>
+                    <div class="fz-drop-text">任何文件都可以放这里：点击选择或拖入</div>
+                    <input type="file" class="fz-input" multiple hidden>
+                </div>
+                <div class="fz-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"><p>工作汇报与文档模块 · 上传文件存于本地浏览器（IndexedDB），点击「打开」即可查看 / 下载</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+(function () {
+    // ====== 文件存储（IndexedDB） ======
+    var DB = 'wb_files_db', STORE = 'files';
+    var db = null;
+    var req = indexedDB.open(DB, 1);
+    req.onupgradeneeded = function (e) {
+        var d = e.target.result;
+        if (!d.objectStoreNames.contains(STORE)) d.createObjectStore(STORE, { keyPath: 'id' });
+    };
+    req.onsuccess = function (e) { db = e.target.result; renderDeliverables(); initZone(document.querySelector('.file-zone[data-zone="free"]')); };
+    req.onerror = function () {
+        document.querySelectorAll('.fz-list').forEach(function (el) {
+            el.innerHTML = '<div class="fz-empty">⚠️ 当前打开方式不支持本地文件存储，请用分享链接页或浏览器打开本文件</div>';
+        });
+    };
+
+    function store(mode) { return db.transaction(STORE, mode).objectStore(STORE); }
+    function list(zone, cb) {
+        var out = [];
+        store('readonly').openCursor().onsuccess = function (e) {
+            var cur = e.target.result;
+            if (cur) { if (cur.value.zone === zone) out.push(cur.value); cur.continue(); }
+            else cb(out.sort(function (a, b) { return b.addedAt - a.addedAt; }));
+        };
+    }
+    function put(rec, done) { var t = store('readwrite'); t.put(rec); t.transaction.oncomplete = done; }
+    function del(id, done) { var t = store('readwrite'); t.delete(id); t.transaction.oncomplete = done; }
+
+    function fmtSize(b) {
+        if (b < 1024) return b + ' B';
+        if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+        return (b / 1048576).toFixed(1) + ' MB';
+    }
+    function extIcon(name) {
+        var e = (name.split('.').pop() || '').toLowerCase();
+        var m = { pdf: '📕', doc: '📘', docx: '📘', xls: '📗', xlsx: '📗', ppt: '📙', pptx: '📙', png: '🖼️', jpg: '🖼️', jpeg: '🖼️', gif: '🖼️', mp4: '🎬', zip: '🗜️', rar: '🗜️', txt: '📄' };
+        return m[e] || '📄';
+    }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    function initZone(zoneEl) {
+        if (!zoneEl || !db) return;
+        var zone = zoneEl.getAttribute('data-zone');
+        var input = zoneEl.querySelector('.fz-input');
+        var drop = zoneEl.querySelector('.fz-drop');
+        var listEl = zoneEl.querySelector('.fz-list');
+        function render() {
+            list(zone, function (items) {
+                if (!items.length) { listEl.innerHTML = '<div class="fz-empty">暂无文件，拖入或点击上方按钮添加</div>'; return; }
+                listEl.innerHTML = items.map(function (it) {
+                    return '<div class="fz-item" data-id="' + it.id + '">' +
+                        '<span class="fz-ico">' + extIcon(it.name) + '</span>' +
+                        '<span class="fz-meta"><span class="fz-name">' + esc(it.name) + '</span>' +
+                        '<span class="fz-sub">' + fmtSize(it.size) + ' · ' + new Date(it.addedAt).toLocaleString('zh-CN') + '</span></span>' +
+                        '<button class="fz-open" data-act="open">打开</button>' +
+                        '<button class="fz-del" data-act="del" title="删除">🗑</button></div>';
+                }).join('');
+            });
+        }
+        function addFiles(files) {
+            Array.prototype.forEach.call(files, function (f) {
+                var r = new FileReader();
+                r.onload = function () { put({ id: Date.now() + '-' + Math.random().toString(36).slice(2, 8), name: f.name, size: f.size, type: f.type, data: f.result, zone: zone, addedAt: Date.now() }, render); };
+                r.readAsDataURL(f);
+            });
+        }
+        input.addEventListener('change', function () { addFiles(input.files); input.value = ''; });
+        drop.addEventListener('click', function () { input.click(); });
+        drop.addEventListener('dragover', function (e) { e.preventDefault(); drop.classList.add('drag'); });
+        drop.addEventListener('dragleave', function () { drop.classList.remove('drag'); });
+        drop.addEventListener('drop', function (e) { e.preventDefault(); drop.classList.remove('drag'); if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files); });
+        listEl.addEventListener('click', function (e) {
+            var btn = e.target.closest('button'); if (!btn) return;
+            var item = e.target.closest('.fz-item'); var id = item.getAttribute('data-id');
+            if (btn.getAttribute('data-act') === 'del') { if (confirm('确定删除该文件？')) del(id, render); return; }
+            list(zone, function (items) {
+                var rec = null;
+                items.forEach(function (x) { if (x.id === id) rec = x; });
+                if (!rec) return;
+                var w = window.open(rec.data, '_blank');
+                if (!w) { var a = document.createElement('a'); a.href = rec.data; a.download = rec.name; a.click(); }
+            });
+        });
+        render();
+    }
+
+    // ====== 交付物模块（增删 + 文件区） ======
+    var KEY = 'wb_deliverables';
+    var listEl = document.getElementById('deliverableList');
+
+    function getModules() {
+        try {
+            var arr = JSON.parse(localStorage.getItem(KEY) || '[]');
+            if (Array.isArray(arr) && arr.length) return arr;
+        } catch (e) {}
+        var def = [
+            { id: 'm_yue', name: '工作月志' },
+            { id: 'm_xue', name: '学习报告' },
+            { id: 'm_shu', name: '数据报告' }
+        ];
+        localStorage.setItem(KEY, JSON.stringify(def));
+        return def;
+    }
+    function saveModules(arr) { localStorage.setItem(KEY, JSON.stringify(arr)); }
+
+    function renderDeliverables() {
+        var arr = getModules();
+        listEl.innerHTML = arr.map(function (m) {
+            return '<div class="deliv-card" data-id="' + m.id + '">' +
+                '<div class="deliv-head">' +
+                    '<input class="deliv-name" type="text" value="' + esc(m.name) + '">' +
+                    '<button class="deliv-del" title="删除该模块">✕</button>' +
+                '</div>' +
+                '<div class="deliv-body">' +
+                    '<div class="file-zone" data-zone="deliv_' + m.id + '">' +
+                        '<div class="fz-drop"><div class="fz-drop-icon">⬆️</div><div class="fz-drop-text">点击选择，或把文件拖到此处</div><input type="file" class="fz-input" multiple hidden></div>' +
+                        '<div class="fz-list"></div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+
+        // 绑定模块名修改
+        listEl.querySelectorAll('.deliv-name').forEach(function (inp) {
+            inp.addEventListener('input', function () {
+                var id = inp.closest('.deliv-card').getAttribute('data-id');
+                var arr2 = getModules();
+                var m = arr2.find(function (x) { return x.id === id; });
+                if (m) { m.name = inp.value; saveModules(arr2); }
+            });
+        });
+        // 绑定模块删除
+        listEl.querySelectorAll('.deliv-del').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                if (!confirm('确定删除该交付物模块？该模块下的文件将一并移除。')) return;
+                var id = btn.closest('.deliv-card').getAttribute('data-id');
+                var arr2 = getModules().filter(function (x) { return x.id !== id; });
+                saveModules(arr2);
+                // 删除该 zone 下的文件
+                if (db) {
+                    list('deliv_' + id, function (items) {
+                        items.forEach(function (it) { del(it.id, function () {}); });
+                    });
+                }
+                renderDeliverables();
+            });
+        });
+        // 初始化每个模块的文件区
+        listEl.querySelectorAll('.file-zone').forEach(initZone);
+    }
+
+    var addBtn = document.getElementById('addDelivBtn');
+    if (addBtn) addBtn.addEventListener('click', function () {
+        var arr = getModules();
+        arr.push({ id: 'm_' + Date.now(), name: '新模块' });
+        saveModules(arr);
+        renderDeliverables();
+    });
+})();
+</script>
+</body>
+</html>
