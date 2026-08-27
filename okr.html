@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月工作台 · OKR工作计划</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item active" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">🎯</div>
+            <div><h1>OKR 工作计划</h1><div class="ph-sub">目标对齐 · 关键结果拆解 · 进度可追踪</div></div>
+        </div>
+        <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第3周</div></div>
+    </div>
+
+    <!-- 总进度概览 -->
+    <div class="overview-metrics" style="margin-bottom:18px;">
+        <div class="mini-stat"><div class="ms-label">总完成度（当月）</div><div class="ms-value" id="okrTotalPct">0<small>%</small></div></div>
+        <div class="mini-stat success"><div class="ms-label">已完成 KR</div><div class="ms-value" id="okrDoneCount">0<small>/ 9</small></div></div>
+        <div class="mini-stat warning"><div class="ms-label">进行中</div><div class="ms-value" id="okrPendingCount">9<small>项</small></div></div>
+        <div class="mini-stat"><div class="ms-label">本月剩余天数</div><div class="ms-value" id="okrDaysLeft">14<small>天</small></div></div>
+    </div>
+
+    <!-- 工具栏 -->
+    <div class="okr-toolbar">
+        <button class="module-add-btn" id="addMonthBtn" type="button">➕ 新增月份</button>
+        <span class="tag tag-blue">新月份自动置顶 · 旧月份自动折叠 · 点击标题可收起</span>
+    </div>
+
+    <!-- 月份容器（由脚本渲染） -->
+    <div id="okrRoot"></div>
+
+    <div class="footer"><p>OKR工作计划模块 · 手写目标/实际即自动保存 · 跨月份管理 · 数据存于本地浏览器</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s1"></script>
+<script>
+(function () {
+    var KEY = 'wb_okr_v4';
+    var root = document.getElementById('okrRoot');
+
+    function num(v) { v = parseInt(v, 10); return isNaN(v) || v < 0 ? 0 : v; }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function curKey() { var n = new Date(); return n.getFullYear() + '-' + pad(n.getMonth() + 1); }
+    function curLabel() { var n = new Date(); return n.getFullYear() + '年' + (n.getMonth() + 1) + '月'; }
+    function nextLabel() { var n = new Date(); var m = new Date(n.getFullYear(), n.getMonth() + 1, 1); return m.getFullYear() + '年' + (m.getMonth() + 1) + '月'; }
+
+    function defaultObjectives() {
+        return [
+            { id: 'o1', badge: 'O1', title: '外媒更新', desc: 'TK + 其他外媒平台运营，获得客户询单；每日 AI 视频多平台同步发布',
+              krs: [
+                { id: 'o1_kr1', text: '获得至少 <strong>5个</strong> 客户询单', target: 5, actual: 0 },
+                { id: 'o1_kr2', text: '每天不低于 <strong>2条</strong> AI 视频，同步发布到 Ins / Facebook / YouTube / TikTok / 抖音', target: 2, actual: 0 }
+              ] },
+            { id: 'o2', badge: 'O2', title: '平台运营（中国制造网）', desc: '产品上架、主图视频、询盘获取、学习报告、AI软件学习',
+              krs: [
+                { id: 'o2_kr1', text: '制造网产品上架（目标 <strong>300个</strong> 链接；产品方向 <strong>5个</strong>），内容获<strong>许总认可</strong>', target: 300, actual: 0 },
+                { id: 'o2_kr2', text: '完成 <strong>10个</strong> 制造网对应产品主图视频（出镜讲解 / 纯效果 / AI）', target: 10, actual: 0 },
+                { id: 'o2_kr3', text: '上架链接获得 <strong>10个</strong> 询盘', target: 10, actual: 0 },
+                { id: 'o2_kr4', text: '制造网运营学习报告（运营 / 上品 / 直播等），获<strong>王总认可</strong>', target: 1, actual: 0 },
+                { id: 'o2_kr5', text: '找刘斐学习不同 AI 软件运用，至少产出 <strong>3项</strong> 结果', target: 3, actual: 0 }
+              ] },
+            { id: 'o3', badge: 'O3', title: '个人工作台', desc: '搭建并完善 WorkBuddy 工作台，实现工作内容完整同步与管理',
+              krs: [
+                { id: 'o3_kr1', text: '了解学习 WorkBuddy 并创建自己的工作台', target: 1, actual: 0 },
+                { id: 'o3_kr2', text: '所有工作内容同步到工作台，不仅仅只是数据展示', target: 1, actual: 0 },
+                { id: 'o3_kr3', text: '工作台布局和内容得到<strong>王总认可</strong>', target: 1, actual: 0 }
+              ] }
+        ];
+    }
+
+    // 载入 / 迁移（保留八月已填数据）
+    function loadState() {
+        try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.months && s.months.length) return s; } catch (e) {}
+        var v3 = null;
+        try { v3 = JSON.parse(localStorage.getItem('wb_okr_v3') || '{}'); } catch (e) {}
+        var objs = defaultObjectives();
+        if (v3 && typeof v3 === 'object') {
+            objs.forEach(function (o) { o.krs.forEach(function (kr) { if (v3[kr.id]) { kr.target = v3[kr.id].target || kr.target; kr.actual = v3[kr.id].actual || 0; } }); });
+        }
+        var note = (v3 && v3.weeklyNote) ? v3.weeklyNote : '';
+        var m = { id: curKey(), label: curLabel(), collapsed: false, note: note, objectives: objs };
+        var s2 = { months: [m] };
+        try { localStorage.setItem(KEY, JSON.stringify(s2)); } catch (e) {}
+        return s2;
+    }
+
+    var state = loadState();
+
+    // 月份滚动：新月份自动置顶，旧月份折叠下放
+    (function autoShift() {
+        var top = state.months[0];
+        var ck = curKey();
+        if (top && /^\d{4}-\d{2}$/.test(top.id) && /^\d{4}-\d{2}$/.test(ck) && ck > top.id) {
+            state.months[0].collapsed = true;
+            state.months.unshift({ id: ck, label: curLabel(), collapsed: false, note: '', objectives: defaultObjectives() });
+            save();
+        }
+    })();
+
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+    // ====== HTML 生成 ======
+    function krHTML(kr) {
+        return '<div class="kr-card" data-kr="' + kr.id + '">' +
+            '<span class="kr-text">' + kr.text + '</span>' +
+            '<span class="kr-fields"><span class="kr-num">目标<input type="number" class="kr-target" min="0" value="' + kr.target + '"></span>' +
+            '<span class="kr-num">实际<input type="number" class="kr-actual" min="0" value="' + kr.actual + '"></span></span>' +
+            '<span class="kr-pct">0%</span></div>';
+    }
+    function objectiveHTML(o) {
+        return '<div class="okr-objective" data-o="' + o.id + '">' +
+            '<div class="okr-o-header okr-obj-toggle">' +
+                '<span class="okr-o-badge ' + o.id + '">' + o.badge + '</span>' +
+                '<div class="okr-o-info"><div class="okr-o-title">' + esc(o.title) + '</div><div class="okr-o-desc">' + esc(o.desc) + '</div></div>' +
+                '<div class="okr-o-progress"><div class="stat-progress"><div class="stat-progress-bar o-bar"></div></div><span class="okr-pct o-pct">0%</span></div>' +
+                '<span class="okr-obj-caret">▾</span>' +
+            '</div>' +
+            '<div class="okr-kr-list">' + o.krs.map(krHTML).join('') + '</div>' +
+        '</div>';
+    }
+    function monthHTML(m) {
+        return '<div class="okr-month" data-id="' + m.id + '">' +
+            '<div class="okr-month-header">' +
+                '<button class="okr-month-toggle' + (m.collapsed ? ' collapsed' : '') + '" type="button" title="折叠/展开">' + (m.collapsed ? '▸' : '▾') + '</button>' +
+                '<div class="om-title">' + esc(m.label) + ' · OKR</div>' +
+                '<div class="om-progress"><div class="stat-progress"><div class="stat-progress-bar om-bar"></div></div><span class="om-pct okr-pct">0%</span></div>' +
+                '<button class="om-del" type="button" title="删除该月份">🗑</button>' +
+            '</div>' +
+            '<div class="okr-month-body' + (m.collapsed ? ' collapsed' : '') + '">' +
+                '<div class="okr-objectives-grid">' + m.objectives.map(objectiveHTML).join('') + '</div>' +
+                '<div class="module" style="margin-top:14px;">' +
+                    '<div class="module-header"><div class="module-title"><span class="icon">📅</span> 本周重点备注</div><span class="tag tag-blue">可选填写</span></div>' +
+                    '<div class="module-body"><textarea class="okr-note log-input" rows="3" placeholder="记录本周需要特别关注的事项、遇到的问题或需要的支持……">' + esc(m.note || '') + '</textarea></div>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+    }
+
+    // ====== 进度计算 ======
+    function objStats(o) {
+        var sum = 0; o.krs.forEach(function (kr) { var t = num(kr.target), a = num(kr.actual); sum += t > 0 ? Math.round(a / t * 100) : 0; });
+        return { pct: o.krs.length ? Math.round(sum / o.krs.length) : 0 };
+    }
+    function monthStats(m) {
+        var all = []; m.objectives.forEach(function (o) { o.krs.forEach(function (kr) { all.push(kr); }); });
+        var sum = 0, done = 0;
+        all.forEach(function (kr) { var t = num(kr.target), a = num(kr.actual); sum += t > 0 ? Math.round(a / t * 100) : 0; if (t > 0 && a >= t) done++; });
+        return { pct: all.length ? Math.round(sum / all.length) : 0, done: done, total: all.length };
+    }
+
+    function updateProgress() {
+        document.querySelectorAll('.okr-month').forEach(function (blockEl) {
+            var id = blockEl.getAttribute('data-id');
+            var m = state.months.find(function (x) { return x.id === id; });
+            if (!m) return;
+            blockEl.querySelectorAll('.okr-objective').forEach(function (oEl) {
+                var oid = oEl.getAttribute('data-o');
+                var o = m.objectives.find(function (x) { return x.id === oid; });
+                if (!o) return;
+                var st = objStats(o);
+                var bar = oEl.querySelector('.o-bar'); if (bar) bar.style.width = Math.min(100, st.pct) + '%';
+                var pe = oEl.querySelector('.o-pct'); if (pe) pe.textContent = st.pct + '%';
+                oEl.querySelectorAll('.kr-card').forEach(function (cardEl) {
+                    var kid = cardEl.getAttribute('data-kr');
+                    var kr = o.krs.find(function (x) { return x.id === kid; });
+                    if (!kr) return;
+                    var t = num(kr.target), a = num(kr.actual); var p = t > 0 ? Math.round(a / t * 100) : 0;
+                    var pe2 = cardEl.querySelector('.kr-pct'); if (pe2) pe2.textContent = p + '%';
+                    cardEl.classList.toggle('kr-done', t > 0 && a >= t);
+                    cardEl.classList.toggle('kr-doing', !(t > 0 && a >= t) && a > 0);
+                });
+            });
+            var ms = monthStats(m);
+            var mb = blockEl.querySelector('.om-bar'); if (mb) mb.style.width = Math.min(100, ms.pct) + '%';
+            var mp = blockEl.querySelector('.om-pct'); if (mp) mp.textContent = ms.pct + '%';
+        });
+        var top = state.months[0];
+        if (top) {
+            var tms = monthStats(top);
+            var tp = document.getElementById('okrTotalPct'); if (tp) tp.innerHTML = tms.pct + '<small>%</small>';
+            var td = document.getElementById('okrDoneCount'); if (td) td.innerHTML = tms.done + '<small>/ ' + tms.total + '</small>';
+            var tpd = document.getElementById('okrPendingCount'); if (tpd) tpd.innerHTML = (tms.total - tms.done) + '<small>项</small>';
+        }
+        var now = new Date(); var last = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+        var left = Math.max(0, last.getDate() - now.getDate());
+        var dl = document.getElementById('okrDaysLeft'); if (dl) dl.innerHTML = left + '<small>天</small>';
+    }
+
+    function updateModelFromDOM() {
+        document.querySelectorAll('.okr-month').forEach(function (blockEl) {
+            var id = blockEl.getAttribute('data-id');
+            var m = state.months.find(function (x) { return x.id === id; });
+            if (!m) return;
+            blockEl.querySelectorAll('.okr-objective').forEach(function (oEl) {
+                var oid = oEl.getAttribute('data-o');
+                var o = m.objectives.find(function (x) { return x.id === oid; });
+                if (!o) return;
+                oEl.querySelectorAll('.kr-card').forEach(function (cardEl) {
+                    var kid = cardEl.getAttribute('data-kr');
+                    var kr = o.krs.find(function (x) { return x.id === kid; });
+                    if (!kr) return;
+                    var t = cardEl.querySelector('.kr-target'); var a = cardEl.querySelector('.kr-actual');
+                    if (t) kr.target = num(t.value);
+                    if (a) kr.actual = num(a.value);
+                });
+            });
+        });
+        save();
+    }
+
+    function render() {
+        root.innerHTML = state.months.map(monthHTML).join('');
+        updateProgress();
+    }
+
+    // ====== 事件（委托，render 不丢失） ======
+    root.addEventListener('input', function (e) {
+        var inp = e.target.closest('.kr-target, .kr-actual');
+        if (inp) { updateModelFromDOM(); updateProgress(); return; }
+        var note = e.target.closest('.okr-note');
+        if (note) {
+            var id = note.closest('.okr-month').getAttribute('data-id');
+            var m = state.months.find(function (x) { return x.id === id; });
+            if (m) { m.note = note.value; save(); }
+        }
+    });
+    root.addEventListener('click', function (e) {
+        var del = e.target.closest('.om-del');
+        if (del) {
+            if (!confirm('确定删除该月份 OKR？')) return;
+            var id2 = del.closest('.okr-month').getAttribute('data-id');
+            state.months = state.months.filter(function (x) { return x.id !== id2; });
+            if (!state.months.length) state.months = [{ id: curKey(), label: curLabel(), collapsed: false, note: '', objectives: defaultObjectives() }];
+            save(); render();
+            return;
+        }
+        var mt = e.target.closest('.okr-month-header');
+        if (mt) {
+            var blk = mt.closest('.okr-month');
+            var body = blk.querySelector('.okr-month-body');
+            var tg = blk.querySelector('.okr-month-toggle');
+            var col = body.classList.toggle('collapsed');
+            if (tg) { tg.classList.toggle('collapsed', col); tg.textContent = col ? '▸' : '▾'; }
+            var id = blk.getAttribute('data-id');
+            var m = state.months.find(function (x) { return x.id === id; });
+            if (m) { m.collapsed = col; save(); }
+            return;
+        }
+        var ot = e.target.closest('.okr-obj-toggle');
+        if (ot) {
+            var list = ot.parentElement.querySelector('.okr-kr-list');
+            var col2 = list.classList.toggle('collapsed');
+            var caret = ot.querySelector('.okr-obj-caret');
+            if (caret) caret.textContent = col2 ? '▸' : '▾';
+            return;
+        }
+    });
+
+    var addBtn = document.getElementById('addMonthBtn');
+    if (addBtn) addBtn.addEventListener('click', function () {
+        var label = prompt('请输入新月份名称（如：' + nextLabel() + '）：', nextLabel());
+        if (label === null) return;
+        if (!label.trim()) label = nextLabel();
+        state.months.unshift({ id: 'm_' + Date.now(), label: label.trim(), collapsed: false, note: '', objectives: defaultObjectives() });
+        save(); render();
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>
