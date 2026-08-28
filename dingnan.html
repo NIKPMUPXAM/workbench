@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丁楠数据看板 · 工作台</title>
+<link rel="stylesheet" href="assets/style.css?v=s1">
+<style>
+  .dn-wrap{max-width:1240px;margin:0 auto;padding:24px 28px 48px;}
+  .dn-back{display:inline-block;margin:6px 0 14px;color:#3b82f6;text-decoration:none;font-weight:600;font-size:14px;}
+  .dn-back:hover{text-decoration:underline;}
+  .dn-title{margin:0 0 4px;font-size:22px;}
+  .dn-desc{color:#8a94a6;font-size:13px;margin-bottom:20px;}
+  .dn-section{background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:22px;box-shadow:0 1px 4px rgba(20,30,60,.07);}
+  .dn-section h2{margin:0 0 2px;font-size:18px;}
+  .dn-sub{color:#8a94a6;font-size:12.5px;margin-bottom:12px;}
+  .dn-cap{font-weight:700;color:#33415c;padding:8px 10px;font-size:13.5px;background:#f4f7ff;border-radius:8px;margin-bottom:10px;}
+  .dn-scroll{overflow:auto;max-height:540px;border:1px solid #eef1f6;border-radius:10px;}
+  table.dn{border-collapse:collapse;width:100%;font-size:13px;min-width:780px;}
+  table.dn thead th{position:sticky;top:0;background:#2f54eb;color:#fff;padding:9px 11px;text-align:left;white-space:nowrap;z-index:2;font-weight:600;}
+  table.dn td{padding:8px 11px;border-bottom:1px solid #f2f4f8;white-space:pre-wrap;vertical-align:top;color:#2b3445;}
+  table.dn tbody tr:nth-child(even){background:#fafbff;}
+  table.dn tbody tr:hover{background:#eef3ff;}
+  @media (prefers-color-scheme: dark){
+    .dn-section{background:#1c2333;box-shadow:none;border:1px solid #2a3346;}
+    .dn-sub,.dn-desc{color:#8a94a6;}
+    .dn-cap{background:#232c40;color:#cdd6e8;}
+    table.dn td{color:#dbe3f2;border-bottom:1px solid #28324a;}
+    table.dn tbody tr:nth-child(even){background:#20283a;}
+    table.dn tbody tr:hover{background:#2a3550;}
+    .dn-scroll{border-color:#2a3346;}
+  }
+</style>
+</head>
+<body>
+<div class="dn-wrap">
+  <a class="dn-back" href="index.html">← 返回总览</a>
+  <h1 class="dn-title">📋 丁楠数据看板</h1>
+  <div class="dn-desc">来自企业微信共享文档（已授权同步）· 仅含丁楠的板块 · 刷新即见最新</div>
+  <div id="dnContainer"></div>
+</div>
+<script src="assets/dingnan_data.js?v=1"></script>
+<script>
+(function(){
+  var D = window.WB_DINGNAN || {};
+  var order = [['okr','OKR / 月度关键指标'],['worklog','日常工作日志'],['inquiry','渠道询单数据']];
+  var c = document.getElementById('dnContainer');
+  if(!Object.keys(D).length){
+    c.innerHTML = '<div class="dn-section"><div class="dn-sub">数据未加载，请刷新页面。</div></div>';
+    return;
+  }
+  order.forEach(function(pair){
+    var key = pair[0], label = pair[1];
+    var sheet = D[key]; if(!sheet || !sheet.rows) return;
+    var sec = document.createElement('div'); sec.className='dn-section';
+    var h = document.createElement('h2'); h.textContent = label; sec.appendChild(h);
+    var sub = document.createElement('div'); sub.className='dn-sub'; sub.textContent = sheet.title || ''; sec.appendChild(sub);
+    var rows = sheet.rows || [];
+    var cap = (rows[0] && rows[0][0]) ? rows[0][0] : '';
+    if(cap){ var cp=document.createElement('div'); cp.className='dn-cap'; cp.textContent=cap; sec.appendChild(cp); }
+    var head = rows[1] || rows[0] || [];
+    var scroll=document.createElement('div'); scroll.className='dn-scroll';
+    var tbl=document.createElement('table'); tbl.className='dn';
+    var thead=document.createElement('thead'); var trh=document.createElement('tr');
+    head.forEach(function(hc){ var th=document.createElement('th'); th.textContent=hc||''; trh.appendChild(th); });
+    thead.appendChild(trh); tbl.appendChild(thead);
+    var tbody=document.createElement('tbody');
+    for(var i=2;i<rows.length;i++){
+      var tr=document.createElement('tr');
+      (rows[i]||[]).forEach(function(cell){ var td=document.createElement('td'); td.textContent=cell||''; tr.appendChild(td); });
+      tbody.appendChild(tr);
+    }
+    tbl.appendChild(tbody); scroll.appendChild(tbl); sec.appendChild(scroll);
+    c.appendChild(sec);
+  });
+})();
+</script>
+</body>
+</html>
