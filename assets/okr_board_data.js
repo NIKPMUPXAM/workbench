@@ -3,7 +3,7 @@ window.WB_OKR_BOARD = {
  "doc": "市场部营销端OKR（2026）",
  "owner": "丁楠",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCN020X0lWlSkqbXrWY",
- "updated": "2026-09-01 20:38",
+ "updated": "2026-09-01 20:49",
  "ratings": {
   "1月": "B",
   "3月": "A-",
