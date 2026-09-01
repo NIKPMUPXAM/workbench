@@ -65,16 +65,35 @@
                 </div>
             </div>
 
-            <!-- 产品待上架清单（一字激光5条，其余各1条，共9条） -->
+            <!-- 运营细分：上新计划 / 上架流程表 / 上架情况 -->
             <div class="module">
                 <div class="module-header">
-                    <div class="module-title"><span class="icon">📦</span> 产品待上架清单</div>
+                    <div class="module-title"><span class="icon">📦</span> 运营细分</div>
                     <span class="tag tag-orange">进行中</span>
                 </div>
                 <div class="module-body">
-                    <div id="prodGroups"></div>
-                    <button class="btn-add-month" type="button">+ 新增月份分组</button>
-                    <div class="product-note" contenteditable="true" data-store="wb_prod_note" title="可编辑：填写上架进度，如「已上架 45 个 / 目标 300 个」">💡 已上架进度：45 / 300（点击此处可直接编辑，填写实际已上架数量）</div>
+                    <div class="seg-control" id="pfSeg">
+                        <button class="seg-btn active" data-tab="plan">上新计划</button>
+                        <button class="seg-btn" data-tab="process">上架流程表</button>
+                        <button class="seg-btn" data-tab="status">上架情况</button>
+                    </div>
+
+                    <!-- 上新计划 -->
+                    <div class="seg-panel active" data-panel="plan">
+                        <div class="edit-area" contenteditable="true" data-store="wb_plan_note" data-placeholder="填写本月上新计划：新品名称 / 上架时间 / 负责人 / 备注…"></div>
+                    </div>
+
+                    <!-- 上架流程表 -->
+                    <div class="seg-panel" data-panel="process">
+                        <div class="edit-area" contenteditable="true" data-store="wb_process_note" data-placeholder="填写上架流程步骤：选品 → 拍摄主图视频 → 写英文标题/关键词 → 上传 → 审核 → 上架…"></div>
+                    </div>
+
+                    <!-- 上架情况（原产品待上架清单） -->
+                    <div class="seg-panel" data-panel="status">
+                        <div id="prodGroups"></div>
+                        <button class="btn-add-month" type="button">+ 新增月份分组</button>
+                        <div class="product-note" contenteditable="true" data-store="wb_prod_note" title="可编辑：填写上架进度，如「已上架 45 个 / 目标 300 个」">💡 已上架进度：45 / 300（点击此处可直接编辑，填写实际已上架数量）</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,6 +146,22 @@
 </div>
 </div>
 <script src="assets/app.js?v=s1"></script>
+<script>
+// 运营细分：上新计划 / 上架流程表 / 上架情况 分段切换
+(function () {
+    var seg = document.getElementById('pfSeg');
+    if (!seg) return;
+    seg.addEventListener('click', function (e) {
+        var btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        var tab = btn.getAttribute('data-tab');
+        seg.querySelectorAll('.seg-btn').forEach(function (b) { b.classList.toggle('active', b === btn); });
+        document.querySelectorAll('.seg-panel').forEach(function (p) {
+            p.classList.toggle('active', p.getAttribute('data-panel') === tab);
+        });
+    });
+})();
+</script>
 <script>
 // 产品待上架清单：按月分组、可折叠、可直接编辑（名称/备注/状态/视频/增删/重命名月份）
 (function () {
