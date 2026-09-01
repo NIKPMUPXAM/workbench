@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s2"></script>
+  <script src="assets/okr_board_data.js?v=board1"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>总数据看板 · 丁楠 OKR 完成度</title>
+<link rel="stylesheet" href="assets/style.css?v=s2">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="dingnan.html"><span class="nav-icon">📋</span>丁楠数据</a>
+        <a class="nav-item" href="okr-board.html"><span class="nav-icon">📈</span>总数据看板</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">📈</div>
+            <div>
+                <h1>总数据看板</h1>
+                <div class="ph-sub">丁楠 · 市场部营销端OKR（2026）完成度总览</div>
+            </div>
+        </div>
+        <div class="ph-date">
+            <div class="d-main" id="boardUpdated">实时数据</div>
+            <div id="boardCount">--</div>
+        </div>
+    </div>
+
+    <div class="board-docbar">
+        <span class="bd-dot"></span>
+        <span>数据实时拉取自企业微信共享文档：</span>
+        <a id="boardDocLink" href="#" target="_blank" rel="noopener">市场部营销端OKR（2026）</a>
+        <span class="bd-tip">（点右上角「刷新」可重新读取最新填写）</span>
+    </div>
+
+    <!-- 月份筛选 -->
+    <div class="section-label">按月份筛选</div>
+    <div class="board-filters" id="boardFilters"></div>
+
+    <!-- 概览统计 -->
+    <div class="board-summary" id="boardSummary"></div>
+
+    <!-- 数据卡片 -->
+    <div class="board-grid" id="boardGrid"></div>
+
+    <div class="footer">
+        <p>总数据看板 · 数据由企业微信共享文档「市场部营销端OKR（2026）」实时解析生成</p>
+        <p style="margin-top:4px;">目标数 / 完成数 为文档中明确可量化的指标；标注「—」的为定性任务，进度按文档填写的完成度说明显示</p>
+    </div>
+</div>
+</div>
+<script src="assets/app.js?v=s2"></script>
+<script>
+(function () {
+    var board = window.WB_OKR_BOARD;
+    if (!board) {
+        document.getElementById('boardGrid').innerHTML =
+            '<div class="empty-state" style="padding:40px;"><div class="icon">⚠️</div><div>看板数据未加载，请刷新或检查网络</div></div>';
+        return;
+    }
+    var docUrl = board.doc_url || '#';
+    var docLink = document.getElementById('boardDocLink');
+    docLink.href = docUrl;
+    var upd = document.getElementById('boardUpdated');
+    if (board.updated) upd.textContent = '更新于 ' + board.updated;
+    else upd.textContent = '数据来自企微文档';
+
+    var months = board.months || [];
+    var ratings = board.ratings || {};
+    var data = board.data || {};
+    var allItems = [];
+    months.forEach(function (m) { (data[m] || []).forEach(function (it) { allItems.push(it); }); });
+    document.getElementById('boardCount').textContent = '共 ' + allItems.length + ' 项指标';
+
+    // 渲染筛选条
+    var filters = document.getElementById('boardFilters');
+    var fAll = mkFilter('全部', 'all', true);
+    filters.appendChild(fAll);
+    months.forEach(function (m) {
+        var r = ratings[m] ? ' · ' + ratings[m] : '';
+        filters.appendChild(mkFilter(m + r, m, false));
+    });
+    function mkFilter(label, val, active) {
+        var b = document.createElement('button');
+        b.className = 'board-filter' + (active ? ' active' : '');
+        b.textContent = label;
+        b.dataset.val = val;
+        b.onclick = function () {
+            document.querySelectorAll('.board-filter').forEach(function (x) { x.classList.remove('active'); });
+            b.classList.add('active');
+            render(val);
+        };
+        return b;
+    }
+
+    function pctColor(p) {
+        if (p === null || p === undefined) return '#9aa4b2';
+        if (p >= 80) return '#2fae66';
+        if (p >= 50) return '#3b82f6';
+        if (p >= 30) return '#e8953a';
+        return '#e2554f';
+    }
+
+    function render(filter) {
+        var items = filter === 'all' ? allItems.slice() : (data[filter] || []);
+        // 概览
+        var sumBox = document.getElementById('boardSummary');
+        var nums = items.filter(function (i) { return i.showNums; });
+        var pcts = items.map(function (i) { return i.pct; }).filter(function (p) { return p !== null && p !== undefined; });
+        var avg = pcts.length ? Math.round(pcts.reduce(function (a, b) { return a + b; }, 0) / pcts.length) : null;
+        var rated = ratings[filter] || (filter === 'all' ? null : ratings[months[0]]);
+        sumBox.innerHTML =
+            '<div class="bs-card"><div class="bs-label">📋 指标数</div><div class="bs-val">' + items.length + '</div></div>' +
+            '<div class="bs-card"><div class="bs-label">✅ 可量化项</div><div class="bs-val">' + nums.length + '</div></div>' +
+            '<div class="bs-card"><div class="bs-label">📊 平均完成度</div><div class="bs-val">' + (avg === null ? '—' : avg + '%') + '</div></div>' +
+            (rated ? '<div class="bs-card"><div class="bs-label">🏅 月度定级</div><div class="bs-val">' + rated + '</div></div>' : '');
+
+        // 卡片
+        var grid = document.getElementById('boardGrid');
+        if (!items.length) {
+            grid.innerHTML = '<div class="empty-state" style="padding:40px;"><div class="icon">🗓️</div><div>该月份暂无数据</div></div>';
+            return;
+        }
+        grid.innerHTML = items.map(function (it) {
+            var name = (it.name || '').replace(/</g, '&lt;');
+            var note = (it.note || '').replace(/</g, '&lt;');
+            var pct = it.pct;
+            var pctTxt = (pct === null || pct === undefined) ? '—' : pct + '%';
+            var barW = (pct === null || pct === undefined) ? 0 : Math.max(0, Math.min(100, pct));
+            var color = pctColor(pct);
+            var tgt = it.showNums ? (it.targetNum + (it.targetUnit || '')) : '—';
+            var dn = it.showNums ? (it.doneNum + (it.doneUnit || '')) : '—';
+            var metric = it.metric || it.month || '';
+            return '' +
+                '<div class="board-card">' +
+                    '<div class="bc-top"><span class="bc-tag">' + metric + '</span><span class="bc-month">' + it.month + '</span></div>' +
+                    '<div class="bc-name">' + name + '</div>' +
+                    '<div class="bc-nums">' +
+                        '<div class="bc-num"><div class="bcn-label">目标数</div><div class="bcn-val">' + tgt + '</div></div>' +
+                        '<div class="bc-num"><div class="bcn-label">完成数</div><div class="bcn-val">' + dn + '</div></div>' +
+                        '<div class="bc-num"><div class="bcn-label">百分比</div><div class="bcn-val" style="color:' + color + '">' + pctTxt + '</div></div>' +
+                    '</div>' +
+                    '<div class="bc-bar"><div class="bc-bar-fill" style="width:' + barW + '%;background:' + color + '"></div></div>' +
+                    (note ? '<div class="bc-note">📝 ' + note + '</div>' : '') +
+                '</div>';
+        }).join('');
+    }
+    render('all');
+})();
+</script>
+</body>
+</html>
