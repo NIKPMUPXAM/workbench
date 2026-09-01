@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s3"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>外媒运营平台 · 丁楠账号矩阵</title>
+<link rel="stylesheet" href="assets/style.css?v=s3">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="dingnan.html"><span class="nav-icon">📋</span>丁楠数据</a>
+        <a class="nav-item" href="okr-board.html"><span class="nav-icon">📈</span>总数据看板</a>
+        <a class="nav-item active" href="media-platforms.html"><span class="nav-icon">🌍</span>外媒运营平台</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">🌍</div>
+            <div>
+                <h1>外媒运营平台</h1>
+                <div class="ph-sub">丁楠 · 海外社媒账号矩阵与运营看板</div>
+            </div>
+        </div>
+        <div class="ph-date">
+            <div class="d-main" id="mpUpdated">待同步</div>
+            <div id="mpCount">6 个平台账号</div>
+        </div>
+    </div>
+
+    <div class="mp-tips">
+        <span>💡</span>
+        <span>所有账号数据、分析总结、选题方向、对标账号均可直接点击编辑；缺失数据已标「待补」，填好后会自动保存在本机浏览器。</span>
+    </div>
+
+    <!-- 账号卡片网格 -->
+    <div class="mp-grid" id="mpGrid">
+
+        <!-- Pinterest -->
+        <div class="mp-card">
+            <div class="mp-head">
+                <div class="mp-platform"><span class="mp-picon">📌</span>Pinterest</div>
+                <a class="mp-link" href="https://www.pinterest.com/wanglang054/" target="_blank" rel="noopener">打开Pinterest主页</a>
+            </div>
+            <div class="mp-name" contenteditable="true" data-store="mp_pinterest_name">wanglang054</div>
+            <div class="mp-desc" contenteditable="true" data-store="mp_pinterest_desc">海外图片/灵感 / 产品案例与场景图沉淀</div>
+            <div class="mp-metrics">
+                <div class="mp-metric">
+                    <div class="mpm-label">粉丝数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_pinterest_followers">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">获赞/收藏</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_pinterest_saves">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">月曝光</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_pinterest_impressions">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">画板数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_pinterest_boards">待补</div>
+                </div>
+            </div>
+            <div class="mp-section-title">分析总结</div>
+            <div class="mp-text" contenteditable="true" data-store="mp_pinterest_analysis">该Pinterest账号用于沉淀投影灯产品图、应用场景和案例灵感，适合海外B端客户和设计领阅。当前账号数据待补充。建议按产品类型（工业警示、文旅亮化、户外防水、定制logo）建立画板，每张图保持统一视觉风格；图片命名和描述带关键词如 gobo projector / logo light / outdoor projection，便于搜索曝光。</div>
+            <div class="mp-section-title">拍摄选题方向</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_pinterest_topics">Industrial safety projection · Logo projection cases · Outdoor waterproof gobo · Custom gobo ideas</div>
+            <div class="mp-section-title">对标账号</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_pinterest_benchmarks">Chauvet Lighting · Signify · LED Lighting ideas · Gobo Projection</div>
+        </div>
+
+        <!-- X (Twitter) -->
+        <div class="mp-card">
+            <div class="mp-head">
+                <div class="mp-platform"><span class="mp-picon">𝕏</span>X</div>
+                <a class="mp-link" href="https://x.com/AladdinGobo" target="_blank" rel="noopener">打开X主页</a>
+            </div>
+            <div class="mp-name" contenteditable="true" data-store="mp_x_name">AladdinGobo Projector</div>
+            <div class="mp-desc" contenteditable="true" data-store="mp_x_desc">海外短内容互动 / 行业动态与产品快讯</div>
+            <div class="mp-metrics">
+                <div class="mp-metric">
+                    <div class="mpm-label">粉丝数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_x_followers">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">发帖数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_x_posts">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">互动量</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_x_engagement">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">月曝光</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_x_impressions">待补</div>
+                </div>
+            </div>
+            <div class="mp-section-title">分析总结</div>
+            <div class="mp-text" contenteditable="true" data-store="mp_x_analysis">该X账号用于发布投影灯产品快讯、海外行业动态和工厂实拍，适合与海外采购商、照明从业者建立互动。当前账号数据待补充。建议每周至少3-5条推文，内容以产品效果短视频、工厂生产片段、客户案例为主；多用 #gobo #projector #LEDlighting 等标签，主动关注海外照明/工程采购相关账号。</div>
+            <div class="mp-section-title">拍摄选题方向</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_x_topics">Product effect clips · Factory snapshots · Trade show updates · Custom gobo cases · Lighting industry news</div>
+            <div class="mp-section-title">对标账号</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_x_benchmarks">Signify · Chauvet Lighting · Elation Lighting · ADJ Lighting</div>
+        </div>
+
+        <!-- TikTok 1 -->
+        <div class="mp-card">
+            <div class="mp-head">
+                <div class="mp-platform"><span class="mp-picon">🎵</span>TikTok</div>
+                <a class="mp-link" href="https://www.tiktok.com/@aladdinwanglang" target="_blank" rel="noopener">打开TikTok主页</a>
+            </div>
+            <div class="mp-name" contenteditable="true" data-store="mp_tiktok1_name">Gobo projector aladdin</div>
+            <div class="mp-desc" contenteditable="true" data-store="mp_tiktok1_desc">海外短视频账号1 / 工厂与产品场景获客</div>
+            <div class="mp-metrics">
+                <div class="mp-metric">
+                    <div class="mpm-label">粉丝数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok1_followers">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">作品数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok1_videos">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">获赞</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok1_likes">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">8月目标</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok1_aug_goal">8 条 / 待补</div>
+                </div>
+            </div>
+            <div class="mp-section-title">分析总结</div>
+            <div class="mp-text" contenteditable="true" data-store="mp_tiktok1_analysis">该TikTok号由丁楠负责内容拍剪发，用于海外短视频获客。当前账号数据待补充。建议统一账号定位为中国投影灯源头工厂，内容前3秒展示产品效果或工厂实力；标题/描述英文，带 #gobo #projectorfactory #ledgobo 等标签，主页留邮箱/WhatsApp便于询盘。</div>
+            <div class="mp-section-title">拍摄选题方向</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_tiktok1_topics">Factory production line · Gobo effect demo · Waterproof test · Custom logo projection · Installation case</div>
+            <div class="mp-section-title">对标账号</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_tiktok1_benchmarks">Chauvet Lighting · Elation Lighting · ADJ Lighting · Martin Professional</div>
+        </div>
+
+        <!-- Facebook -->
+        <div class="mp-card">
+            <div class="mp-head">
+                <div class="mp-platform"><span class="mp-picon">f</span>Facebook</div>
+                <a class="mp-link" href="https://www.facebook.com/Aladdin.projection.light" target="_blank" rel="noopener">打开Facebook主页</a>
+            </div>
+            <div class="mp-name" contenteditable="true" data-store="mp_fb_name">Aladdin projection light</div>
+            <div class="mp-desc" contenteditable="true" data-store="mp_fb_desc">Facebook主页 / 海外社媒账号展示与询盘承接</div>
+            <div class="mp-metrics">
+                <div class="mp-metric">
+                    <div class="mpm-label">粉丝数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_fb_followers">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">主页赞</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_fb_likes">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">互动量</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_fb_engagement">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">月触达</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_fb_reach">待补</div>
+                </div>
+            </div>
+            <div class="mp-section-title">分析总结</div>
+            <div class="mp-text" contenteditable="true" data-store="mp_fb_analysis">该Facebook主页用于海外社媒账号矩阵展示与询盘承接，适合发布产品图文、客户案例、工厂动态。当前账号数据待补充。建议完善主页简介、联系方式与官网/WhatsApp入口；保持每周2-3条帖子，结合产品场景图与短视频，引导私信询盘。</div>
+            <div class="mp-section-title">拍摄选题方向</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_fb_topics">Product scene photos · Customer project show · Factory live snapshot · Event lighting case · Q&A carousel</div>
+            <div class="mp-section-title">对标账号</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_fb_benchmarks">Chauvet Lighting · Signify · Elation Lighting · ADJ Lighting</div>
+        </div>
+
+        <!-- TikTok 2 -->
+        <div class="mp-card">
+            <div class="mp-head">
+                <div class="mp-platform"><span class="mp-picon">🎵</span>TikTok</div>
+                <a class="mp-link" href="https://www.tiktok.com/@aladdingobo" target="_blank" rel="noopener">打开TikTok主页</a>
+            </div>
+            <div class="mp-name" contenteditable="true" data-store="mp_tiktok2_name">AladdinGobo projector</div>
+            <div class="mp-desc" contenteditable="true" data-store="mp_tiktok2_desc">海外短视频账号2 / Gobo projector垂直内容</div>
+            <div class="mp-metrics">
+                <div class="mp-metric">
+                    <div class="mpm-label">粉丝数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok2_followers">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">作品数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok2_videos">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">获赞</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok2_likes">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">8月目标</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_tiktok2_aug_goal">待补</div>
+                </div>
+            </div>
+            <div class="mp-section-title">分析总结</div>
+            <div class="mp-text" contenteditable="true" data-store="mp_tiktok2_analysis">该TikTok号为Gobo projector垂直内容账号，用于覆盖更精准的投影灯兴趣人群。当前账号数据待补充。建议内容聚焦产品效果、使用教程、安装展示、客户场景，形成垂直内容系列；标题和标签统一使用 #gobo #projector #goboprojector #ledlight 等。</div>
+            <div class="mp-section-title">拍摄选题方向</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_tiktok2_topics">Before/after projection · How to install gobo · Outdoor gobo test · Custom pattern show · Warehouse bulk order</div>
+            <div class="mp-section-title">对标账号</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_tiktok2_benchmarks">Chauvet Lighting · Elation Lighting · ADJ Lighting · Martin Professional</div>
+        </div>
+
+        <!-- Instagram -->
+        <div class="mp-card">
+            <div class="mp-head">
+                <div class="mp-platform"><span class="mp-picon">📷</span>Instagram</div>
+                <a class="mp-link" href="https://www.instagram.com/IN5wanglang054/" target="_blank" rel="noopener">打开Instagram主页</a>
+            </div>
+            <div class="mp-name" contenteditable="true" data-store="mp_ig_name">IN5wanglang054</div>
+            <div class="mp-desc" contenteditable="true" data-store="mp_ig_desc">Instagram主页 / 海外视觉内容与用户私信承接</div>
+            <div class="mp-metrics">
+                <div class="mp-metric">
+                    <div class="mpm-label">粉丝数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_ig_followers">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">作品数</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_ig_posts">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">互动量</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_ig_engagement">待补</div>
+                </div>
+                <div class="mp-metric">
+                    <div class="mpm-label">月触达</div>
+                    <div class="mpm-val" contenteditable="true" data-store="mp_ig_reach">待补</div>
+                </div>
+            </div>
+            <div class="mp-section-title">分析总结</div>
+            <div class="mp-text" contenteditable="true" data-store="mp_ig_analysis">该Instagram账号用于海外视觉内容展示与私信询盘承接，适合高质量产品图、Reels短视频、客户案例。当前账号数据待补充。建议统一视觉风格与配色，保持feed整齐；善用Reels获取自然流量，主页bio加入WhatsApp/邮箱链接，便于客户直接私信。</div>
+            <div class="mp-section-title">拍摄选题方向</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_ig_topics">Clean product shots · Reels demo · Lifestyle projection · Customer tag review · Story behind the product</div>
+            <div class="mp-section-title">对标账号</div>
+            <div class="mp-tags" contenteditable="true" data-store="mp_ig_benchmarks">Chauvet Lighting · Elation Lighting · ADJ Lighting · Martin Professional</div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>外媒运营平台 · 账号数据与运营策略看板</p>
+        <p style="margin-top:4px;">点击任意文字即可编辑；编辑内容保存在本机浏览器。如需多台电脑同步，请使用「任意门」页的数据导出/导入功能。</p>
+    </div>
+</div>
+</div>
+
+<script src="assets/app.js?v=s3"></script>
+<script>
+(function(){
+    var el = document.getElementById('mpUpdated');
+    if (el) {
+        var now = new Date();
+        var pad = function(n){ return n < 10 ? '0' + n : n; };
+        el.textContent = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate());
+    }
+})();
+</script>
+</body>
+</html>
