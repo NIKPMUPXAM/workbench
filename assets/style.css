@@ -901,3 +901,30 @@ body {
 }
 .share-bar-copy:hover { background: rgba(255,255,255,.28); }
 [data-theme="dark"] .share-bar { background: linear-gradient(90deg, #1558b0, #0a4a9e); }
+
+/* ===== 制造网「运营细分」分段切换 ===== */
+.seg-control {
+    display: flex; gap: 6px; margin-bottom: 14px;
+    background: var(--bg-gray); padding: 4px; border-radius: 10px;
+}
+.seg-btn {
+    flex: 1; padding: 8px 4px; border: none; background: transparent;
+    color: var(--text-secondary); font-size: 13px; font-weight: 600;
+    border-radius: 7px; cursor: pointer; transition: all .15s;
+}
+.seg-btn:hover { background: rgba(49,130,206,.08); }
+.seg-btn.active { background: var(--card-bg); color: var(--accent-blue); box-shadow: var(--shadow-sm); }
+[data-theme="dark"] .seg-btn { color: var(--text-secondary); }
+[data-theme="dark"] .seg-btn.active { background: var(--secondary-blue); color: #fff; }
+
+.seg-panel { display: none; }
+.seg-panel.active { display: block; }
+
+.edit-area {
+    min-height: 150px; font-size: 13.5px; line-height: 1.8;
+    color: var(--text-primary); border: 1px dashed var(--border-color);
+    border-radius: 9px; padding: 12px 14px; background: var(--bg-gray);
+    outline: none; transition: border-color .18s, box-shadow .18s;
+}
+.edit-area:focus { border-color: var(--accent-blue); border-style: solid; box-shadow: 0 0 0 3px rgba(49,130,206,.12); }
+.edit-area:empty:before { content: attr(data-placeholder); color: var(--text-muted); }
