@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <script src="assets/data.js?v=s4"></script>
+  <script src="assets/data.js?v=s5"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>8月工作台 · 中国制造网</title>
-<link rel="stylesheet" href="assets/style.css?v=s4">
+<link rel="stylesheet" href="assets/style.css?v=s5">
 </head>
 <body>
 <div class="layout">
@@ -145,10 +145,63 @@
         </div>
     </div>
 
+    <!-- 中国制造网·品牌主管面板进度（照搬自 7048…app.workbuddy.link 工作面板） -->
+    <div class="module mic-progress">
+        <div class="module-header">
+            <div class="module-title"><span class="icon">📈</span> 中国制造网 · 成交突破进展</div>
+            <span class="tag tag-orange">数据来源：品牌主管工作面板</span>
+        </div>
+        <div class="module-body">
+            <!-- 核心徽章 -->
+            <div class="mic-badges">
+                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_july_deal">¥53,259</div><div class="mb-label">7月成交金额</div></div>
+                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_score">87</div><div class="mb-label">店铺评分</div></div>
+                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_star">预计4星</div><div class="mb-label">店铺星级</div></div>
+            </div>
+
+            <!-- 月度进展 -->
+            <div class="mic-sub-title">📅 月度进展</div>
+            <div class="mic-timeline" id="micTimeline">
+                <div class="mic-month">
+                    <div class="mm-head">2026年5月</div>
+                    <div class="mm-text" contenteditable="true" data-store="mic_m5">第一次接触制造网，完成布局和关键词确认，认证拍摄完成，链接上传推进中。</div>
+                </div>
+                <div class="mic-month">
+                    <div class="mm-head">2026年6月</div>
+                    <div class="mm-text" contenteditable="true" data-store="mic_m6">完善核心主推产品链接，上架工业投影灯相关产品，学习中边优化边完善。</div>
+                </div>
+                <div class="mic-month">
+                    <div class="mm-head">2026年7月</div>
+                    <div class="mm-text" contenteditable="true" data-store="mic_m7">上架301个链接，优化300条链接；店铺评分从77升到87，询盘15个，成交2单，成交金额53259。</div>
+                </div>
+            </div>
+
+            <!-- 问题 & 卡点 -->
+            <div class="mic-sub-title">⚠️ 问题 & 卡点</div>
+            <ul class="mic-list" contenteditable="true" data-store="mic_issues">
+                <li>7月结果较硬，但仍需持续看前端搜索点击图和详情页质量。</li>
+                <li>成交样本刚开始，要把高意向客户跟进和业务转化记录完整。</li>
+                <li>链接优化数量很高，下一步要转向转化效率。</li>
+            </ul>
+
+            <!-- 下阶段目标 -->
+            <div class="mic-sub-title">🎯 下阶段目标</div>
+            <ul class="mic-list" contenteditable="true" data-store="mic_okr">
+                <li>继续纳入曝光、点击、询盘、成交漏斗。</li>
+                <li>成交、回款、成本、毛利记录完整率100%。</li>
+                <li>前端搜索效果和TOP链接贡献纳入总经理工作台。</li>
+            </ul>
+
+            <!-- 推广花费 -->
+            <div class="mic-sub-title">💰 推广花费</div>
+            <div class="mic-budget">平台入驻：<b contenteditable="true" data-store="mic_budget">65,800</b> 元（已计入年度推广花费）</div>
+        </div>
+    </div>
+
     <div class="footer"><p>中国制造网模块 · 数据自动保存于本地浏览器</p></div>
 </div>
 </div>
-<script src="assets/app.js?v=s4"></script>
+<script src="assets/app.js?v=s5"></script>
 <script>
 // 运营细分：上新计划 / 上架流程表 / 上架情况 分段切换
 (function () {
