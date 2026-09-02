@@ -1018,6 +1018,63 @@ body {
     .mp-metrics { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* ===== 中国制造网·品牌主管面板进度模块 ===== */
+.mic-progress { margin-top: 18px; }
+.mic-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.mic-badge {
+    background: linear-gradient(135deg, rgba(217,119,6,.10), rgba(180,83,9,.06));
+    border: 1px solid rgba(217,119,6,.18); border-radius: 12px;
+    padding: 14px 12px; text-align: center;
+}
+.mic-badge .mb-val {
+    font-size: 24px; font-weight: 800; color: #b45309; line-height: 1.2;
+    min-height: 28px;
+}
+.mic-badge .mb-label { font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
+.mic-badge .mb-val[contenteditable] { border-bottom: 1px dashed transparent; }
+.mic-badge .mb-val[contenteditable]:hover { border-bottom-color: var(--border-color); }
+.mic-badge .mb-val[contenteditable]:focus { border-bottom-color: #b45309; outline: none; }
+
+.mic-sub-title {
+    font-size: 15px; font-weight: 700; color: var(--text-primary);
+    margin: 16px 0 10px; display: flex; align-items: center; gap: 7px;
+}
+.mic-timeline { display: flex; flex-direction: column; gap: 10px; }
+.mic-month {
+    background: var(--bg-gray); border-left: 4px solid var(--accent-blue);
+    border-radius: 10px; padding: 10px 14px;
+}
+.mic-month .mm-head { font-size: 14.5px; font-weight: 700; color: var(--accent-blue); margin-bottom: 4px; }
+.mic-month .mm-text {
+    font-size: 14.5px; color: var(--text-secondary); line-height: 1.65;
+}
+.mic-month .mm-text[contenteditable] { border: 1px dashed transparent; padding: 4px 6px; border-radius: 7px; margin: 0 -6px; }
+.mic-month .mm-text[contenteditable]:hover { border-color: var(--border-color); }
+.mic-month .mm-text[contenteditable]:focus { border-color: var(--accent-blue); outline: none; background: rgba(49,130,206,.04); }
+
+.mic-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.mic-list li {
+    position: relative; padding: 9px 12px 9px 30px;
+    background: var(--bg-gray); border-radius: 9px;
+    font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;
+}
+.mic-list li::before {
+    content: ''; position: absolute; left: 12px; top: 16px;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent-blue);
+}
+.mic-list[contenteditable] { border: 1px dashed transparent; border-radius: 10px; }
+.mic-list[contenteditable]:hover { border-color: var(--border-color); }
+.mic-list[contenteditable]:focus { border-color: var(--accent-blue); outline: none; }
+
+.mic-budget {
+    background: rgba(217,119,6,.07); border: 1px solid rgba(217,119,6,.16);
+    border-radius: 10px; padding: 12px 14px; font-size: 14.5px; color: var(--text-secondary);
+}
+.mic-budget b { color: #b45309; font-size: 17px; }
+.mic-budget b[contenteditable] { border-bottom: 1px dashed transparent; }
+.mic-budget b[contenteditable]:hover { border-bottom-color: var(--border-color); }
+.mic-budget b[contenteditable]:focus { border-bottom-color: #b45309; outline: none; }
+
 /* ===== 全局字号兜底（整体放大可读性）===== */
 body { font-size: 16.5px; }
 
