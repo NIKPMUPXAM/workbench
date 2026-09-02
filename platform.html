@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <script src="assets/data.js?v=s5"></script>
+  <script src="assets/data.js?v=s6"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>8月工作台 · 中国制造网</title>
-<link rel="stylesheet" href="assets/style.css?v=s5">
+<link rel="stylesheet" href="assets/style.css?v=s6">
 </head>
 <body>
 <div class="layout">
@@ -145,18 +145,21 @@
         </div>
     </div>
 
-    <!-- 中国制造网·品牌主管面板进度（照搬自 7048…app.workbuddy.link 工作面板） -->
+    <!-- 中国制造网·品牌主管面板进度（1:1 照搬自 7048…app.workbuddy.link 工作面板） -->
     <div class="module mic-progress">
         <div class="module-header">
-            <div class="module-title"><span class="icon">📈</span> 中国制造网 · 成交突破进展</div>
-            <span class="tag tag-orange">数据来源：品牌主管工作面板</span>
+            <div class="module-title"><span class="icon">🏭</span> 中国制造网</div>
+            <span class="tag tag-orange">成交突破</span>
+            <span class="tag tag-gray">数据来源：品牌主管工作面板</span>
         </div>
         <div class="module-body">
-            <!-- 核心徽章 -->
+            <p class="mic-desc" contenteditable="true" data-store="mic_desc">产品上架、链接优化、店铺评分、询盘和成交。</p>
+
+            <!-- 核心徽章（与源面板一致） -->
             <div class="mic-badges">
-                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_july_deal">¥53,259</div><div class="mb-label">7月成交金额</div></div>
-                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_score">87</div><div class="mb-label">店铺评分</div></div>
-                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_star">预计4星</div><div class="mb-label">店铺星级</div></div>
+                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_b1">7月成交53259</div></div>
+                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_b2">店铺评分87</div></div>
+                <div class="mic-badge"><div class="mb-val" contenteditable="true" data-store="mic_b3">预计4星</div></div>
             </div>
 
             <!-- 月度进展 -->
@@ -192,16 +195,30 @@
                 <li>前端搜索效果和TOP链接贡献纳入总经理工作台。</li>
             </ul>
 
-            <!-- 推广花费 -->
+            <!-- 推广花费（源面板预算卡，含图表预留位） -->
             <div class="mic-sub-title">💰 推广花费</div>
-            <div class="mic-budget">平台入驻：<b contenteditable="true" data-store="mic_budget">65,800</b> 元（已计入年度推广花费）</div>
+            <div class="mic-budget-card">
+                <div class="mic-budget-head">中国制造网 <span class="budget-total">已录入 65,800</span></div>
+                <div class="table-wrap">
+                    <table class="table budget-table">
+                        <thead><tr><th>项目</th><th>费用类型</th><th>实际花费</th><th>状态</th></tr></thead>
+                        <tbody>
+                            <tr><td>中国制造网</td><td>平台入驻</td><td contenteditable="true" data-store="mic_cost">65,800</td><td>已计入年度推广花费</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="budget-chart-slot">
+                    <b>制造网推广消耗图表预留</b>
+                    <span>后续放平台入驻、推广余额消耗、询盘数量、成交金额和单个询盘成本。</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="footer"><p>中国制造网模块 · 数据自动保存于本地浏览器</p></div>
 </div>
 </div>
-<script src="assets/app.js?v=s5"></script>
+<script src="assets/app.js?v=s6"></script>
 <script>
 // 运营细分：上新计划 / 上架流程表 / 上架情况 分段切换
 (function () {
