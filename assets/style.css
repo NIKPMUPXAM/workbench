@@ -995,6 +995,11 @@ body {
 .mp-section-title::before {
     content: ''; width: 4px; height: 14px; background: var(--accent-blue); border-radius: 2px;
 }
+.ai-tag {
+    font-size: 11px; font-weight: 600; color: #6d28d9;
+    background: rgba(124,58,237,.10); border: 1px solid rgba(124,58,237,.22);
+    border-radius: 999px; padding: 1px 8px; line-height: 1.6;
+}
 .mp-text {
     font-size: 14px; color: var(--text-secondary); line-height: 1.65;
     background: rgba(49,130,206,.04); border-radius: 10px; padding: 10px 12px;
