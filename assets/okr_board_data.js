@@ -3,7 +3,7 @@ window.WB_OKR_BOARD = {
  "doc": "市场部营销端OKR（2026）",
  "owner": "丁楠",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCN020X0lWlSkqbXrWY",
- "updated": "2026-09-02 07:52",
+ "updated": "2026-09-03 15:07",
  "ratings": {
   "1月": "B",
   "3月": "A-",
@@ -989,8 +989,11 @@ window.WB_OKR_BOARD = {
    {
     "month": "9月",
     "metric": "外媒更新",
-    "name": "同步发布到ins，facebook，youtube，X账号",
-    "target": null,
+    "name": "同步发布到ins，facebook，youtube，X账号  7个外媒平台工作日每天同步更新2条视频",
+    "target": [
+     7,
+     "个"
+    ],
     "pct": null,
     "hasTarget": false,
     "hasDone": false,
@@ -1019,7 +1022,7 @@ window.WB_OKR_BOARD = {
    {
     "month": "9月",
     "metric": "平台运营",
-    "name": "优化八月上架的链接，每个链接至少2个动作",
+    "name": "优化八月上架的链接，每个链接至少2个动作，同时完善对应链接的对应FAQ",
     "target": [
      2,
      "个"
