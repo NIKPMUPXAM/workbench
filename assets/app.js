@@ -430,13 +430,17 @@
             var a = e.target.closest('.file-link');
             if (!a) return;
             e.preventDefault();
-            var url = a.getAttribute('href') || '';
-            var unc = url.replace(/^file:\/\//, '\\\\').replace(/\//g, '\\');
+            // 优先使用卡片上保存的原始 UNC 路径（data-unc），避免二次转义产生多余反斜杠
+            var unc = a.getAttribute('data-unc') || '';
+            if (!unc) {
+                // 兜底：从 file:// URL 还原 UNC（仅当 data-unc 缺失时）
+                unc = (a.getAttribute('href') || '').replace(/^file:\/\/\/?/, '').replace(/\//g, '\\');
+            }
             copyText(unc);
             // 直接尝试唤起资源管理器（本地 file:// 打开时生效，即真正一键打开）
-            try { window.location.href = url; } catch (err) {}
+            try { window.location.href = a.getAttribute('href'); } catch (err) {}
             if (location.protocol !== 'file:') {
-                toast('📋 路径已复制。用「打开工作台(本地).bat」启动本页，点击即可<strong>直接打开</strong>资源管理器', 5000);
+                toast('📋 路径已复制：<br><b>' + (a.getAttribute('data-unc') || '') + '</b><br>用「打开工作台(本地).bat」启动本页，点击即可<strong>直接打开</strong>资源管理器', 5000);
             }
         });
     })();
