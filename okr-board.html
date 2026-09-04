@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <script src="assets/data.js?v=s8"></script>
+  <script src="assets/data.js?v=s9"></script>
   <script src="assets/okr_board_data.js?v=board5"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月工作数据看板 · 丁楠 OKR 完成度</title>
-<link rel="stylesheet" href="assets/style.css?v=s8">
+<link rel="stylesheet" href="assets/style.css?v=s9">
 </head>
 <body>
 <div class="layout">
@@ -78,7 +78,7 @@
     </div>
 </div>
 </div>
-<script src="assets/app.js?v=s8"></script>
+<script src="assets/app.js?v=s9"></script>
 <script>
 (function () {
     var board = window.WB_OKR_BOARD;
@@ -101,13 +101,20 @@
     months.forEach(function (m) { (data[m] || []).forEach(function (it) { allItems.push(it); }); });
     document.getElementById('boardCount').textContent = '共 ' + allItems.length + ' 项指标';
 
+    // 默认显示「当月」内容（若当月暂无数据则回退到最新月份）
+    var now = new Date();
+    var curKey = (now.getMonth() + 1) + '月';
+    var defaultMonth = months.indexOf(curKey) >= 0 ? curKey
+        : (months.length ? months[months.length - 1] : 'all');
+
     // 渲染筛选条
     var filters = document.getElementById('boardFilters');
-    var fAll = mkFilter('全部', 'all', true);
+    var fAll = mkFilter('全部', 'all', defaultMonth === 'all');
     filters.appendChild(fAll);
     months.forEach(function (m) {
         var r = ratings[m] ? ' · ' + ratings[m] : '';
-        filters.appendChild(mkFilter(m + r, m, false));
+        var isCur = (m === curKey);
+        filters.appendChild(mkFilter(m + r + (isCur ? ' · 当月' : ''), m, m === defaultMonth));
     });
     function mkFilter(label, val, active) {
         var b = document.createElement('button');
@@ -174,7 +181,7 @@
                 '</div>';
         }).join('');
     }
-    render('all');
+    render(defaultMonth);
 })();
 </script>
 </body>
