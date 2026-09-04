@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <script src="assets/data.js?v=s7"></script>
+  <script src="assets/data.js?v=s10"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>任意门 · 8月工作台</title>
-<link rel="stylesheet" href="assets/style.css?v=s7">
+<link rel="stylesheet" href="assets/style.css?v=s10">
 </head>
 <body>
 <div class="layout">
@@ -94,7 +94,7 @@
     <div class="footer"><p>任意门模块 · 网站/外媒新窗口打开 · 共享空间点击唤起本机文件资源管理器 · 改动自动保存</p></div>
 </div>
 </div>
-<script src="assets/app.js?v=s7"></script>
+<script src="assets/app.js?v=s10"></script>
 <script>
 (function () {
     var KEY = 'wb_portal';
@@ -145,11 +145,12 @@
             if (!box) return;
             box.innerHTML = d[col].map(function (it, idx) {
                 if (col === 'share') {
-                    var href = 'file://' + (it.path || '').replace(/\\/g, '/');
+                    var raw = it.path || '';
+                    var href = 'file://///' + raw.replace(/^[\\/]+/, '').replace(/\\/g, '/');
                     return '<div class="portal-item">' +
-                        '<a class="portal-link file-link" href="' + esc(href) + '" target="_blank" rel="noopener">' +
+                        '<a class="portal-link file-link" href="' + esc(href) + '" data-unc="' + esc(raw) + '" target="_blank" rel="noopener">' +
                             '<div class="pl-name">' + esc(it.name) + '</div>' +
-                            '<div class="pl-url">' + esc(it.path || '') + '</div>' +
+                            '<div class="pl-url">' + esc(raw) + '</div>' +
                         '</a>' +
                         '<button class="portal-del" data-col="' + col + '" data-i="' + idx + '" title="删除">🗑</button>' +
                     '</div>';
