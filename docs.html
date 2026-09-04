@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <script src="assets/data.js?v=s7"></script>
+  <script src="assets/data.js?v=s10"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>8月工作台 · 工作汇报与文档</title>
-<link rel="stylesheet" href="assets/style.css?v=s7">
+<link rel="stylesheet" href="assets/style.css?v=s10">
 </head>
 <body>
 <div class="layout">
@@ -81,7 +81,7 @@
     <div class="footer"><p>工作汇报与文档模块 · 上传文件存于本地浏览器（IndexedDB），点击「打开」即可查看 / 下载</p></div>
 </div>
 </div>
-<script src="assets/app.js?v=s7"></script>
+<script src="assets/app.js?v=s10"></script>
 <script>
 (function () {
     // ====== 文件存储（IndexedDB） ======
@@ -92,7 +92,7 @@
         var d = e.target.result;
         if (!d.objectStoreNames.contains(STORE)) d.createObjectStore(STORE, { keyPath: 'id' });
     };
-    req.onsuccess = function (e) { db = e.target.result; renderDeliverables(); initZone(document.querySelector('.file-zone[data-zone="free"]')); };
+    req.onsuccess = function (e) { db = e.target.result; initAllZones(); };
     req.onerror = function () {
         document.querySelectorAll('.fz-list').forEach(function (el) {
             el.innerHTML = '<div class="fz-empty">⚠️ 当前打开方式不支持本地文件存储，请用分享链接页或浏览器打开本文件</div>';
@@ -230,8 +230,13 @@
                 renderDeliverables();
             });
         });
-        // 初始化每个模块的文件区
-        listEl.querySelectorAll('.file-zone').forEach(initZone);
+        // 初始化每个模块的文件区（db 就绪后由 initAllZones 统一处理）
+        initAllZones();
+    }
+
+    function initAllZones() {
+        if (!db) return;
+        document.querySelectorAll('.file-zone').forEach(initZone);
     }
 
     var addBtn = document.getElementById('addDelivBtn');
@@ -241,6 +246,12 @@
         saveModules(arr);
         renderDeliverables();
     });
+
+    // 防止导航时浏览器恢复旧滚动位置导致页面“跳来跳去”
+    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+
+    // 立即同步渲染模块结构（不等待 IndexedDB，避免页面先空后“跳”）
+    renderDeliverables();
 })();
 </script>
 </body>
