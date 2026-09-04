@@ -7,7 +7,7 @@
  * updated：数据抓取/生成日期。
  */
 window.WB_MEDIA_STATS = {
-  updated: "2026-09-03",
+  updated: "2026-09-04",
   note: "X 为公开主页自动抓取真实值；TikTok/Instagram/Facebook/Pinterest 被平台反爬拦截无法自动读取，月曝光需登录后台分析，均标「待补」，请导出后台数据发我补齐。拍摄选题方向、对标账号由 AI 每周生成，可编辑。",
   platforms: {
     pinterest: {
@@ -17,8 +17,8 @@ window.WB_MEDIA_STATS = {
       benchmarks: "对标方向：① Chauvet Lighting、Signify 等国际照明品牌的 Pinterest 画板结构（分类清晰、关键词 SEO）；② 在 Pinterest 搜索 gobo projector / LED logo light，看自然排名靠前的同行账号的爆款 Pin 标题与封面；③ 参考 Etsy 上定制 gobo 卖家的内容排版。重点对标：画板分类逻辑、图片 SEO、高收藏 Pin 的标题结构。"
     },
     x: {
-      followers: "0", likes: "待补", exposure: "待补", posts: "53",
-      analysis: "X（@AladdinGobo）公开主页读取到 53 条推文，粉丝数显示 0（疑似账号较新或主页未公开粉丝数，建议登录后台核实真实粉丝与曝光）。内容以产品快讯+行业动态为主。建议：①保持每周 3–5 条，提高工厂实拍/产品效果短视频占比；②固定使用 #gobo #projector #LEDlighting 等标签；③主动关注并互动海外照明/工程采购账号，引导私信询盘。下周重点观察发帖频率与互动率变化。",
+      followers: "0", likes: "待补", exposure: "待补", posts: "55",
+      analysis: "X（@AladdinGobo）公开主页读取到 55 条推文，粉丝数显示 0（疑似账号较新或主页未公开粉丝数，建议登录后台核实真实粉丝与曝光）。内容以产品快讯+行业动态为主。建议：①保持每周 3–5 条，提高工厂实拍/产品效果短视频占比；②固定使用 #gobo #projector #LEDlighting 等标签；③主动关注并互动海外照明/工程采购账号，引导私信询盘。下周重点观察发帖频率与互动率变化。",
       topics: "1) 每日/隔日产品快讯（新款 gobo 灯效果短片段，前 3 秒出光效）；2) 行业动态（照明展、海外工程政策、采购旺季）；3) 工厂实拍（产线/质检/仓储）建立源头工厂信任；4) 客户案例转推+点评；5) 固定话题 #gobo #projector #LEDlighting 做系列化。建议短视频占比提升到 50% 以上。",
       benchmarks: "对标方向：① @Signify、@ChauvetPro 的短资讯节奏与标签策略；② 搜索 gobo projector 看海外询盘型账号的内容形式与涨粉路径；③ 关注海外照明工程/采购类 KOL 的互动对象，反向挖掘精准客户。重点对标：发帖频率、短资讯标题结构、如何在推文中引导私信询盘。"
     },
