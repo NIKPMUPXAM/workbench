@@ -1107,7 +1107,7 @@ body {
 /* ===== 全局字号兜底（整体放大可读性）===== */
 body { font-size: 16.5px; }
 
-/* ===== 总数据看板 ===== */
+/* ===== 月工作数据看板 ===== */
 .board-docbar {
     display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
     background: var(--card-bg); border: 1px solid var(--border-color);
