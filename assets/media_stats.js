@@ -45,6 +45,12 @@ window.WB_MEDIA_STATS = {
       analysis: "Instagram（@wanglang054）当前无自动可读数据（平台反爬拦截）。该账号用于海外视觉内容展示与私信询盘。建议：统一视觉风格与配色保持 feed 整齐；善用 Reels 获取自然流量；bio 加 WhatsApp/邮箱便于客户私信。补齐方式：用 Instagram 专业账户后台导出粉丝/触达数据发我。",
       topics: "1) 干净产品图（白底/场景化，突出质感）；2) Reels 效果演示（吃自然流量，前 2 秒出光效）；3) 生活方式投影（居家/咖啡馆/婚礼氛围）；4) 客户 @ 返图/评价（社交证明）；5) 产品故事幕后（研发/品控/包装）。统一视觉配色保持 feed 整齐，bio 加 WhatsApp/邮箱。",
       benchmarks: "对标方向：① 搜索 gobo light / LED projection 看视觉类同行账号的 feed 风格与配色；② 参考 @ChauvetLighting 的 Reels 节奏与封面设计；③ 关注海外灯光设计师/活动策划账号的内容偏好（了解客户审美）。重点对标：feed 视觉统一度、Reels 选题、Story 互动玩法。"
+    },
+    youtube: {
+      followers: "待补", likes: "待补", exposure: "待补", posts: "待补",
+      analysis: "YouTube（Gobo projector Aladdin）当前无自动可读数据（平台反爬拦截）。该频道用于海外投影灯效果展示与品牌内容沉淀，视频易被 Google 长期收录，适合做产品演示/工厂溯源/安装教程类长尾内容。建议：①保持每周 1–2 条，标题带 gobo projector / LED logo light 等关键词利于搜索；②封面统一风格、前 2 秒出光效；③描述区放官网/WhatsApp 承接询盘。补齐方式：用 YouTube Studio 后台导出订阅/观看/时长数据发我。",
+      topics: "1) 产品效果演示长视频（gobo 投影打在墙面/地面/建筑的全过程，前 2 秒出光效）；2) 工厂溯源（产线/质检/老化测试，建立源头工厂信任，易被 Google 收录）；3) 安装教程（吸顶/壁装/户外固定，完播率高）；4) 客户案例实拍（店铺招牌/婚礼/展会现场）；5) 参数对比/选购指南（工业警示 vs 文旅亮化 vs 户外防水，引导询盘）。标题带 gobo projector / LED logo light 关键词吃搜索流量。",
+      benchmarks: "对标方向：① @ChauvetLighting、@ElationLighting 的产品演示长视频结构与封面设计；② 搜索『led gobo projector』看海外评测/工厂号的长尾选题与标题关键词；③ 参考阿里国际站头部投影灯卖家的视频脚本。重点对标：视频 SEO 标题结构、前两秒钩子、描述区询盘引导（官网/WhatsApp/邮箱）。"
     }
   }
 };
