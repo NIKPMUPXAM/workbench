@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <script src="assets/data.js?v=s10"></script>
+  <script src="assets/data.js?v=s11"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>8月工作台 · 工作汇报与文档</title>
-<link rel="stylesheet" href="assets/style.css?v=s10">
+<link rel="stylesheet" href="assets/style.css?v=s11">
 </head>
 <body>
 <div class="layout">
@@ -45,7 +45,7 @@
             <div class="ph-icon">📁</div>
             <div><h1>工作汇报与文档</h1><div class="ph-sub">交付物汇总 · 文件集中存放 · 模块可自由增减</div></div>
         </div>
-        <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第1周</div></div>
+        <div class="ph-date"><div class="d-main" id="currentDate"></div><div id="currentWeek"></div></div>
     </div>
 
     <!-- 交付物模块（动态：可新增/删除，每项带文件区） -->
@@ -73,7 +73,7 @@
                     <div class="fz-drop-text">任何文件都可以放这里：点击选择或拖入</div>
                     <input type="file" class="fz-input" multiple hidden>
                 </div>
-                <div class="fz-list"></div>
+                <div class="fz-list"><div class="fz-empty">读取本地文件中…</div></div>
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
     <div class="footer"><p>工作汇报与文档模块 · 上传文件存于本地浏览器（IndexedDB），点击「打开」即可查看 / 下载</p></div>
 </div>
 </div>
-<script src="assets/app.js?v=s10"></script>
+<script src="assets/app.js?v=s11"></script>
 <script>
 (function () {
     // ====== 文件存储（IndexedDB） ======
@@ -108,8 +108,37 @@
             else cb(out.sort(function (a, b) { return b.addedAt - a.addedAt; }));
         };
     }
-    function put(rec, done) { var t = store('readwrite'); t.put(rec); t.transaction.oncomplete = done; }
-    function del(id, done) { var t = store('readwrite'); t.delete(id); t.transaction.oncomplete = done; }
+    function loadMeta() { try { return JSON.parse(localStorage.getItem('wb_files_meta') || '[]'); } catch (e) { return []; } }
+    function saveMeta(arr) { try { localStorage.setItem('wb_files_meta', JSON.stringify(arr)); } catch (e) {} }
+    function put(rec, done) {
+        var t = store('readwrite'); t.put(rec);
+        t.transaction.oncomplete = function () { var m = loadMeta(); m.push({ id: rec.id, name: rec.name, size: rec.size, zone: rec.zone, addedAt: rec.addedAt }); saveMeta(m); if (done) done(); };
+    }
+    function del(id, done) {
+        var t = store('readwrite'); t.delete(id);
+        t.transaction.oncomplete = function () { saveMeta(loadMeta().filter(function (x) { return x.id !== id; })); if (done) done(); };
+    }
+    function itemHTML(it) {
+        return '<div class="fz-item" data-id="' + it.id + '">' +
+            '<span class="fz-ico">' + extIcon(it.name) + '</span>' +
+            '<span class="fz-meta"><span class="fz-name">' + esc(it.name) + '</span>' +
+            '<span class="fz-sub">' + fmtSize(it.size) + ' · ' + new Date(it.addedAt).toLocaleString('zh-CN') + '</span></span>' +
+            '<button class="fz-open" data-act="open">打开</button>' +
+            '<button class="fz-del" data-act="del" title="删除">🗑</button></div>';
+    }
+    function renderListEl(listEl, items) {
+        if (!items.length) { listEl.innerHTML = '<div class="fz-empty">暂无文件，拖入或点击上方按钮添加</div>'; return; }
+        listEl.innerHTML = items.map(itemHTML).join('');
+    }
+    function renderAllFromMeta() {
+        var meta = loadMeta();
+        document.querySelectorAll('.file-zone').forEach(function (zoneEl) {
+            var zone = zoneEl.getAttribute('data-zone');
+            var listEl = zoneEl.querySelector('.fz-list');
+            if (!listEl) return;
+            renderListEl(listEl, meta.filter(function (x) { return x.zone === zone; }).sort(function (a, b) { return b.addedAt - a.addedAt; }));
+        });
+    }
 
     function fmtSize(b) {
         if (b < 1024) return b + ' B';
@@ -130,17 +159,7 @@
         var drop = zoneEl.querySelector('.fz-drop');
         var listEl = zoneEl.querySelector('.fz-list');
         function render() {
-            list(zone, function (items) {
-                if (!items.length) { listEl.innerHTML = '<div class="fz-empty">暂无文件，拖入或点击上方按钮添加</div>'; return; }
-                listEl.innerHTML = items.map(function (it) {
-                    return '<div class="fz-item" data-id="' + it.id + '">' +
-                        '<span class="fz-ico">' + extIcon(it.name) + '</span>' +
-                        '<span class="fz-meta"><span class="fz-name">' + esc(it.name) + '</span>' +
-                        '<span class="fz-sub">' + fmtSize(it.size) + ' · ' + new Date(it.addedAt).toLocaleString('zh-CN') + '</span></span>' +
-                        '<button class="fz-open" data-act="open">打开</button>' +
-                        '<button class="fz-del" data-act="del" title="删除">🗑</button></div>';
-                }).join('');
-            });
+            list(zone, function (items) { renderListEl(listEl, items); });
         }
         function addFiles(files) {
             Array.prototype.forEach.call(files, function (f) {
@@ -199,7 +218,7 @@
                 '<div class="deliv-body">' +
                     '<div class="file-zone" data-zone="deliv_' + m.id + '">' +
                         '<div class="fz-drop"><div class="fz-drop-icon">⬆️</div><div class="fz-drop-text">点击选择，或把文件拖到此处</div><input type="file" class="fz-input" multiple hidden></div>' +
-                        '<div class="fz-list"></div>' +
+                        '<div class="fz-list"><div class="fz-empty">读取本地文件中…</div></div>' +
                     '</div>' +
                 '</div>' +
             '</div>';
@@ -252,6 +271,8 @@
 
     // 立即同步渲染模块结构（不等待 IndexedDB，避免页面先空后“跳”）
     renderDeliverables();
+    // 首屏用本地缓存元数据同步渲染文件列表，进入页面高度即最终高度，不再跳动
+    renderAllFromMeta();
 })();
 </script>
 </body>
