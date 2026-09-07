@@ -1169,6 +1169,21 @@ body { font-size: 16.5px; }
     padding: 16px 18px; box-shadow: var(--shadow-sm);
 }
 .bcon-head { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+
+/* 工作日志 · 数据来源状态条（实时 / 离线快照） */
+.wl-sync {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-size: 13.5px; padding: 9px 14px; border-radius: 10px; margin-bottom: 14px;
+    border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-secondary);
+}
+.wl-sync.wls-live { border-color: rgba(47,174,102,.55); background: rgba(47,174,102,.10); color: #2fae66; }
+.wl-sync.wls-off { border-color: rgba(232,149,58,.55); background: rgba(232,149,58,.10); color: #c97a1e; }
+.wl-sync.wls-loading { color: var(--text-muted); }
+.wls-btn {
+    margin-left: auto; font-size: 12.5px; padding: 3px 10px; border-radius: 7px; cursor: pointer;
+    border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-secondary);
+}
+.wls-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
 .bcon-body {
     font-size: 14px; line-height: 1.8; color: var(--text-secondary);
     white-space: pre-wrap; word-break: break-word;
