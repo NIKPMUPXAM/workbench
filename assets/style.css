@@ -1158,4 +1158,19 @@ body { font-size: 16.5px; }
 .bc-bar { height: 9px; background: var(--bg-gray); border-radius: 6px; overflow: hidden; }
 .bc-bar-fill { height: 100%; border-radius: 6px; transition: width .4s ease; min-width: 0; }
 .bc-note { font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; background: var(--bg-gray);
-    border-radius: 8px; padding: 8px 10px; }
+    border-radius: 8px; padding: 8px 10px; border-left: 3px solid var(--accent-blue); }
+.bc-note-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 3px; }
+.bc-note-txt { display: block; word-break: break-word; white-space: pre-wrap; }
+
+/* 月度总结（看板最底部） */
+.board-conclude { margin-top: 20px; display: grid; gap: 14px; }
+.bcon-card {
+    background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;
+    padding: 16px 18px; box-shadow: var(--shadow-sm);
+}
+.bcon-head { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+.bcon-body {
+    font-size: 14px; line-height: 1.8; color: var(--text-secondary);
+    white-space: pre-wrap; word-break: break-word;
+}
+.bcon-empty { font-size: 13.5px; color: var(--text-muted); }
