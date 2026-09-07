@@ -2,11 +2,11 @@
 <html lang="zh-CN">
 <head>
   <script src="assets/data.js?v=s10"></script>
-  <script src="assets/okr_board_data.js?v=board5"></script>
+  <script src="assets/okr_board_data.js?v=board6"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月工作数据看板 · 丁楠 OKR 完成度</title>
-<link rel="stylesheet" href="assets/style.css?v=s10">
+<link rel="stylesheet" href="assets/style.css?v=s11">
 </head>
 <body>
 <div class="layout">
@@ -72,6 +72,9 @@
     <!-- 数据卡片 -->
     <div class="board-grid" id="boardGrid"></div>
 
+    <!-- 月度总结（最底部） -->
+    <div class="board-conclude" id="boardConclude"></div>
+
     <div class="footer">
         <p>月工作数据看板 · 数据由企业微信共享文档「市场部营销端OKR（2026）」实时解析生成</p>
         <p style="margin-top:4px;">目标数 / 完成数 为文档中明确可量化的指标；标注「—」的为定性任务，进度按文档填写的完成度说明显示</p>
@@ -97,6 +100,7 @@
     var months = board.months || [];
     var ratings = board.ratings || {};
     var data = board.data || {};
+    var summaries = board.summaries || {};
     var allItems = [];
     months.slice().reverse().forEach(function (m) { (data[m] || []).forEach(function (it) { allItems.push(it); }); });
     document.getElementById('boardCount').textContent = '共 ' + allItems.length + ' 项指标';
@@ -159,7 +163,7 @@
         }
         grid.innerHTML = items.map(function (it) {
             var name = (it.name || '').replace(/</g, '&lt;');
-            var note = (it.note || '').replace(/</g, '&lt;');
+            var note = escHtml((it.note || '').trim());
             var pct = it.pct;
             var pctTxt = (pct === null || pct === undefined) ? '—' : pct + '%';
             var barW = (pct === null || pct === undefined) ? 0 : Math.max(0, Math.min(100, pct));
@@ -179,10 +183,42 @@
                         '<div class="bc-num"><div class="bcn-label">百分比</div><div class="bcn-val" style="color:' + color + '">' + pctTxt + '</div></div>' +
                     '</div>' +
                     '<div class="bc-bar"><div class="bc-bar-fill" style="width:' + barW + '%;background:' + color + '"></div></div>' +
-                    (note ? '<div class="bc-note">📝 ' + note + '</div>' : '') +
+                    '<div class="bc-note"><span class="bc-note-label">📋 月底完成情况</span><span class="bc-note-txt">' + (note || '—') + '</span></div>' +
                 '</div>';
         }).join('');
+        renderConclude(filter);
     }
+
+    function escHtml(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // 最底部：月度总结（来自文档第0列「20XX年X月OKR月度总结」）
+    function renderConclude(filter) {
+        var box = document.getElementById('boardConclude');
+        if (!box) return;
+        if (filter === 'all') {
+            var keys = months.slice().reverse().filter(function (m) { return summaries[m]; });
+            if (!keys.length) {
+                box.innerHTML = '<div class="bcon-card"><div class="bcon-head">📝 月度总结</div>' +
+                    '<div class="bcon-empty">文档中暂无已填写的月度总结</div></div>';
+                return;
+            }
+            box.innerHTML = keys.map(function (m) {
+                return '<div class="bcon-card">' +
+                    '<div class="bcon-head">📝 ' + m + ' 月度总结</div>' +
+                    '<div class="bcon-body">' + escHtml(summaries[m]) + '</div></div>';
+            }).join('');
+            return;
+        }
+        var s = summaries[filter] || '';
+        box.innerHTML = '<div class="bcon-card">' +
+            '<div class="bcon-head">📝 ' + filter + ' 月度总结</div>' +
+            (s ? '<div class="bcon-body">' + escHtml(s) + '</div>'
+               : '<div class="bcon-empty">该月文档暂未填写总结内容（可在企微文档对应月份末尾补充）</div>') +
+            '</div>';
+    }
+
     render(defaultMonth);
 })();
 </script>
