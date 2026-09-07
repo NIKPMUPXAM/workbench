@@ -164,7 +164,9 @@
             var pctTxt = (pct === null || pct === undefined) ? '—' : pct + '%';
             var barW = (pct === null || pct === undefined) ? 0 : Math.max(0, Math.min(100, pct));
             var color = pctColor(pct);
-            var tgt = it.showNums ? (it.targetNum + (it.targetUnit || '')) : '—';
+            var tgtVal = (it.targetNum != null) ? it.targetNum : (it.target && it.target[0] != null ? it.target[0] : null);
+            var tgtUnit = it.targetUnit || (it.target && it.target[1]) || '';
+            var tgt = (tgtVal != null) ? (tgtVal + tgtUnit) : '—';
             var dn = it.showNums ? (it.doneNum + (it.doneUnit || '')) : '—';
             var metric = it.metric || it.month || '';
             return '' +
