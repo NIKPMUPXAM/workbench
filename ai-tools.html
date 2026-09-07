@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="assets/data.js?v=s11"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 工具 · 丁楠工作台</title>
+<link rel="stylesheet" href="assets/style.css?v=s11">
+</head>
+<body>
+<div class="layout">
+<button class="menu-toggle" id="menuToggle" aria-label="打开菜单">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">📊</div>
+        <div class="logo-sub">运营助理</div>
+        <div class="logo-title">个人工作台</div>
+    </div>
+    <nav class="nav-menu">
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
+        <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
+        <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
+        <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
+        <a class="nav-item" href="worklog.html"><span class="nav-icon">📝</span>工作日志</a>
+        <a class="nav-item" href="inquiry.html"><span class="nav-icon">📊</span>询单统计</a>
+        <a class="nav-item" href="okr-board.html"><span class="nav-icon">📈</span>月工作数据看板</a>
+        <a class="nav-item" href="media-platforms.html"><span class="nav-icon">🌍</span>外媒运营平台</a>
+        <a class="nav-item" href="docs.html"><span class="nav-icon">📁</span>工作汇报与文档</a>
+        <a class="nav-item" href="portal.html"><span class="nav-icon">🚪</span>任意门</a>
+        <a class="nav-item active" href="ai-tools.html"><span class="nav-icon">🤖</span>AI工具</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-actions">
+            <button class="sidebar-btn" id="refreshBtn" title="刷新页面">🔄 刷新</button>
+            <button class="sidebar-btn" id="themeBtn" title="切换深/浅色">🌓 深色</button>
+        </div>
+        <div id="sidebarClock" class="sidebar-clock">--</div>
+    </div>
+</aside>
+
+<div class="content">
+    <div class="page-header">
+        <div class="ph-left">
+            <div class="ph-icon">🤖</div>
+            <div>
+                <div class="ph-title">AI 工具</div>
+                <div class="ph-sub">千问 / 豆包 / ChatGPT 等主流 AI 官网一键直达（新窗口打开）</div>
+            </div>
+        </div>
+        <div class="ph-right">
+            <span class="tag tag-blue">AI 直达</span>
+        </div>
+    </div>
+
+    <div class="portal-grid">
+        <div class="portal-col">
+            <div class="portal-col-title">🇨🇳 国内 AI 助手</div>
+            <div class="portal-links">
+                <div class="portal-item"><a class="portal-link" href="https://tongyi.aliyun.com/" target="_blank" rel="noopener"><div class="pl-name">通义千问</div><div class="pl-url">tongyi.aliyun.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://www.doubao.com/" target="_blank" rel="noopener"><div class="pl-name">豆包</div><div class="pl-url">doubao.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://chat.deepseek.com/" target="_blank" rel="noopener"><div class="pl-name">DeepSeek</div><div class="pl-url">chat.deepseek.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://www.kimi.com/" target="_blank" rel="noopener"><div class="pl-name">Kimi</div><div class="pl-url">kimi.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://yuanbao.tencent.com/" target="_blank" rel="noopener"><div class="pl-name">腾讯元宝</div><div class="pl-url">yuanbao.tencent.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://yiyan.baidu.com/" target="_blank" rel="noopener"><div class="pl-name">文心一言</div><div class="pl-url">yiyan.baidu.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://xinghuo.xfyun.cn/" target="_blank" rel="noopener"><div class="pl-name">讯飞星火</div><div class="pl-url">xinghuo.xfyun.cn</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://chatglm.cn/" target="_blank" rel="noopener"><div class="pl-name">智谱清言</div><div class="pl-url">chatglm.cn</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://metaso.cn/" target="_blank" rel="noopener"><div class="pl-name">秘塔 AI 搜索</div><div class="pl-url">metaso.cn</div></a></div>
+            </div>
+        </div>
+
+        <div class="portal-col">
+            <div class="portal-col-title">🌍 海外 AI</div>
+            <div class="portal-links">
+                <div class="portal-item"><a class="portal-link" href="https://chatgpt.com/" target="_blank" rel="noopener"><div class="pl-name">ChatGPT</div><div class="pl-url">chatgpt.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://claude.ai/" target="_blank" rel="noopener"><div class="pl-name">Claude</div><div class="pl-url">claude.ai</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://gemini.google.com/" target="_blank" rel="noopener"><div class="pl-name">Gemini</div><div class="pl-url">gemini.google.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://grok.com/" target="_blank" rel="noopener"><div class="pl-name">Grok</div><div class="pl-url">grok.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://www.perplexity.ai/" target="_blank" rel="noopener"><div class="pl-name">Perplexity</div><div class="pl-url">perplexity.ai</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://notebooklm.google.com/" target="_blank" rel="noopener"><div class="pl-name">NotebookLM</div><div class="pl-url">notebooklm.google.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://copilot.microsoft.com/" target="_blank" rel="noopener"><div class="pl-name">Copilot</div><div class="pl-url">copilot.microsoft.com</div></a></div>
+            </div>
+        </div>
+
+        <div class="portal-col">
+            <div class="portal-col-title">🎨 AI 图像 · 视频 · 音频</div>
+            <div class="portal-links">
+                <div class="portal-item"><a class="portal-link" href="https://jimeng.jianying.com/" target="_blank" rel="noopener"><div class="pl-name">即梦 AI</div><div class="pl-url">jimeng.jianying.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://klingai.com/" target="_blank" rel="noopener"><div class="pl-name">可灵 AI</div><div class="pl-url">klingai.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://hailuoai.com/" target="_blank" rel="noopener"><div class="pl-name">海螺 AI</div><div class="pl-url">hailuoai.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://www.midjourney.com/" target="_blank" rel="noopener"><div class="pl-name">Midjourney</div><div class="pl-url">midjourney.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://runwayml.com/" target="_blank" rel="noopener"><div class="pl-name">Runway</div><div class="pl-url">runwayml.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://suno.com/" target="_blank" rel="noopener"><div class="pl-name">Suno（配乐）</div><div class="pl-url">suno.com</div></a></div>
+                <div class="portal-item"><a class="portal-link" href="https://zenvideo.qq.com/" target="_blank" rel="noopener"><div class="pl-name">腾讯智影</div><div class="pl-url">zenvideo.qq.com</div></a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:16px;">
+        💡 点击任意卡片即在<strong>新窗口</strong>打开对应 AI 官网；首次使用需自行登录账号。<br>
+        海外站点（ChatGPT / Claude / Gemini 等）需要相应网络环境，国内站点可直接访问。
+    </div>
+
+    <div class="footer"><p>AI 工具模块 · 主流 AI 官网直达 · 新窗口打开</p></div>
+</div>
+</div>
+<script src="assets/app.js?v=s11"></script>
+</body>
+</html>
