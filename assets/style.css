@@ -963,6 +963,20 @@ body {
     background: rgba(49,130,206,.08); padding: 5px 10px; border-radius: 8px;
 }
 .mp-link:hover { background: rgba(49,130,206,.14); text-decoration: underline; }
+/* 卡片右上：主页 + 后台数据 两个入口并列 */
+.mp-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+/* 月工作数据看板（OKR 同款排版）：只读任务行 + 月底完成情况 */
+.kr-row { margin-bottom: 8px; }
+.kr-readonly { cursor: default; }
+.kr-readonly .kr-num b { font-weight: 700; color: var(--text-primary); }
+.kr-endnote {
+    font-size: 13px; color: var(--text-secondary); background: var(--bg-gray);
+    border-left: 3px solid var(--accent-blue); border-radius: 8px;
+    padding: 7px 10px; margin: 4px 0 2px; line-height: 1.55; white-space: pre-wrap;
+}
+.kr-endnote-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; }
+.mp-link-data { color: #2fae66; background: rgba(47,174,102,.10); }
+.mp-link-data:hover { background: rgba(47,174,102,.18); text-decoration: underline; }
 .mp-name {
     font-size: 19px; font-weight: 700; color: var(--text-primary);
     line-height: 1.35; margin-top: 2px;
