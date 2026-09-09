@@ -19,7 +19,6 @@
         <div class="logo-title">个人工作台</div>
     </div>
     <nav class="nav-menu">
-        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
         <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
         <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
         <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
@@ -114,7 +113,7 @@
 </div>
 </div>
 <script src="assets/app.js?v=s10"></script>
-<script src="assets/worklog_data.js?v=s8"></script>
+<script src="assets/worklog_data.js?v=s11"></script>
 <script>
 (function () {
     /* 工作日志数据源：优先实时读取企微文档（本地服务 /api/worklog），
@@ -139,32 +138,38 @@
             localStorage.setItem('wb_overview', JSON.stringify(_ov));
         } catch (e) {}
     }
-    // 合并：仅补进本地没有的日期，绝不覆盖用户已保存/编辑过的日志
+    // 合并：补进本地没有的日期；不覆盖用户已编辑过的日志
+    // 例外：旧数据是「整周合并」格式（正文以【周一】开头）时，用按天拆分的新数据覆盖
     function merge(defaults) {
-        var added = 0;
+        var res = { added: 0, replaced: 0 };
         try {
             var d = JSON.parse(localStorage.getItem(KEY) || '[]');
             (defaults || []).forEach(function (def) {
                 if (!def || !def.date) return;
-                var exists = d.some(function (it) { return it.date === def.date; });
-                if (!exists) { d.push(def); added++; }
+                var idx = -1;
+                for (var i = 0; i < d.length; i++) { if (d[i].date === def.date) { idx = i; break; } }
+                if (idx < 0) { d.push(def); res.added++; }
+                else if (d[idx].text && d[idx].text.indexOf('【周一】') === 0) {
+                    d[idx] = def; res.replaced++;   // 整周合并 -> 替换为单日
+                }
             });
-            if (added) {
+            if (res.added || res.replaced) {
                 d.sort(function (a, b) { return b.date.localeCompare(a.date); });
                 localStorage.setItem(KEY, JSON.stringify(d));
             }
         } catch (e) {}
         syncOverview();
         try { window.dispatchEvent(new Event('wb:worklog-updated')); } catch (e) {}
-        return added;
+        return res;
     }
 
     var seed = window.WB_WORKLOG_SEED || [];
 
     function fallback(reason) {
-        var added = merge(seed);
+        var r = merge(seed);
         status('wls-off', '🟡 离线快照：' + reason + ' · 本地共 ' + count() + ' 条'
-            + (added ? '（本次补入 ' + added + ' 条）' : ''));
+            + (r.added ? '（补入 ' + r.added + ' 条）' : '')
+            + (r.replaced ? '（按天拆分覆盖 ' + r.replaced + ' 条）' : ''));
     }
 
     function doFetch(force) {
@@ -175,10 +180,12 @@
             .then(function (j) {
                 clearTimeout(timer);
                 if (j && j.ok) {
-                    var added = merge(j.items || []);
+                    var r = merge(j.items || []);
                     status('wls-live', '🟢 实时同步 · 来自企微文档 · ' + (j.updated || '') +
                         ' · 文档 ' + (j.count || 0) + ' 条 · 本地共 ' + count() + ' 条'
-                        + (added ? '（本次新增 ' + added + ' 条）' : '（本地已最新）'));
+                        + (r.added ? '（新增 ' + r.added + ' 条）' : '')
+                        + (r.replaced ? '（按天拆分覆盖 ' + r.replaced + ' 条）' : '')
+                        + (!r.added && !r.replaced ? '（本地已最新）' : ''));
                 } else if (j && j.need_auth) {
                     fallback('企微「文档」机器人授权已过期，需重新授权');
                 } else {
