@@ -975,6 +975,13 @@ body {
     padding: 7px 10px; margin: 4px 0 2px; line-height: 1.55; white-space: pre-wrap;
 }
 .kr-endnote-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; }
+/* 看板专用：OKR 页的 kr-list 是两列网格（放短输入框），
+   但看板任务文字长且带「月底完成情况」，两列会挤成一团 -> 改单列铺开 */
+#okrRoot .okr-kr-list { display: block; padding: 11px 16px; }
+#okrRoot .kr-row { margin-bottom: 10px; }
+#okrRoot .kr-row:last-child { margin-bottom: 0; }
+#okrRoot .kr-text { font-size: 14.5px; }
+#okrRoot .kr-num b { font-size: 14px; margin-left: 2px; }
 .mp-link-data { color: #2fae66; background: rgba(47,174,102,.10); }
 .mp-link-data:hover { background: rgba(47,174,102,.18); text-decoration: underline; }
 .mp-name {
