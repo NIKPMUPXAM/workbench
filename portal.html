@@ -104,14 +104,17 @@
             { name: '制造网后台', url: 'https://login.made-in-china.com/sign-in/?baseNextPage=https%3A%2F%2Fwww.made-in-china.com%2F' },
             { name: '阿里国际站', url: 'https://cn1524439495ubad.m.en.alibaba.com/productlist.html?spm=a2700.shop_index.88.12.3cbe40a3O0wgU4' },
             { name: '百汇利官网', url: 'http://www.logotouyingdeng.com/xinwenzixun/' },
-            { name: '阿拉丁官网', url: 'https://www.aladdin-noparde.com/information' }
+            { name: '阿拉丁官网', url: 'https://www.aladdin-noparde.com/information' },
+            { name: '淘宝', url: 'https://www.taobao.com' },
+            { name: '京东', url: 'https://www.jd.com' }
         ],
         media: [
             { name: 'TIKTOK', url: 'https://www.tiktok.com/@aladdinwanglang?lang=zh-Hans' },
             { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61570812323421' },
             { name: 'INS', url: 'https://www.instagram.com/direct/inbox/' },
             { name: '推特', url: 'https://x.com/AladdinGobo' },
-            { name: 'YOUTUBE', url: 'https://studio.youtube.com/channel/UC7ZuW5DsaIet9NEc1synh0g/activity/mentions' }
+            { name: 'YOUTUBE', url: 'https://studio.youtube.com/channel/UC7ZuW5DsaIet9NEc1synh0g/activity/mentions' },
+            { name: 'Pinterest', url: 'https://www.pinterest.com/wanglang054/_pins/' }
         ],
         share: [
             { name: '市场部\\各类产品规格书说明书资料\\2.规格书资料', path: '\\\\192.168.50.77\\市场部\\各类产品规格书说明书资料\\2.规格书资料' },
@@ -123,16 +126,40 @@
             { name: '市场部\\彭桂青\\5.A项目案例手册-全国\\A已完成案例', path: '\\\\192.168.50.77\\市场部\\彭桂青\\5.A项目案例手册-全国\\A已完成案例' },
             { name: '公共文件\\李云鸽\\买家秀2021-9月后', path: '\\\\192.168.50.77\\公共文件\\李云鸽\\买家秀2021-9月后' },
             { name: '电商客服部\\客户图案效果图', path: '\\\\192.168.50.77\\电商客服部\\客户图案效果图' },
-            { name: '公共文件\\00效果图及视频分类整理', path: '\\\\192.168.50.77\\公共文件\\00效果图及视频分类整理' }
+            { name: '公共文件\\00效果图及视频分类整理', path: '\\\\192.168.50.77\\公共文件\\00效果图及视频分类整理' },
+            { name: '市场部\\丁楠\\运营', path: '\\\\192.168.50.77\\市场部\\丁楠\\运营' }
         ]
     };
 
     function load() {
+        var d = null;
         try {
-            var d = JSON.parse(localStorage.getItem(KEY) || '{}');
-            if (d && d.site && d.media && d.share) return d;
+            var raw = JSON.parse(localStorage.getItem(KEY) || '{}');
+            if (raw && raw.site && raw.media && raw.share) d = raw;
         } catch (e) {}
-        return JSON.parse(JSON.stringify(defaults));
+        if (!d) d = JSON.parse(JSON.stringify(defaults));
+
+        // 迁移：把 defaults 中「新增且本地还没有」的项自动补入。
+        // 用 _mig 记录已处理过的项，避免把用户主动删除的条目再加回来。
+        var mig = {};
+        try { mig = JSON.parse(localStorage.getItem(KEY + '_mig') || '{}'); } catch (e) {}
+        var changed = false, migChanged = false;
+        ['site', 'media', 'share'].forEach(function (col) {
+            var exist = {};
+            d[col].forEach(function (it) { if (it && it.name) exist[it.name] = true; });
+            (defaults[col] || []).forEach(function (def) {
+                var k = col + '|' + def.name;
+                if (mig[k]) return;           // 之前已处理过（补过 / 或被用户删过）
+                mig[k] = 1; migChanged = true;
+                if (!exist[def.name]) {
+                    d[col].push(JSON.parse(JSON.stringify(def)));
+                    changed = true;
+                }
+            });
+        });
+        if (changed) save(d);
+        if (migChanged) { try { localStorage.setItem(KEY + '_mig', JSON.stringify(mig)); } catch (e) {} }
+        return d;
     }
     function save(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
 
