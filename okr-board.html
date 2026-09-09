@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <script src="assets/data.js?v=s10"></script>
-  <script src="assets/okr_board_data.js?v=board6"></script>
+  <script src="assets/okr_board_data.js?v=board7"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月工作数据看板 · 丁楠 OKR 完成度</title>
@@ -20,7 +20,6 @@
         <div class="logo-title">个人工作台</div>
     </div>
     <nav class="nav-menu">
-        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span>总览</a>
         <a class="nav-item" href="platform.html"><span class="nav-icon">🏭</span>中国制造网</a>
         <a class="nav-item" href="social.html"><span class="nav-icon">🌐</span>外媒运营</a>
         <a class="nav-item" href="okr.html"><span class="nav-icon">🎯</span>OKR工作计划</a>
@@ -67,14 +66,11 @@
     <div class="section-label">按月份筛选</div>
     <div class="board-filters" id="boardFilters"></div>
 
-    <!-- 概览统计 -->
-    <div class="board-summary" id="boardSummary"></div>
+    <!-- 概览统计（与「OKR 工作计划」同款） -->
+    <div class="overview-metrics" id="boardSummary" style="margin-bottom:18px;"></div>
 
-    <!-- 数据卡片 -->
-    <div class="board-grid" id="boardGrid"></div>
-
-    <!-- 月度总结（最底部） -->
-    <div class="board-conclude" id="boardConclude"></div>
+    <!-- 月份容器（OKR 同款排版：月份 → 指标分组 → 任务行 → 月度总结） -->
+    <div id="okrRoot"></div>
 
     <div class="footer">
         <p>月工作数据看板 · 数据由企业微信共享文档「市场部营销端OKR（2026）」实时解析生成</p>
