@@ -220,7 +220,7 @@
                 '<button class="okr-month-toggle' + (collapsed ? ' collapsed' : '') + '" type="button" title="折叠/展开">' + (collapsed ? '▸' : '▾') + '</button>' +
                 '<div class="om-title">' + m + ' · OKR</div>' +
                 '<div class="om-progress"><div class="stat-progress"><div class="stat-progress-bar" style="width:' + w + '%;background:' + color + '"></div></div>' +
-                '<span class="om-pct okr-pct" style="color:' + color + '">' + (a === null ? '—' : a + '%') + '</span></div>' +
+                '<span class="om-pct okr-pct">' + (a === null ? '—' : a + '%') + '</span></div>' +
             '</div>' +
             '<div class="okr-month-body' + (collapsed ? ' collapsed' : '') + '">' +
                 '<div class="okr-objectives-grid">' + groupByMetric(items).map(objBlock).join('') + '</div>' +
