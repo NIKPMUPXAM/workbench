@@ -83,7 +83,8 @@
 (function () {
     var board = window.WB_OKR_BOARD;
     if (!board) {
-        document.getElementById('boardGrid').innerHTML =
+        var warnEl = document.getElementById('okrRoot');
+        if (warnEl) warnEl.innerHTML =
             '<div class="empty-state" style="padding:40px;"><div class="icon">⚠️</div><div>看板数据未加载，请刷新或检查网络</div></div>';
         return;
     }
@@ -138,82 +139,137 @@
         return '#e2554f';
     }
 
-    function render(filter) {
-        var items = filter === 'all' ? allItems.slice() : (data[filter] || []);
-        // 概览
-        var sumBox = document.getElementById('boardSummary');
-        var nums = items.filter(function (i) { return i.showNums; });
-        var pcts = items.map(function (i) { return i.pct; }).filter(function (p) { return p !== null && p !== undefined; });
-        var avg = pcts.length ? Math.round(pcts.reduce(function (a, b) { return a + b; }, 0) / pcts.length) : null;
-        var rated = ratings[filter] || (filter === 'all' ? null : ratings[months[0]]);
-        sumBox.innerHTML =
-            '<div class="bs-card"><div class="bs-label">📋 指标数</div><div class="bs-val">' + items.length + '</div></div>' +
-            '<div class="bs-card"><div class="bs-label">✅ 可量化项</div><div class="bs-val">' + nums.length + '</div></div>' +
-            '<div class="bs-card"><div class="bs-label">📊 平均完成度</div><div class="bs-val">' + (avg === null ? '—' : avg + '%') + '</div></div>' +
-            (rated ? '<div class="bs-card"><div class="bs-label">🏅 月度定级</div><div class="bs-val">' + rated + '</div></div>' : '');
-
-        // 卡片
-        var grid = document.getElementById('boardGrid');
-        if (!items.length) {
-            grid.innerHTML = '<div class="empty-state" style="padding:40px;"><div class="icon">🗓️</div><div>该月份暂无数据</div></div>';
-            return;
-        }
-        grid.innerHTML = items.map(function (it) {
-            var name = (it.name || '').replace(/</g, '&lt;');
-            var note = escHtml((it.note || '').trim());
-            var pct = it.pct;
-            var pctTxt = (pct === null || pct === undefined) ? '—' : pct + '%';
-            var barW = (pct === null || pct === undefined) ? 0 : Math.max(0, Math.min(100, pct));
-            var color = pctColor(pct);
-            var tgtVal = (it.targetNum != null) ? it.targetNum : (it.target && it.target[0] != null ? it.target[0] : null);
-            var tgtUnit = it.targetUnit || (it.target && it.target[1]) || '';
-            var tgt = (tgtVal != null) ? (tgtVal + tgtUnit) : '—';
-            var dn = it.showNums ? (it.doneNum + (it.doneUnit || '')) : '—';
-            var metric = it.metric || it.month || '';
-            return '' +
-                '<div class="board-card">' +
-                    '<div class="bc-top"><span class="bc-tag">' + metric + '</span><span class="bc-month">' + it.month + '</span></div>' +
-                    '<div class="bc-name">' + name + '</div>' +
-                    '<div class="bc-nums">' +
-                        '<div class="bc-num"><div class="bcn-label">目标数</div><div class="bcn-val">' + tgt + '</div></div>' +
-                        '<div class="bc-num"><div class="bcn-label">完成数</div><div class="bcn-val">' + dn + '</div></div>' +
-                        '<div class="bc-num"><div class="bcn-label">百分比</div><div class="bcn-val" style="color:' + color + '">' + pctTxt + '</div></div>' +
-                    '</div>' +
-                    '<div class="bc-bar"><div class="bc-bar-fill" style="width:' + barW + '%;background:' + color + '"></div></div>' +
-                    '<div class="bc-note"><span class="bc-note-label">📋 月底完成情况</span><span class="bc-note-txt">' + (note || '—') + '</span></div>' +
-                '</div>';
-        }).join('');
-        renderConclude(filter);
+    function avgPct(list) {
+        var pcts = list.map(function (i) { return i.pct; }).filter(function (p) { return p !== null && p !== undefined; });
+        return pcts.length ? Math.round(pcts.reduce(function (a, b) { return a + b; }, 0) / pcts.length) : null;
     }
-
+    function tgtOf(it) {
+        var v = (it.targetNum != null) ? it.targetNum : (it.target && it.target[0] != null ? it.target[0] : null);
+        var u = it.targetUnit || (it.target && it.target[1]) || '';
+        return v != null ? (v + u) : '—';
+    }
+    function doneOf(it) {
+        return it.showNums ? (it.doneNum + (it.doneUnit || '')) : '—';
+    }
     function escHtml(s) {
         return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    // 最底部：月度总结（来自文档第0列「20XX年X月OKR月度总结」）
-    function renderConclude(filter) {
-        var box = document.getElementById('boardConclude');
-        if (!box) return;
-        if (filter === 'all') {
-            var keys = months.slice().reverse().filter(function (m) { return summaries[m]; });
-            if (!keys.length) {
-                box.innerHTML = '<div class="bcon-card"><div class="bcon-head">📝 月度总结</div>' +
-                    '<div class="bcon-empty">文档中暂无已填写的月度总结</div></div>';
-                return;
-            }
-            box.innerHTML = keys.map(function (m) {
-                return '<div class="bcon-card">' +
-                    '<div class="bcon-head">📝 ' + m + ' 月度总结</div>' +
-                    '<div class="bcon-body">' + escHtml(summaries[m]) + '</div></div>';
-            }).join('');
+    // 任务行（KR 同款，只读）：任务名 + 目标/完成 + 百分比 + 月底完成情况
+    function krRow(it) {
+        var pct = it.pct;
+        var pctTxt = (pct === null || pct === undefined) ? '—' : pct + '%';
+        var color = pctColor(pct);
+        var note = escHtml((it.note || '').trim());
+        return '<div class="kr-row">' +
+            '<div class="kr-card kr-readonly">' +
+                '<span class="kr-text">' + escHtml(it.name || '') + '</span>' +
+                '<span class="kr-fields">' +
+                    '<span class="kr-num">目标 <b>' + escHtml(tgtOf(it)) + '</b></span>' +
+                    '<span class="kr-num">完成 <b>' + escHtml(doneOf(it)) + '</b></span>' +
+                '</span>' +
+                '<span class="kr-pct" style="color:' + color + '">' + pctTxt + '</span>' +
+            '</div>' +
+            '<div class="kr-endnote"><span class="kr-endnote-label">📋 月底完成情况</span>' + (note || '—') + '</div>' +
+        '</div>';
+    }
+
+    // 按指标分组（对应 OKR 的「目标 O」）
+    function groupByMetric(items) {
+        var groups = [], map = {};
+        items.forEach(function (it) {
+            var k = ((it.metric || '').trim()) || '其他';
+            if (!map[k]) { map[k] = { name: k, items: [] }; groups.push(map[k]); }
+            map[k].items.push(it);
+        });
+        return groups;
+    }
+    function objBlock(g, idx) {
+        var a = avgPct(g.items);
+        var color = pctColor(a);
+        var w = (a === null) ? 0 : Math.max(0, Math.min(100, a));
+        return '<div class="okr-objective">' +
+            '<div class="okr-o-header">' +
+                '<span class="okr-o-badge o' + ((idx % 3) + 1) + '">O' + (idx + 1) + '</span>' +
+                '<div class="okr-o-info"><div class="okr-o-title">' + escHtml(g.name) + '</div>' +
+                '<div class="okr-o-desc">' + g.items.length + ' 项任务</div></div>' +
+                '<div class="okr-o-progress"><div class="stat-progress"><div class="stat-progress-bar" style="width:' + w + '%;background:' + color + '"></div></div>' +
+                '<span class="okr-pct" style="color:' + color + '">' + (a === null ? '—' : a + '%') + '</span></div>' +
+            '</div>' +
+            '<div class="okr-kr-list">' + g.items.map(krRow).join('') + '</div>' +
+        '</div>';
+    }
+
+    // 月度总结（每个月份块底部）
+    function summaryModule(m) {
+        var s = summaries[m] || '';
+        return '<div class="module" style="margin-top:14px;">' +
+            '<div class="module-header"><div class="module-title"><span class="icon">📝</span> ' + m + ' 月度总结</div>' +
+            '<span class="tag tag-blue">来自企微文档</span></div>' +
+            '<div class="module-body"><div class="bcon-body">' +
+            (s ? escHtml(s) : '<span class="bcon-empty">该月文档暂未填写总结内容（可在企微文档对应月份末尾补充）</span>') +
+            '</div></div></div>';
+    }
+
+    function monthBlock(m, items, collapsed) {
+        var a = avgPct(items);
+        var color = pctColor(a);
+        var w = (a === null) ? 0 : Math.max(0, Math.min(100, a));
+        return '<div class="okr-month" data-m="' + m + '">' +
+            '<div class="okr-month-header">' +
+                '<button class="okr-month-toggle' + (collapsed ? ' collapsed' : '') + '" type="button" title="折叠/展开">' + (collapsed ? '▸' : '▾') + '</button>' +
+                '<div class="om-title">' + m + ' · OKR</div>' +
+                '<div class="om-progress"><div class="stat-progress"><div class="stat-progress-bar" style="width:' + w + '%;background:' + color + '"></div></div>' +
+                '<span class="om-pct okr-pct" style="color:' + color + '">' + (a === null ? '—' : a + '%') + '</span></div>' +
+            '</div>' +
+            '<div class="okr-month-body' + (collapsed ? ' collapsed' : '') + '">' +
+                '<div class="okr-objectives-grid">' + groupByMetric(items).map(objBlock).join('') + '</div>' +
+                summaryModule(m) +
+            '</div>' +
+        '</div>';
+    }
+
+    function bindToggle(root) {
+        root.querySelectorAll('.okr-month-header').forEach(function (h) {
+            h.addEventListener('click', function () {
+                var block = h.closest('.okr-month');
+                if (!block) return;
+                var body = block.querySelector('.okr-month-body');
+                var btn = block.querySelector('.okr-month-toggle');
+                var collapsed = body.classList.toggle('collapsed');
+                if (btn) { btn.classList.toggle('collapsed', collapsed); btn.textContent = collapsed ? '▸' : '▾'; }
+            });
+        });
+    }
+
+    function render(filter) {
+        var items = filter === 'all' ? allItems.slice() : (data[filter] || []);
+        // 概览（与 OKR 工作计划同款 mini-stat）
+        var sumBox = document.getElementById('boardSummary');
+        var nums = items.filter(function (i) { return i.showNums; });
+        var avg = avgPct(items);
+        var rated = ratings[filter] || (filter === 'all' ? null : ratings[filter]);
+        if (sumBox) {
+            sumBox.innerHTML =
+                '<div class="mini-stat"><div class="ms-label">📋 指标数</div><div class="ms-value">' + items.length + '<small>项</small></div></div>' +
+                '<div class="mini-stat success"><div class="ms-label">✅ 可量化</div><div class="ms-value">' + nums.length + '<small>项</small></div></div>' +
+                '<div class="mini-stat warning"><div class="ms-label">📊 平均完成度</div><div class="ms-value">' + (avg === null ? '—' : avg + '<small>%</small>') + '</div></div>' +
+                (rated ? '<div class="mini-stat"><div class="ms-label">🏅 月度定级</div><div class="ms-value">' + escHtml(rated) + '</div></div>' : '');
+        }
+        var root = document.getElementById('okrRoot');
+        if (!root) return;
+        if (!items.length) {
+            root.innerHTML = '<div class="empty-state" style="padding:40px;"><div class="icon">🗓️</div><div>该月份暂无数据</div></div>';
             return;
         }
-        var s = summaries[filter] || '';
-        box.innerHTML = '<div class="bcon-card">' +
-            '<div class="bcon-head">📝 ' + filter + ' 月度总结</div>' +
-            (s ? '<div class="bcon-body">' + escHtml(s) + '</div>'
-               : '<div class="bcon-empty">该月文档暂未填写总结内容（可在企微文档对应月份末尾补充）</div>') +
-            '</div>';
+        if (filter === 'all') {
+            root.innerHTML = months.slice().reverse().map(function (m) {
+                return monthBlock(m, data[m] || [], m !== defaultMonth);
+            }).join('');
+        } else {
+            root.innerHTML = monthBlock(filter, items, false);
+        }
+        bindToggle(root);
     }
 
     render(defaultMonth);
