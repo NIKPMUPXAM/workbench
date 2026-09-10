@@ -975,13 +975,67 @@ body {
     padding: 7px 10px; margin: 4px 0 2px; line-height: 1.55; white-space: pre-wrap;
 }
 .kr-endnote-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; }
-/* 看板专用：OKR 页的 kr-list 是两列网格（放短输入框），
-   但看板任务文字长且带「月底完成情况」，两列会挤成一团 -> 改单列铺开 */
-#okrRoot .okr-kr-list { display: block; padding: 11px 16px; }
-#okrRoot .kr-row { margin-bottom: 10px; }
-#okrRoot .kr-row:last-child { margin-bottom: 0; }
-#okrRoot .kr-text { font-size: 14.5px; }
-#okrRoot .kr-num b { font-size: 14px; margin-left: 2px; }
+/* ---------- 月工作数据看板：表格化清单（专用，不再复用 OKR 的 kr-card 嵌套） ---------- */
+.bd-month {
+    background: var(--card-bg); border: 1px solid var(--border-color);
+    border-radius: 14px; margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.bd-month-head {
+    display: flex; align-items: center; gap: 12px; padding: 13px 18px;
+    background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
+    color: #fff; cursor: pointer; user-select: none;
+}
+.bd-toggle {
+    width: 28px; height: 28px; border: none; border-radius: 8px; flex-shrink: 0;
+    background: rgba(255,255,255,.18); color: #fff; font-size: 15px; line-height: 1; cursor: pointer;
+}
+.bd-toggle:hover { background: rgba(255,255,255,.32); }
+.bd-month-title { font-size: 16.5px; font-weight: 700; flex: 1; min-width: 0; }
+.bd-month-stat { font-size: 13.5px; opacity: .95; white-space: nowrap; }
+.bd-month-stat b { font-size: 16px; }
+.bd-month-body { padding: 6px 18px 16px; }
+.bd-month-body.collapsed { display: none; }
+
+.bd-group { margin-top: 16px; }
+.bd-group-title {
+    display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700;
+    color: var(--text-primary); padding-bottom: 7px; border-bottom: 1px solid var(--border-color);
+}
+.bd-gdot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent-blue); flex-shrink: 0; }
+.bd-gcount { margin-left: auto; font-size: 12.5px; font-weight: 600; color: var(--text-muted); }
+
+.bd-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.bd-table th {
+    text-align: left; font-size: 12.5px; font-weight: 600; color: var(--text-muted);
+    padding: 9px 10px; background: var(--bg-gray);
+}
+.bd-table td { padding: 11px 10px; border-top: 1px solid var(--border-color); vertical-align: top; }
+.bd-table .c-num { width: 84px; text-align: right; white-space: nowrap; font-weight: 600; color: var(--text-primary); }
+.bd-table .c-pct { width: 118px; }
+.bd-task { color: var(--text-primary); line-height: 1.6; }
+.bd-note { margin-top: 6px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.55;
+    background: var(--bg-gray); border-left: 3px solid var(--accent-blue);
+    border-radius: 7px; padding: 6px 9px; white-space: pre-wrap; }
+.bd-note-empty { color: var(--text-muted); background: transparent; border-left-color: var(--border-color); }
+.bd-note-tag { display: block; font-size: 11.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; }
+.bd-pct { font-size: 14px; font-weight: 700; }
+.bd-bar { height: 6px; background: var(--bg-gray); border-radius: 4px; margin-top: 6px; overflow: hidden; }
+.bd-bar i { display: block; height: 100%; border-radius: 4px; }
+@media (max-width: 768px) {
+    .bd-table .c-num { width: auto; }
+    .bd-table .c-pct { width: 92px; }
+}
+
+/* 看板内「抖音询单数据」汇总 */
+.inq-total { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+.inq-total b { font-size: 21px; color: var(--accent-blue); margin-left: 2px; }
+.inq-row { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 8px; line-height: 2; }
+.inq-label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-muted); }
+.inq-chip {
+    display: inline-block; background: var(--bg-gray); border-radius: 7px;
+    padding: 3px 9px; margin: 0 6px 4px 0; white-space: nowrap;
+}
+.inq-chip b { color: var(--accent-blue); }
 .mp-link-data { color: #2fae66; background: rgba(47,174,102,.10); }
 .mp-link-data:hover { background: rgba(47,174,102,.18); text-decoration: underline; }
 .mp-name {
