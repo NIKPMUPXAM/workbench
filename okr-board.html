@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月工作数据看板 · 丁楠 OKR 完成度</title>
-<link rel="stylesheet" href="assets/style.css?v=s11">
+<link rel="stylesheet" href="assets/style.css?v=s12">
 </head>
 <body>
 <div class="layout">
@@ -156,26 +156,7 @@
         return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    // 任务行（KR 同款，只读）：任务名 + 目标/完成 + 百分比 + 月底完成情况
-    function krRow(it) {
-        var pct = it.pct;
-        var pctTxt = (pct === null || pct === undefined) ? '—' : pct + '%';
-        var color = pctColor(pct);
-        var note = escHtml((it.note || '').trim());
-        return '<div class="kr-row">' +
-            '<div class="kr-card kr-readonly">' +
-                '<span class="kr-text">' + escHtml(it.name || '') + '</span>' +
-                '<span class="kr-fields">' +
-                    '<span class="kr-num">目标 <b>' + escHtml(tgtOf(it)) + '</b></span>' +
-                    '<span class="kr-num">完成 <b>' + escHtml(doneOf(it)) + '</b></span>' +
-                '</span>' +
-                '<span class="kr-pct" style="color:' + color + '">' + pctTxt + '</span>' +
-            '</div>' +
-            '<div class="kr-endnote"><span class="kr-endnote-label">📋 月底完成情况</span>' + (note || '—') + '</div>' +
-        '</div>';
-    }
-
-    // 按指标分组（对应 OKR 的「目标 O」）
+    // 按指标分组
     function groupByMetric(items) {
         var groups = [], map = {};
         items.forEach(function (it) {
@@ -185,26 +166,72 @@
         });
         return groups;
     }
-    function objBlock(g, idx) {
-        var a = avgPct(g.items);
-        var color = pctColor(a);
-        var w = (a === null) ? 0 : Math.max(0, Math.min(100, a));
-        return '<div class="okr-objective">' +
-            '<div class="okr-o-header">' +
-                '<span class="okr-o-badge o' + ((idx % 3) + 1) + '">O' + (idx + 1) + '</span>' +
-                '<div class="okr-o-info"><div class="okr-o-title">' + escHtml(g.name) + '</div>' +
-                '<div class="okr-o-desc">' + g.items.length + ' 项任务</div></div>' +
-                '<div class="okr-o-progress"><div class="stat-progress"><div class="stat-progress-bar" style="width:' + w + '%;background:' + color + '"></div></div>' +
-                '<span class="okr-pct" style="color:' + color + '">' + (a === null ? '—' : a + '%') + '</span></div>' +
-            '</div>' +
-            '<div class="okr-kr-list">' + g.items.map(krRow).join('') + '</div>' +
+
+    // 任务行：任务名 + 月底完成情况（同一格），右侧 目标/完成/完成度
+    function rowHTML(it) {
+        var pct = it.pct;
+        var pctTxt = (pct === null || pct === undefined) ? '—' : pct + '%';
+        var color = pctColor(pct);
+        var w = (pct === null || pct === undefined) ? 0 : Math.max(0, Math.min(100, pct));
+        var note = escHtml((it.note || '').trim());
+        return '<tr>' +
+            '<td class="c-task">' +
+                '<div class="bd-task">' + escHtml(it.name || '') + '</div>' +
+                (note
+                    ? '<div class="bd-note"><span class="bd-note-tag">月底完成情况</span>' + note + '</div>'
+                    : '<div class="bd-note bd-note-empty">月底完成情况：—</div>') +
+            '</td>' +
+            '<td class="c-num">' + escHtml(tgtOf(it)) + '</td>' +
+            '<td class="c-num">' + escHtml(doneOf(it)) + '</td>' +
+            '<td class="c-pct">' +
+                '<span class="bd-pct" style="color:' + color + '">' + pctTxt + '</span>' +
+                '<div class="bd-bar"><i style="width:' + w + '%;background:' + color + '"></i></div>' +
+            '</td>' +
+        '</tr>';
+    }
+
+    function groupHTML(g) {
+        return '<div class="bd-group">' +
+            '<div class="bd-group-title"><span class="bd-gdot"></span>' + escHtml(g.name) +
+            '<span class="bd-gcount">' + g.items.length + ' 项</span></div>' +
+            '<table class="bd-table">' +
+                '<thead><tr><th class="c-task">任务</th><th class="c-num">目标</th>' +
+                '<th class="c-num">完成</th><th class="c-pct">完成度</th></tr></thead>' +
+                '<tbody>' + g.items.map(rowHTML).join('') + '</tbody>' +
+            '</table>' +
         '</div>';
     }
 
-    // 月度总结（每个月份块底部）
+    // 抖音询单数据（来自「丁楠-矩阵抖音渠道」，按月汇总）
+    var inq = window.WB_INQUIRY_SEED || null;
+    function chips(obj) {
+        return Object.keys(obj).sort(function (a, b) { return obj[b] - obj[a]; })
+            .map(function (k) { return '<span class="inq-chip">' + escHtml(k) + ' <b>' + obj[k] + '</b></span>'; })
+            .join('');
+    }
+    function inquiryModule(m) {
+        if (!inq || !inq.items) return '';
+        var list = inq.items.filter(function (i) { return i.month === m; });
+        if (!list.length) return '';
+        var bySales = {}, byType = {};
+        list.forEach(function (i) {
+            var s = i.sales || '未分配'; bySales[s] = (bySales[s] || 0) + 1;
+            var t = i.type || '未分类'; byType[t] = (byType[t] || 0) + 1;
+        });
+        return '<div class="module" style="margin-top:16px;">' +
+            '<div class="module-header"><div class="module-title"><span class="icon">📨</span> ' + m + ' 抖音询单数据</div>' +
+            '<span class="tag tag-blue">丁楠-矩阵抖音渠道</span></div>' +
+            '<div class="module-body">' +
+                '<div class="inq-total">📨 询单总数 <b>' + list.length + '</b> 条</div>' +
+                '<div class="inq-row"><span class="inq-label">业务员分配</span>' + chips(bySales) + '</div>' +
+                '<div class="inq-row"><span class="inq-label">询盘类型</span>' + chips(byType) + '</div>' +
+            '</div></div>';
+    }
+
+    // 月度总结（来自文档）
     function summaryModule(m) {
         var s = summaries[m] || '';
-        return '<div class="module" style="margin-top:14px;">' +
+        return '<div class="module" style="margin-top:16px;">' +
             '<div class="module-header"><div class="module-title"><span class="icon">📝</span> ' + m + ' 月度总结</div>' +
             '<span class="tag tag-blue">来自企微文档</span></div>' +
             '<div class="module-body"><div class="bcon-body">' +
@@ -214,29 +241,27 @@
 
     function monthBlock(m, items, collapsed) {
         var a = avgPct(items);
-        var color = pctColor(a);
-        var w = (a === null) ? 0 : Math.max(0, Math.min(100, a));
-        return '<div class="okr-month" data-m="' + m + '">' +
-            '<div class="okr-month-header">' +
-                '<button class="okr-month-toggle' + (collapsed ? ' collapsed' : '') + '" type="button" title="折叠/展开">' + (collapsed ? '▸' : '▾') + '</button>' +
-                '<div class="om-title">' + m + ' · OKR</div>' +
-                '<div class="om-progress"><div class="stat-progress"><div class="stat-progress-bar" style="width:' + w + '%;background:' + color + '"></div></div>' +
-                '<span class="om-pct okr-pct">' + (a === null ? '—' : a + '%') + '</span></div>' +
+        return '<div class="bd-month" data-m="' + m + '">' +
+            '<div class="bd-month-head">' +
+                '<button class="bd-toggle' + (collapsed ? ' collapsed' : '') + '" type="button" title="折叠/展开">' + (collapsed ? '▸' : '▾') + '</button>' +
+                '<div class="bd-month-title">' + m + ' · OKR</div>' +
+                '<div class="bd-month-stat">平均完成度 <b>' + (a === null ? '—' : a + '%') + '</b></div>' +
             '</div>' +
-            '<div class="okr-month-body' + (collapsed ? ' collapsed' : '') + '">' +
-                '<div class="okr-objectives-grid">' + groupByMetric(items).map(objBlock).join('') + '</div>' +
+            '<div class="bd-month-body' + (collapsed ? ' collapsed' : '') + '">' +
+                groupByMetric(items).map(groupHTML).join('') +
+                inquiryModule(m) +
                 summaryModule(m) +
             '</div>' +
         '</div>';
     }
 
     function bindToggle(root) {
-        root.querySelectorAll('.okr-month-header').forEach(function (h) {
+        root.querySelectorAll('.bd-month-head').forEach(function (h) {
             h.addEventListener('click', function () {
-                var block = h.closest('.okr-month');
+                var block = h.closest('.bd-month');
                 if (!block) return;
-                var body = block.querySelector('.okr-month-body');
-                var btn = block.querySelector('.okr-month-toggle');
+                var body = block.querySelector('.bd-month-body');
+                var btn = block.querySelector('.bd-toggle');
                 var collapsed = body.classList.toggle('collapsed');
                 if (btn) { btn.classList.toggle('collapsed', collapsed); btn.textContent = collapsed ? '▸' : '▾'; }
             });
@@ -245,7 +270,6 @@
 
     function render(filter) {
         var items = filter === 'all' ? allItems.slice() : (data[filter] || []);
-        // 概览（与 OKR 工作计划同款 mini-stat）
         var sumBox = document.getElementById('boardSummary');
         var nums = items.filter(function (i) { return i.showNums; });
         var avg = avgPct(items);
