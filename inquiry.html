@@ -48,6 +48,11 @@
         <div class="ph-date"><div class="d-main" id="currentDate">2026年8月</div><div id="currentWeek">第3周</div></div>
     </div>
 
+    <!-- 数据来源状态条 -->
+    <div class="wl-sync wls-loading" id="inqSync">
+        <span id="inqSyncText">🔄 正在读取企微文档询单数据…</span>
+    </div>
+
     <!-- 统计概览 -->
     <div class="overview-metrics" style="margin-bottom:18px;">
         <div class="mini-stat"><div class="ms-label">询单总数</div><div class="ms-value" id="statTotal">0</div></div>
@@ -416,6 +421,45 @@
         body.addEventListener('change', refresh);
         if (window.MutationObserver) { new MutationObserver(refresh).observe(body, { childList: true, subtree: true }); }
         refresh();
+    }
+})();
+</script>
+<script src="assets/inquiry_data.js?v=i1"></script>
+<script>
+(function () {
+    /* 询单数据：来自企微文档「丁楠-矩阵抖音渠道」，用文档明细替换示例行；
+       表格仍可手动编辑，统计/筛选逻辑自动生效（MutationObserver）。 */
+    var tbody = document.querySelector('#inquiryTable tbody');
+    var seed = window.WB_INQUIRY_SEED || null;
+    var txtEl = document.getElementById('inqSyncText');
+
+    function status(html) { if (txtEl) txtEl.innerHTML = html; }
+    if (!tbody) return;
+
+    var SOURCES = ['', 'tiktok', 'instagram', 'facebook', 'youtube', 'twitter', 'douyin', 'mic', 'other'];
+    var NAMES = { tiktok: '🎵 TikTok', instagram: '📷 Instagram', facebook: '👤 Facebook', youtube: '▶️ YouTube', twitter: '🐦 推特 X', douyin: '🎵 抖音', mic: '🏭 制造网', other: '📌 其他' };
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = (s == null ? '' : String(s)); return d.innerHTML; }
+
+    if (seed && seed.items && seed.items.length) {
+        var rows = seed.items.map(function (d) {
+            var opts = SOURCES.map(function (v) {
+                return '<option value="' + v + '"' + (v === d.source ? ' selected' : '') + '>' + (v ? (NAMES[v] || v) : '— 选择来源 —') + '</option>';
+            }).join('');
+            var demand = (d.type ? d.type + '：' : '') + (d.demand || '') + (d.channel ? '（' + d.channel + '）' : '');
+            return '<tr>' +
+                '<td><input type="date" value="' + esc(d.date || '') + '"></td>' +
+                '<td><select>' + opts + '</select></td>' +
+                '<td><input type="text" value="' + esc(d.customer) + '"></td>' +
+                '<td><input type="text" value="' + esc(d.sales) + '"></td>' +
+                '<td><input type="text" value="' + esc(demand) + '"></td>' +
+                '<td></td>' +
+                '</tr>';
+        }).join('');
+        tbody.innerHTML = rows;
+        status('🟢 实时同步 · 来自企微文档「' + esc(seed.doc || '丁楠-矩阵抖音渠道') + '」 · 共 ' + seed.count + ' 条询单 · 更新于 ' + esc(seed.updated || ''));
+    } else {
+        status('🟡 未读取到企微文档询单数据，当前为手动录入模式');
     }
 })();
 </script>
