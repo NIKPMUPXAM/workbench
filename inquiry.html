@@ -489,13 +489,18 @@
             }
             if (!has) { tr.style.display = 'none'; return; }
             var ok = true;
-            if (myRange !== 'all' && ds) {
-                var dt = new Date(ds + 'T00:00:00');
-                if (!isNaN(dt)) {
-                    if (myRange === 'year') ok = dt.getFullYear() === now.getFullYear();
-                    else if (myRange === 'month') ok = dt.getFullYear() === now.getFullYear() && dt.getMonth() === now.getMonth();
-                    else if (myRange === 'quarter') ok = dt.getFullYear() === now.getFullYear() && Math.floor(dt.getMonth() / 3) === Math.floor(now.getMonth() / 3);
-                    else if (myRange === 'week') ok = dt >= monday && dt < sunday;
+            if (myRange !== 'all') {
+                // 选了具体范围：无日期的行不显示（文档里未填「几号」的条目无法归入某周/月）
+                if (!ds) {
+                    ok = false;
+                } else {
+                    var dt = new Date(ds + 'T00:00:00');
+                    if (!isNaN(dt)) {
+                        if (myRange === 'year') ok = dt.getFullYear() === now.getFullYear();
+                        else if (myRange === 'month') ok = dt.getFullYear() === now.getFullYear() && dt.getMonth() === now.getMonth();
+                        else if (myRange === 'quarter') ok = dt.getFullYear() === now.getFullYear() && Math.floor(dt.getMonth() / 3) === Math.floor(now.getMonth() / 3);
+                        else if (myRange === 'week') ok = dt >= monday && dt < sunday;
+                    }
                 }
             }
             if (ok && mySource) ok = (sel ? sel.value : '') === mySource;
@@ -509,6 +514,8 @@
             status('🔍 ' + label + (mySource ? ' · ' + (NAMES[mySource] || mySource) : '') + ' · 显示 ' + visible + ' 条');
         }
     }
+    tbody.addEventListener('input', applyFilter);
+    tbody.addEventListener('change', applyFilter);
     document.addEventListener('click', function (e) {
         var btn = e.target.closest ? e.target.closest('.filter-btn') : null;
         if (!btn || !btn.getAttribute('data-range')) return;
