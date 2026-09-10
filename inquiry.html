@@ -453,7 +453,7 @@
                 '<td><input type="text" value="' + esc(d.customer) + '"></td>' +
                 '<td><input type="text" value="' + esc(d.sales) + '"></td>' +
                 '<td><input type="text" value="' + esc(demand) + '"></td>' +
-                '<td></td>' +
+                '<td style="text-align:center;"><button type="button" class="row-del" title="删除此行">🗑</button></td>' +
                 '</tr>';
         }).join('');
         tbody.innerHTML = rows;
@@ -461,6 +461,68 @@
     } else {
         status('🟡 未读取到企微文档询单数据，当前为手动录入模式');
     }
+
+    /* ---- 独立筛选实现（事件委托）：app.js 的表格持久化与主脚本绑定可能失效，这里兜底 ---- */
+    tbody.addEventListener('click', function (e) {
+        var del = e.target.closest ? e.target.closest('.row-del') : null;
+        if (!del) return;
+        if (!confirm('确定删除该询单记录？')) return;
+        var tr = del.closest('tr');
+        if (tr) tr.remove();
+    });
+    var myRange = 'all', mySource = '';
+    function applyFilter() {
+        var now = new Date();
+        var monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (now.getDay() + 6) % 7);
+        var sunday = new Date(monday); sunday.setDate(monday.getDate() + 7);
+        var visible = 0;
+        tbody.querySelectorAll('tr').forEach(function (tr) {
+            var dinp = tr.children[0] ? tr.children[0].querySelector('input') : null;
+            var sel = tr.children[1] ? tr.children[1].querySelector('select') : null;
+            var ds = dinp ? dinp.value : '';
+            var has = false;
+            for (var i = 0; i < tr.children.length; i++) {
+                var i2 = tr.children[i].querySelector('input');
+                var s2 = tr.children[i].querySelector('select');
+                if (i2 && i2.value.trim()) { has = true; break; }
+                if (s2 && s2.value) { has = true; break; }
+            }
+            if (!has) { tr.style.display = 'none'; return; }
+            var ok = true;
+            if (myRange !== 'all' && ds) {
+                var dt = new Date(ds + 'T00:00:00');
+                if (!isNaN(dt)) {
+                    if (myRange === 'year') ok = dt.getFullYear() === now.getFullYear();
+                    else if (myRange === 'month') ok = dt.getFullYear() === now.getFullYear() && dt.getMonth() === now.getMonth();
+                    else if (myRange === 'quarter') ok = dt.getFullYear() === now.getFullYear() && Math.floor(dt.getMonth() / 3) === Math.floor(now.getMonth() / 3);
+                    else if (myRange === 'week') ok = dt >= monday && dt < sunday;
+                }
+            }
+            if (ok && mySource) ok = (sel ? sel.value : '') === mySource;
+            tr.style.display = ok ? '' : 'none';
+            if (ok) visible++;
+        });
+        var st = document.getElementById('inqSync');
+        if (st) {
+            st.className = 'wl-sync ' + ((myRange !== 'all' || mySource) ? 'wls-live' : 'wls-loading');
+            var label = myRange === 'all' ? '全部时间' : ({ week: '本周', month: '本月', quarter: '本季', year: '本年' }[myRange] || myRange);
+            status('🔍 ' + label + (mySource ? ' · ' + (NAMES[mySource] || mySource) : '') + ' · 显示 ' + visible + ' 条');
+        }
+    }
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.filter-btn') : null;
+        if (!btn || !btn.getAttribute('data-range')) return;
+        myRange = btn.getAttribute('data-range');
+        document.querySelectorAll('.filter-bar .filter-btn').forEach(function (b) {
+            b.classList.toggle('active', b === btn);
+        });
+        applyFilter();
+    });
+    var fsel = document.getElementById('filterSource');
+    if (fsel) fsel.addEventListener('change', function () {
+        mySource = fsel.value;
+        applyFilter();
+    });
 })();
 </script>
 </body>
