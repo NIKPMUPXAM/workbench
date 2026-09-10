@@ -1010,15 +1010,15 @@ body {
     padding: 9px 10px; background: var(--bg-gray);
 }
 .bd-table td { padding: 11px 10px; border-top: 1px solid var(--border-color); vertical-align: top; }
-.bd-table .c-num { width: 84px; text-align: right; white-space: nowrap; font-weight: 600; color: var(--text-primary); }
+.bd-table .c-num { width: 88px; text-align: right; white-space: nowrap; font-weight: 600; font-size: 15px; color: var(--text-primary); }
 .bd-table .c-pct { width: 118px; }
-.bd-task { color: var(--text-primary); line-height: 1.6; }
-.bd-note { margin-top: 6px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.55;
+.bd-task { color: var(--text-primary); font-size: 16px; font-weight: 600; line-height: 1.65; }
+.bd-note { margin-top: 7px; font-size: 14px; color: var(--text-secondary); line-height: 1.6;
     background: var(--bg-gray); border-left: 3px solid var(--accent-blue);
-    border-radius: 7px; padding: 6px 9px; white-space: pre-wrap; }
+    border-radius: 7px; padding: 7px 10px; white-space: pre-wrap; }
 .bd-note-empty { color: var(--text-muted); background: transparent; border-left-color: var(--border-color); }
-.bd-note-tag { display: block; font-size: 11.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; }
-.bd-pct { font-size: 14px; font-weight: 700; }
+.bd-note-tag { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 3px; }
+.bd-pct { font-size: 15px; font-weight: 700; }
 .bd-bar { height: 6px; background: var(--bg-gray); border-radius: 4px; margin-top: 6px; overflow: hidden; }
 .bd-bar i { display: block; height: 100%; border-radius: 4px; }
 @media (max-width: 768px) {
