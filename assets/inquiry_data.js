@@ -2,9 +2,19 @@
 window.WB_INQUIRY_SEED = {
  "doc": "【2026】销售-营销端每日数据登记表 · 丁楠-矩阵抖音渠道",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCNxPCIv8HgTt2PENka",
- "updated": "2026-09-09 17:39",
- "count": 94,
+ "updated": "2026-09-11 21:09",
+ "count": 95,
  "items": [
+  {
+   "date": "2026-09-09",
+   "month": "9月",
+   "customer": "17773149256",
+   "sales": "小何/周鑫",
+   "type": "图案",
+   "demand": "小区单元楼牌号",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
   {
    "date": "2026-09-07",
    "month": "9月",
