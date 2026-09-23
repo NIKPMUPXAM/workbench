@@ -2,7 +2,7 @@
 window.WB_INQUIRY_SEED = {
  "doc": "【2026】销售-营销端每日数据登记表 · 丁楠-矩阵抖音渠道",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCNxPCIv8HgTt2PENka",
- "updated": "2026-09-23 18:46",
+ "updated": "2026-09-23 19:13",
  "count": 117,
  "items": [
   {
@@ -283,6 +283,16 @@ window.WB_INQUIRY_SEED = {
    "type": "工业",
    "demand": "室内车间门口",
    "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-06-23",
+   "month": "6月",
+   "customer": "lxkt2021",
+   "sales": "俊彬",
+   "type": "其他",
+   "demand": "老板您好，有个工程项目想跟您聊下合作，加个我方便联系 lxkt2021",
+   "channel": "深圳阿拉丁亮化投影灯厂家",
    "source": "douyin"
   },
   {
@@ -963,16 +973,6 @@ window.WB_INQUIRY_SEED = {
    "type": "图案",
    "demand": "想装个投影灯 投到楼体上 安装位置是楼下的一个小平房 距离楼梯3米 需要斜向上的角度 怎么能让画面投射出来是圆形的 而不是拉长变形的 45°",
    "channel": "阿拉丁投影灯（朗哥）",
-   "source": "douyin"
-  },
-  {
-   "date": null,
-   "month": "6月",
-   "customer": "lxkt2021",
-   "sales": "俊彬",
-   "type": "其他",
-   "demand": "老板您好，有个工程项目想跟您聊下合作，加个我方便联系 lxkt2021",
-   "channel": "深圳阿拉丁亮化投影灯厂家",
    "source": "douyin"
   },
   {
