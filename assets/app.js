@@ -51,7 +51,6 @@
                 '<option value="youtube">YouTube</option>' +
                 '<option value="twitter">推特 X</option>' +
                 '<option value="douyin">抖音</option>' +
-                '<option value="mic">中国制造网</option>' +
                 '<option value="other">其他</option>' +
             '</select></td>' +
             '<td><input type="text" placeholder="客户名/公司名"></td>' +
