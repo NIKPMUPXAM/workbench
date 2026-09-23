@@ -2,17 +2,37 @@
 window.WB_INQUIRY_SEED = {
  "doc": "【2026】销售-营销端每日数据登记表 · 丁楠-矩阵抖音渠道",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCNxPCIv8HgTt2PENka",
- "updated": "2026-09-11 21:09",
- "count": 95,
+ "updated": "2026-09-23 18:46",
+ "count": 117,
  "items": [
+  {
+   "date": "2026-09-16",
+   "month": "9月",
+   "customer": "13147415331",
+   "sales": "小何/周鑫",
+   "type": "",
+   "demand": "感应联动声光报警，类似地下车库场景",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-09-14",
+   "month": "9月",
+   "customer": "18989325388",
+   "sales": "俊彬",
+   "type": "",
+   "demand": "300米道路",
+   "channel": "视频号",
+   "source": "other"
+  },
   {
    "date": "2026-09-09",
    "month": "9月",
    "customer": "17773149256",
    "sales": "小何/周鑫",
-   "type": "图案",
+   "type": "",
    "demand": "小区单元楼牌号",
-   "channel": "国内抖音",
+   "channel": "阿拉丁投影灯（朗哥）",
    "source": "douyin"
   },
   {
@@ -20,7 +40,7 @@ window.WB_INQUIRY_SEED = {
    "month": "9月",
    "customer": "18235427861",
    "sales": "志良",
-   "type": "图案",
+   "type": "",
    "demand": "投射距离 37米",
    "channel": "阿拉丁亮化投影/深圳源头厂家",
    "source": "douyin"
@@ -30,9 +50,9 @@ window.WB_INQUIRY_SEED = {
    "month": "9月",
    "customer": "juemei2022",
    "sales": "文凤",
-   "type": "图案",
+   "type": "",
    "demand": "太阳能款投影灯",
-   "channel": "国内抖音",
+   "channel": "阿拉丁投影灯（朗哥）",
    "source": "douyin"
   },
   {
@@ -40,7 +60,7 @@ window.WB_INQUIRY_SEED = {
    "month": "9月",
    "customer": "18806666630",
    "sales": "文凤",
-   "type": "图案",
+   "type": "",
    "demand": "换图，公司名称",
    "channel": "小红书",
    "source": "other"
@@ -953,6 +973,206 @@ window.WB_INQUIRY_SEED = {
    "type": "其他",
    "demand": "老板您好，有个工程项目想跟您聊下合作，加个我方便联系 lxkt2021",
    "channel": "深圳阿拉丁亮化投影灯厂家",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "9月",
+   "customer": "0553 112 607",
+   "sales": "李倩",
+   "type": "Abdelkader Bendouha",
+   "demand": "",
+   "channel": "Gobo projector aladdin（jack）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "9月",
+   "customer": "530855227",
+   "sales": "谢晓萁",
+   "type": "ليزر اسماء عرسان مكه",
+   "demand": "激光婚礼名称",
+   "channel": "Gobo projector aladdin（jack）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "+973 3925 3384",
+   "sales": "李倩",
+   "type": "-",
+   "demand": "车载款投影",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "＋966503169501",
+   "sales": "谭佳婷",
+   "type": "R",
+   "demand": "需要100瓦的 10个灯片",
+   "channel": "Gobo projector aladdin（jack）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "+96892627761",
+   "sales": "谭佳婷",
+   "type": "koshat_jalaan",
+   "demand": "车间斑马线/通道图案，LYP300W",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "emin.karakulluk@suralsu.com.tr",
+   "sales": "谢晓萁",
+   "type": "Emin Karakulluk",
+   "demand": "车载款投影",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "王总WhatsApp联系",
+   "sales": "王总",
+   "type": "umutilbey",
+   "demand": "土耳其客户，需要地面警示叉车标识1个灯",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "+968 9582 8684",
+   "sales": "欧阳钰",
+   "type": "+968 9582 8684",
+   "demand": "叉车边界灯",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "＋92 333 3429747",
+   "sales": "欧阳钰",
+   "type": "Abdul Rauf Patel",
+   "demand": "警示安全投影stop  励影 巴基斯坦客户",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "＋569656909615",
+   "sales": "谢晓萁",
+   "type": "Siempre TRABAJANDO",
+   "demand": "工业警示投影需求 智利客户",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "+201113155222",
+   "sales": "谢晓萁",
+   "type": "Maksab Samuel",
+   "demand": "叉车投影 励影 埃及客户",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "美国+1 443998 1048",
+   "sales": "李倩",
+   "type": "remeo",
+   "demand": "叉车投影灯的需求",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "rahul.gurule@jbmgroup.com\n9172303737",
+   "sales": "李倩",
+   "type": "ahulgurule",
+   "demand": "叉车路口拐角雷达感应投影灯",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "+964770506 8700",
+   "sales": "王总",
+   "type": "Fouad",
+   "demand": "This is Engineer Fouad from Iraqi Kurdistan.\n我是来自伊拉克库尔德斯坦的工程师福阿德。",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "972504444088",
+   "sales": "王总",
+   "type": "SAMI GANEM",
+   "demand": "以色列 叉车投影灯的需求",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "905322833110",
+   "sales": "王总",
+   "type": "Mustafa",
+   "demand": "土耳其",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "923333664588",
+   "sales": "王总",
+   "type": "Taha Shabbir",
+   "demand": "巴基斯坦",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "918290600110",
+   "sales": "王总",
+   "type": "Parvind Joshi",
+   "demand": "印度",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "31654942777",
+   "sales": "王总",
+   "type": "Ehab s.",
+   "demand": "荷兰",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "351913952191",
+   "sales": "王总",
+   "type": "Fernando Carvalho",
+   "demand": "葡萄牙",
+   "channel": "咨询WhatsApp",
    "source": "douyin"
   }
  ]
