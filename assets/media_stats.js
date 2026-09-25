@@ -7,7 +7,7 @@
  * updated：数据抓取/生成日期。
  */
 window.WB_MEDIA_STATS = {
-  updated: "2026-09-21",
+  updated: "2026-09-23",
   note: "X 为公开主页自动抓取真实值；TikTok/Instagram/Facebook/Pinterest 被平台反爬拦截无法自动读取，月曝光需登录后台分析，均标「待补」，请导出后台数据发我补齐。拍摄选题方向、对标账号由 AI 每周生成，可编辑。",
   platforms: {
     pinterest: {
@@ -17,8 +17,8 @@ window.WB_MEDIA_STATS = {
       benchmarks: "对标方向：① Chauvet Lighting、Signify 等国际照明品牌的 Pinterest 画板分类与关键词 SEO 结构；② 搜索 gobo projector / LED logo light 看自然排名靠前的同行爆款 Pin 标题与封面；③ 参考 Etsy 定制 gobo 卖家的排版与收藏引导。重点对标：画板分类逻辑、图片 SEO、高收藏 Pin 的标题结构。"
     },
     x: {
-      followers: "0", likes: "待补", exposure: "待补", posts: "76",
-      analysis: "X（@AladdinGobo）本次公开主页读取到真实值：发帖数 76（较上期 55 稳步增长），粉丝数页面返回 0、无法确认真实数值，保留上一期值并已注明「需登录后台核实」。X 仍是海外 B 端采购商获取行业动态的入口，Q4 前询盘活跃。建议：①保持每周 4–6 条，提高工厂实拍/产品效果短视频占比；②固定 #gobo #projector #LEDlighting 标签并叠加行业热点话题；③主动在照明/工程采购账号下互动，引导私信询盘。下周重点：观察发帖频率与互动率变化。",
+      followers: "待补", likes: "待补", exposure: "待补", posts: "79",
+      analysis: "X（@AladdinGobo）2026-09-23 公开主页读取到真实值：发帖数 79（较上期 76 稳步增长）。粉丝数页面仅对登录用户展示、访客态返回 0（非真实值），故标「待补」，请登录 X 后台核对真实粉丝数。X 仍是海外 B 端采购商获取行业动态的入口，Q4 前询盘活跃。建议：①保持每周 4–6 条，提高工厂实拍/产品效果短视频占比；②固定 #gobo #projector #LEDlighting 标签并叠加行业热点话题；③主动在照明/工程采购账号下互动，引导私信询盘。下周重点：观察发帖频率与互动率变化。",
       topics: "1) 产品快讯：新款 gobo 灯效果短片段，前 3 秒出光效；2) 行业动态：照明展、海外工程政策、采购旺季资讯；3) 工厂实拍：产线/质检/仓储，建立源头工厂信任；4) 客户案例转推+点评，强化社会证明；5) 固定 #gobo #projector #LEDlighting 做系列化，短视频占比提升到 50% 以上。",
       benchmarks: "对标方向：① @Signify、@ChauvetPro 的短资讯节奏与标签策略；② 搜索 gobo projector 看海外询盘型账号的内容形式与涨粉路径；③ 关注海外照明工程/采购类 KOL 的互动对象，反向挖掘精准客户。重点对标：发帖频率、短资讯标题结构、推文中引导私信询盘的话术。"
     },
