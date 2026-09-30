@@ -53,8 +53,9 @@
     <!-- 统计概览 -->
     <div class="overview-metrics" style="margin-bottom:18px;">
         <div class="mini-stat"><div class="ms-label">询单总数</div><div class="ms-value" id="statTotal">0</div></div>
-        <div class="mini-stat success"><div class="ms-label">本月目标</div><div class="ms-value">5<small> 个</small></div></div>
-        <div class="mini-stat warning"><div class="ms-label">完成率</div><div class="ms-value" id="statRate">0<small>%</small></div></div>
+        <div class="mini-stat success"><div class="ms-label">本月询单</div><div class="ms-value" id="statMonth">0<small> 条</small></div></div>
+        <div class="mini-stat warning"><div class="ms-label">本周询单</div><div class="ms-value" id="statWeek">0<small> 条</small></div></div>
+        <div class="mini-stat"><div class="ms-label">本年询单</div><div class="ms-value" id="statYear">0<small> 条</small></div></div>
     </div>
 
     <!-- 询单数据表（5列） -->
@@ -323,21 +324,34 @@
     function refresh() {
         if (!body) return;
         var rows = body.querySelectorAll('tr');
-        var total = 0, matched = 0;
+        var total = 0, matched = 0, monthCnt = 0, weekCnt = 0, yearCnt = 0;
         var sourceCount = {};
+        var now = new Date();
+        var day = (now.getDay() + 6) % 7; // 周一为0
+        var monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - day); monday.setHours(0, 0, 0, 0);
+        var sunday = new Date(monday); sunday.setDate(monday.getDate() + 7);
         rows.forEach(function (tr) {
             if (!rowHasData(tr)) { tr.style.display = 'none'; return; }
             total++;
             var src = rowSource(tr);
             if (src) sourceCount[src] = (sourceCount[src] || 0) + 1;
-            var ok = inRange(rowDate(tr)) && (!curSource || src === curSource);
+            var ds = rowDate(tr);
+            var d = ds ? new Date(ds + 'T00:00:00') : null;
+            if (d && !isNaN(d) && d.getFullYear() === now.getFullYear()) {
+                yearCnt++;
+                if (d.getMonth() === now.getMonth()) monthCnt++;
+                if (d >= monday && d < sunday) weekCnt++;
+            }
+            var ok = inRange(ds) && (!curSource || src === curSource);
             tr.style.display = ok ? '' : 'none';
             if (ok) matched++;
         });
 
         var g = function (id) { return document.getElementById(id); };
         if (g('statTotal')) g('statTotal').textContent = total;
-        if (g('statRate')) g('statRate').innerHTML = Math.min(100, Math.round(total / 5 * 100)) + '<small>%</small>';
+        if (g('statMonth')) g('statMonth').innerHTML = monthCnt + '<small> 条</small>';
+        if (g('statWeek')) g('statWeek').innerHTML = weekCnt + '<small> 条</small>';
+        if (g('statYear')) g('statYear').innerHTML = yearCnt + '<small> 条</small>';
 
         // 来源分布 chips（展示全部来源，点击即筛选）
         var ssEl = document.getElementById('sourceStats');
