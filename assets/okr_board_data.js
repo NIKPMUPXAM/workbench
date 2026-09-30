@@ -3,7 +3,7 @@ window.WB_OKR_BOARD = {
  "doc": "市场部营销端OKR（2026）",
  "owner": "丁楠",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCN020X0lWlSkqbXrWY",
- "updated": "2026-09-27 07:55",
+ "updated": "2026-09-30 19:12",
  "ratings": {
   "1月": "B",
   "3月": "A-",
@@ -997,12 +997,15 @@ window.WB_OKR_BOARD = {
     "month": "9月",
     "metric": "外媒更新",
     "name": "同步发布到ins，facebook，youtube，X账号  7个外媒平台工作日每天同步更新2条视频",
-    "target": [
-     7,
-     "个"
-    ],
+    "targetNum": 7,
+    "targetUnit": "个",
+    "doneNum": null,
+    "doneUnit": "",
+    "pctStated": null,
+    "qual": null,
+    "note": "原定七个平台，后续扩展了领英，保持每个工作日更新",
     "pct": null,
-    "hasTarget": false,
+    "hasTarget": true,
     "hasDone": false,
     "showNums": false
    },
@@ -1010,8 +1013,14 @@ window.WB_OKR_BOARD = {
     "month": "9月",
     "metric": "外媒更新",
     "name": "优化外媒所有平台头像，详情，背景图",
-    "target": null,
-    "pct": null,
+    "targetNum": null,
+    "targetUnit": "",
+    "doneNum": null,
+    "doneUnit": "",
+    "pctStated": null,
+    "qual": 100,
+    "note": "已完成,每个平台的词数上限不一样，每个平台都做了不同的简介",
+    "pct": 100,
     "hasTarget": false,
     "hasDone": false,
     "showNums": false
@@ -1020,8 +1029,14 @@ window.WB_OKR_BOARD = {
     "month": "9月",
     "metric": "外媒更新",
     "name": "手机登录所有外媒平台",
-    "target": null,
-    "pct": null,
+    "targetNum": null,
+    "targetUnit": "",
+    "doneNum": null,
+    "doneUnit": "",
+    "pctStated": null,
+    "qual": 100,
+    "note": "已完成",
+    "pct": 100,
     "hasTarget": false,
     "hasDone": false,
     "showNums": false
@@ -1043,12 +1058,15 @@ window.WB_OKR_BOARD = {
     "month": "9月",
     "metric": "平台运营",
     "name": "完成10个制造网的对应产品主图视频（包括但不限于出镜讲解，纯效果，AI）",
-    "target": [
-     10,
-     "个"
-    ],
+    "targetNum": 10,
+    "targetUnit": "个",
+    "doneNum": null,
+    "doneUnit": "",
+    "pctStated": null,
+    "qual": null,
+    "note": "剪辑了八条视频，每个视频导出了三个时长",
     "pct": null,
-    "hasTarget": false,
+    "hasTarget": true,
     "hasDone": false,
     "showNums": false
    },
@@ -1056,12 +1074,15 @@ window.WB_OKR_BOARD = {
     "month": "9月",
     "metric": "平台运营",
     "name": "上架链接获得10个询盘",
-    "target": [
-     10,
-     "个"
-    ],
+    "targetNum": 10,
+    "targetUnit": "个",
+    "doneNum": null,
+    "doneUnit": "",
+    "pctStated": null,
+    "qual": null,
+    "note": "获得一个询盘",
     "pct": null,
-    "hasTarget": false,
+    "hasTarget": true,
     "hasDone": false,
     "showNums": false
    },
@@ -1069,14 +1090,17 @@ window.WB_OKR_BOARD = {
     "month": "9月",
     "metric": "平台运营",
     "name": "设计部下需求不低于10次",
-    "target": [
-     10,
-     "次"
-    ],
-    "pct": null,
-    "hasTarget": false,
-    "hasDone": false,
-    "showNums": false
+    "targetNum": 10,
+    "targetUnit": "次",
+    "doneNum": 11,
+    "doneUnit": "次",
+    "pctStated": null,
+    "qual": null,
+    "note": "11次",
+    "pct": 110,
+    "hasTarget": true,
+    "hasDone": true,
+    "showNums": true
    }
   ]
  }
