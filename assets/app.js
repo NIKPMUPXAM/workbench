@@ -133,6 +133,7 @@
             localStorage.setItem('wb_overview', JSON.stringify(ov));
         } catch (e) {}
     }
+    window.pushOverview = pushOverview;
 
     // 中国制造网页：核心指标 → 快照 + 顶部大数字同步
     (function () {
