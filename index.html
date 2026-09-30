@@ -2,13 +2,48 @@
 <html lang="zh-CN">
 <head>
   <script src="assets/data.js?v=s7"></script>
+  <script src="assets/okr_board_data.js?v=board12"></script>
+  <script src="assets/inquiry_data.js?v=i4"></script>
+  <script src="assets/media_stats.js?v=s14"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个人工作台</title>
-<!-- 根目录自动进入首个模块「工作日志」 -->
-<meta http-equiv="refresh" content="0; url=worklog.html">
-<script>try { location.replace('worklog.html'); } catch (e) {}</script>
+<title>工作台首页 · 丁楠</title>
 <link rel="stylesheet" href="assets/style.css?v=s7">
+<style>
+.reminder-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:860px){.reminder-wrap{grid-template-columns:1fr;}}
+.todo-add-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.todo-input{flex:1 1 240px;min-width:180px;padding:9px 11px;border:1px solid var(--border,#e3e6ee);border-radius:8px;font-size:14px;background:var(--card,#fff);color:var(--text,#1f2430);}
+.todo-sel,.todo-date{padding:8px;border:1px solid var(--border,#e3e6ee);border-radius:8px;background:var(--card,#fff);color:var(--text,#1f2430);font-size:13px;}
+.todo-list{display:flex;flex-direction:column;gap:8px;}
+.todo-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--border,#eef0f5);border-radius:10px;background:var(--card,#fff);}
+.todo-item.overdue{border-color:#f3b1b1;background:#fff6f6;}
+.todo-check input{width:17px;height:17px;margin-top:3px;cursor:pointer;}
+.todo-main{flex:1;min-width:0;}
+.todo-text{font-size:14px;color:var(--text,#1f2430);word-break:break-word;}
+.todo-text.done{text-decoration:line-through;color:#9aa0ac;}
+.todo-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px;font-size:12px;color:#8a90a0;}
+.todo-pri{padding:1px 7px;border-radius:20px;font-weight:600;}
+.pri-high{background:#fde8e8;color:#d23b3b;}
+.pri-mid{background:#fff2e0;color:#d98324;}
+.pri-low{background:#eef1f6;color:#6b7280;}
+.todo-due{background:#eef4ff;color:#3b6fd2;border-radius:20px;padding:1px 7px;}
+.todo-mod{color:#8a90a0;}
+.todo-actions{display:flex;align-items:center;gap:6px;}
+.todo-go{font-size:12px;color:#2f7d4f;text-decoration:none;white-space:nowrap;font-weight:600;}
+.todo-del{border:none;background:transparent;color:#b9bdc7;cursor:pointer;font-size:14px;line-height:1;}
+.todo-del:hover{color:#d23b3b;}
+.alert-list{display:flex;flex-direction:column;gap:8px;}
+.alert-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:14px;border:1px solid transparent;}
+.al-warn{background:#fff7e8;border-color:#f3dca0;color:#8a5a00;}
+.al-danger{background:#fdeeee;border-color:#f3b6b6;color:#a82929;}
+.al-ok{background:#eef9f0;border-color:#bfe6c8;color:#2f7d4f;}
+.al-icon{font-size:16px;}
+.al-text{flex:1;}
+.al-go{font-size:12px;color:#2f7d4f;text-decoration:none;font-weight:600;white-space:nowrap;}
+.empty-state{text-align:center;color:#9aa0ac;font-size:13px;}
+.empty-state .icon{font-size:26px;margin-bottom:6px;}
+</style>
 </head>
 <body>
 <div class="layout">
@@ -44,13 +79,13 @@
         <div class="ph-left">
             <div class="ph-icon">📊</div>
                 <div>
-                    <h1>8月</h1>
-                    <div class="ph-sub">本月工作总览 · 核心指标一览</div>
+                    <h1>工作台首页</h1>
+                    <div class="ph-sub">待办与重要事项一目了然 · 各模块数据自动同步</div>
                 </div>
         </div>
         <div class="ph-date">
-            <div class="d-main" id="currentDate">2026年8月</div>
-            <div id="currentWeek">第1周</div>
+            <div class="d-main" id="currentDate">--</div>
+            <div id="currentWeek">--</div>
         </div>
     </div>
 
@@ -58,9 +93,51 @@
     <div class="ov-hero">
         <div class="ov-hero-text">
             <div class="ov-hero-h" id="ovHello">👋 你好</div>
-            <div class="ov-hero-sub" id="ovHeroSub">本月核心指标与最新进展，一目了然。</div>
+            <div class="ov-hero-sub" id="ovHeroSub">今日待办与重要事项，已在下方为你汇总。</div>
         </div>
-        <div class="ov-hero-badge" id="ovWeekBadge">📅 第1周</div>
+        <div class="ov-hero-badge" id="ovWeekBadge">📅 --</div>
+    </div>
+
+    <!-- ===== 今日重要事项：我的待办 + 系统提醒 ===== -->
+    <div class="section-label">🔔 今日重要事项</div>
+    <div class="reminder-wrap">
+        <div class="module">
+            <div class="module-header">
+                <div class="module-title"><span class="icon">✅</span> 我的待办 <span class="tag tag-red" id="todoCount">0</span></div>
+                <button class="sidebar-btn" id="todoAdd">+ 添加</button>
+            </div>
+            <div class="module-body">
+                <div class="todo-add-row">
+                    <input id="todoInput" class="todo-input" placeholder="记一件要做的事，如：给王总发报价单">
+                    <select id="todoModule" class="todo-sel">
+                        <option value="">📌 不关联</option>
+                        <option value="worklog">📝 工作日志</option>
+                        <option value="inquiry">📊 询单统计</option>
+                        <option value="okr">📈 月工作数据看板</option>
+                        <option value="media">🌍 外媒运营平台</option>
+                        <option value="docs">📁 工作汇报与文档</option>
+                        <option value="portal">🚪 任意门</option>
+                        <option value="ai">🤖 AI工具</option>
+                    </select>
+                    <select id="todoPriority" class="todo-sel">
+                        <option value="高">高</option>
+                        <option value="中" selected>中</option>
+                        <option value="低">低</option>
+                    </select>
+                    <input id="todoDue" class="todo-date" type="date" title="到期日(可选)">
+                </div>
+                <div id="todoList" class="todo-list"></div>
+            </div>
+        </div>
+
+        <div class="module">
+            <div class="module-header">
+                <div class="module-title"><span class="icon">📡</span> 系统提醒</div>
+            </div>
+            <div class="module-body">
+                <div id="alertList" class="alert-list"></div>
+            </div>
+        </div>
     </div>
 
     <div class="section-label">核心指标</div>
@@ -102,12 +179,12 @@
             <div class="module-header"><div class="module-title"><span class="icon">🧭</span> 快捷入口</div></div>
             <div class="module-body">
                 <div class="ov-nav-grid">
-                    <a class="ov-nav-card" href="okr.html"><span class="ov-nav-ico">🎯</span><span class="ov-nav-meta"><span class="ov-nav-title">OKR工作计划</span><span class="ov-nav-desc">目标与进度</span></span></a>
                     <a class="ov-nav-card" href="worklog.html"><span class="ov-nav-ico">📝</span><span class="ov-nav-meta"><span class="ov-nav-title">工作日志</span><span class="ov-nav-desc">每日打卡</span></span></a>
                     <a class="ov-nav-card" href="inquiry.html"><span class="ov-nav-ico">📊</span><span class="ov-nav-meta"><span class="ov-nav-title">询单统计</span><span class="ov-nav-desc">登记与分布</span></span></a>
+                    <a class="ov-nav-card" href="okr-board.html"><span class="ov-nav-ico">📈</span><span class="ov-nav-meta"><span class="ov-nav-title">月工作数据看板</span><span class="ov-nav-desc">OKR完成度</span></span></a>
+                    <a class="ov-nav-card" href="media-platforms.html"><span class="ov-nav-ico">🌍</span><span class="ov-nav-meta"><span class="ov-nav-title">外媒运营平台</span><span class="ov-nav-desc">7账号矩阵</span></span></a>
                     <a class="ov-nav-card" href="docs.html"><span class="ov-nav-ico">📁</span><span class="ov-nav-meta"><span class="ov-nav-title">工作汇报与文档</span><span class="ov-nav-desc">月志 / 报告</span></span></a>
                     <a class="ov-nav-card" href="portal.html"><span class="ov-nav-ico">🚪</span><span class="ov-nav-meta"><span class="ov-nav-title">任意门</span><span class="ov-nav-desc">常用链接</span></span></a>
-                    <a class="ov-nav-card" href="#" id="ovTopLink"><span class="ov-nav-ico">⬆️</span><span class="ov-nav-meta"><span class="ov-nav-title">返回顶部</span><span class="ov-nav-desc">快速置顶</span></span></a>
                 </div>
             </div>
         </div>
@@ -120,12 +197,13 @@
     </div>
 
     <div class="footer">
-        <p>8月 · 数据自动保存于本地浏览器 · 建议使用 Chrome / Edge 浏览器打开</p>
+        <p>工作台首页 · 待办自动保存于本地浏览器 · 建议使用 Chrome / Edge 浏览器打开</p>
         <p style="margin-top:4px;">按 Ctrl+P 可打印当前页面供领导审阅</p>
     </div>
 </div>
 </div>
 <script src="assets/app.js?v=s10"></script>
+<script src="assets/todos.js?v=t1"></script>
 <script>
 (function () {
     var ov = {};
@@ -134,15 +212,24 @@
     if (h) {
         var hr = new Date().getHours();
         var g = hr < 6 ? '夜深了' : hr < 11 ? '早上好' : hr < 13 ? '中午好' : hr < 18 ? '下午好' : '晚上好';
-        h.textContent = '👋 ' + g + '，欢迎查看本月工作总览';
+        h.textContent = '👋 ' + g + '，欢迎回到工作台';
     }
     var wk = document.getElementById('currentWeek'), wb = document.getElementById('ovWeekBadge');
-    if (wb && wk) wb.textContent = '📅 ' + wk.textContent;
+    var d = new Date();
+    var cd = document.getElementById('currentDate');
+    if (cd) cd.textContent = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+    function weekOfMonth(date) {
+        var d1 = new Date(date.getFullYear(), date.getMonth(), 1);
+        return Math.ceil((date.getDate() + d1.getDay()) / 7);
+    }
+    var wlabel = '第' + weekOfMonth(d) + '周';
+    if (wk) wk.textContent = wlabel;
+    if (wb) wb.textContent = '📅 ' + wlabel;
     var linksDone = ov.linksDone !== undefined ? ov.linksDone : 45;
     var videosDone = ov.videosDone !== undefined ? ov.videosDone : 5;
     var inquiryTotal = ov.inquiryTotal !== undefined ? ov.inquiryTotal : 6;
     var logCount = ov.logCount !== undefined ? ov.logCount : 11;
-    var elapsed = new Date().getDate();
+    var elapsed = d.getDate();
     var heroSub = document.getElementById('ovHeroSub');
     if (heroSub) {
         heroSub.textContent = '本月已上架 ' + linksDone + ' 个链接 · 完成主图视频 ' + videosDone + ' 条 · 新增客户询单 ' + inquiryTotal + ' 单 · 工作日志 ' + logCount + ' 天。';
@@ -166,9 +253,9 @@
         try {
             var raw = localStorage.getItem('workbench_inquiry_v2');
             if (raw) {
-                var d = JSON.parse(raw);
-                if (d && d.rows) {
-                    var tmp = document.createElement('tbody'); tmp.innerHTML = d.rows;
+                var dd = JSON.parse(raw);
+                if (dd && dd.rows) {
+                    var tmp = document.createElement('tbody'); tmp.innerHTML = dd.rows;
                     tmp.querySelectorAll('tr').forEach(function (tr) {
                         var filled = false;
                         tr.querySelectorAll('input,select').forEach(function (i) { if (i.value && i.value.trim()) filled = true; });
@@ -190,8 +277,6 @@
             }).join('');
         }
     }
-    var top = document.getElementById('ovTopLink');
-    if (top) top.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 })();
 </script>
 </body>
