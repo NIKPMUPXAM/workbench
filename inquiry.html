@@ -264,7 +264,7 @@
     <div class="footer"><p>询单统计模块 · 数据自动保存于本地浏览器</p></div>
 </div>
 </div>
-<script src="assets/app.js?v=s10"></script>
+<script src="assets/app.js?v=s11"></script>
 <script>
 (function () {
     var table = document.getElementById('inquiryTable');
@@ -410,6 +410,7 @@
         body.addEventListener('change', refresh);
         if (window.MutationObserver) { new MutationObserver(refresh).observe(body, { childList: true, subtree: true }); }
         refresh();
+        window.__inquiryRefresh = refresh;
     }
 })();
 </script>
@@ -446,6 +447,11 @@
                 '</tr>';
         }).join('');
         tbody.innerHTML = rows;
+        /* 种子已写入表格：立即确定性地重算顶部统计概览 / 来源分布，
+           不再依赖 MutationObserver 的异步时机（旧逻辑会在种子载入前算一次，
+           导致「询单总数 / 完成率 / 来源分布」停在旧数据上、看起来没更新） */
+        try { if (window.__inquiryRefresh) window.__inquiryRefresh(); } catch (e) {}
+        try { if (typeof pushOverview === 'function') pushOverview({ inquiryTotal: (seed.items || []).length }); } catch (e) {}
         status('🟢 实时同步 · 来自企微文档「' + esc(seed.doc || '丁楠-矩阵抖音渠道') + '」 · 共 ' + seed.count + ' 条询单 · 更新于 ' + esc(seed.updated || ''));
     } else {
         status('🟡 未读取到企微文档询单数据，当前为手动录入模式');
