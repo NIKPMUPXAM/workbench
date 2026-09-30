@@ -2,8 +2,8 @@
 window.WB_INQUIRY_SEED = {
  "doc": "【2026】销售-营销端每日数据登记表 · 丁楠-矩阵抖音渠道",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCNxPCIv8HgTt2PENka",
- "updated": "2026-09-23 19:13",
- "count": 117,
+ "updated": "2026-09-30 19:21",
+ "count": 139,
  "items": [
   {
    "date": "2026-09-16",
@@ -998,16 +998,6 @@ window.WB_INQUIRY_SEED = {
   {
    "date": null,
    "month": "10月",
-   "customer": "+973 3925 3384",
-   "sales": "李倩",
-   "type": "-",
-   "demand": "车载款投影",
-   "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
-  },
-  {
-   "date": null,
-   "month": "10月",
    "customer": "＋966503169501",
    "sales": "谭佳婷",
    "type": "R",
@@ -1173,6 +1163,236 @@ window.WB_INQUIRY_SEED = {
    "type": "Fernando Carvalho",
    "demand": "葡萄牙",
    "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "919342270042",
+   "sales": "王总",
+   "type": "Vijayakumar Gunasekaran",
+   "demand": "",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "917827658755",
+   "sales": "王总",
+   "type": "Dee",
+   "demand": "印度有经销商吗?",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "919818105435",
+   "sales": "王总",
+   "type": "Anand Prakash",
+   "demand": "印度",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "96895488420",
+   "sales": "王总",
+   "type": "vasanthkumarraga",
+   "demand": "阿曼，Kindly share the product catalogue",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "918146607817",
+   "sales": "王总",
+   "type": "Bharat Deep",
+   "demand": "Any dealership in india For forklift lights",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "8801912864896",
+   "sales": "王总",
+   "type": "",
+   "demand": "孟加拉，这些是什么颜色的?",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "32499406882",
+   "sales": "王总",
+   "type": "Agri Et Fils",
+   "demand": "比利时，克拉克的保护套多少钱?",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "13888981374",
+   "sales": "小何/周鑫",
+   "type": "/",
+   "demand": "太阳能投影灯 要用12小时 打文字",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "962781251258",
+   "sales": "王总",
+   "type": "barjas ehs",
+   "demand": "约旦,我会先查看一下手册，然后尽快与你联系。",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "918006398491",
+   "sales": "王总",
+   "type": "opin8006398491",
+   "demand": "印度，边界灯",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "6799704944",
+   "sales": "王总",
+   "type": "joytish",
+   "demand": "斐济",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "966506725859",
+   "sales": "王总",
+   "type": "/",
+   "demand": "沙特，我想了解一下适合我需求的激光雕刻机。我目前拥有一台200瓦的Gubo设备，但正在寻找一款专门用于镜片加工的、价格实惠的激光雕刻机。我已阶\n上我的作品照片。",
+   "channel": "Gobo projector aladdin（jack）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "60122215528",
+   "sales": "王总",
+   "type": "chong cw",
+   "demand": "马来西亚,询价",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "94773215519",
+   "sales": "王总",
+   "type": "Hirantha",
+   "demand": "斯里兰卡，边界灯",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "923256616511",
+   "sales": "王总",
+   "type": "Shehroz khan",
+   "demand": "来自巴基斯坦NESRex能源系统的谢赫罗兹",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "18185105963",
+   "sales": "王总",
+   "type": "Viken Soulahian",
+   "demand": "美国，看产品手册·",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "919670035254",
+   "sales": "谭佳婷",
+   "type": "chandanpandey211",
+   "demand": "印度，",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "+91 93524 85503",
+   "sales": "王总",
+   "type": "+91 93524 85503",
+   "demand": "它在印度有售吗?",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "James Baird",
+   "sales": "王总",
+   "type": "",
+   "demand": "你们是如何处理美国分销的?我在物料搬运行业工作了40年，最后几年在国家安全委员会和行人意识制造公司工作。产品是否通过匹认证?",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "Vungandze",
+   "sales": "王总",
+   "type": "26876633134",
+   "demand": "斯威士兰请问可以咨询一下您的产品吗?",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "Printing Solutions for Businesses",
+   "sales": "王总",
+   "type": "213549186062",
+   "demand": "阿尔及利亚请问，我有一台激光机。我想学习怎么把不同颜色的图案片组合成一片完整的全彩图案片。\n如果你可以提供这种教学服务，或者有完整的培训课程，请告诉我价格，我可以付费学习",
+   "channel": "咨询WhatsApp",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "SPNP SYSTEMS",
+   "sales": "谢晓萁",
+   "type": "+660814530823",
+   "demand": "泰国产品手册目录",
+   "channel": "Gobo projector aladdin（jack）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "10月",
+   "customer": "Giselle",
+   "sales": "王总",
+   "type": "554191536463",
+   "demand": "我在巴西哪里可以买到?",
+   "channel": "Gobo projector aladdin（jack）",
    "source": "douyin"
   }
  ]
