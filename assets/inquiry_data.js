@@ -1,158 +1,108 @@
-// 询单数据 - 丁楠（拉取自企微共享文档「【2026】销售-营销端每日数据登记表 · 丁楠-矩阵抖音渠道」）
+// 询单数据 - 丁楠（拉取自企微共享文档「【2026】销售-营销端每日数据登记表 · 丁楠-新媒体渠道」）
 window.WB_INQUIRY_SEED = {
- "doc": "【2026】销售-营销端每日数据登记表 · 丁楠-矩阵抖音渠道",
+ "doc": "【2026】销售-营销端每日数据登记表 · 丁楠-新媒体渠道",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCNxPCIv8HgTt2PENka",
- "updated": "2026-09-30 19:21",
- "count": 139,
+ "updated": "2026-10-06 11:58",
+ "count": 170,
  "items": [
   {
-   "date": "2026-09-16",
-   "month": "9月",
-   "customer": "13147415331",
-   "sales": "小何/周鑫",
+   "date": "2026-10-04",
+   "month": "10月",
+   "customer": "Nguyen Hoang Dung越南",
+   "sales": "王总",
    "type": "",
-   "demand": "感应联动声光报警，类似地下车库场景",
-   "channel": "阿拉丁投影灯（朗哥）",
+   "demand": "阿拉丁投影灯",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-09-14",
-   "month": "9月",
-   "customer": "18989325388",
-   "sales": "俊彬",
+   "date": "2026-10-04",
+   "month": "10月",
+   "customer": "Baran Ali伊拉克",
+   "sales": "王总",
    "type": "",
-   "demand": "300米道路",
-   "channel": "视频号",
-   "source": "other"
-  },
-  {
-   "date": "2026-09-09",
-   "month": "9月",
-   "customer": "17773149256",
-   "sales": "小何/周鑫",
-   "type": "",
-   "demand": "小区单元楼牌号",
-   "channel": "阿拉丁投影灯（朗哥）",
-   "source": "douyin"
-  },
-  {
-   "date": "2026-09-07",
-   "month": "9月",
-   "customer": "18235427861",
-   "sales": "志良",
-   "type": "",
-   "demand": "投射距离 37米",
-   "channel": "阿拉丁亮化投影/深圳源头厂家",
-   "source": "douyin"
-  },
-  {
-   "date": "2026-09-01",
-   "month": "9月",
-   "customer": "juemei2022",
-   "sales": "文凤",
-   "type": "",
-   "demand": "太阳能款投影灯",
-   "channel": "阿拉丁投影灯（朗哥）",
-   "source": "douyin"
-  },
-  {
-   "date": "2026-09-01",
-   "month": "9月",
-   "customer": "18806666630",
-   "sales": "文凤",
-   "type": "",
-   "demand": "换图，公司名称",
-   "channel": "小红书",
-   "source": "other"
-  },
-  {
-   "date": "2026-08-22",
-   "month": "8月",
-   "customer": "13307300579",
-   "sales": "文凤",
-   "type": "图案",
-   "demand": "门店广告投影灯",
-   "channel": "国内抖音",
-   "source": "douyin"
-  },
-  {
-   "date": "2026-08-22",
-   "month": "8月",
-   "customer": "17351595886",
-   "sales": "小何/周鑫",
-   "type": "其他",
    "demand": "",
-   "channel": "国内抖音",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-08-21",
-   "month": "8月",
-   "customer": "vickymchou227",
-   "sales": "文凤",
-   "type": "图案",
-   "demand": "",
-   "channel": "国内抖音",
+   "date": "2026-10-04",
+   "month": "10月",
+   "customer": "Chatarreria Alex哥伦比亚",
+   "sales": "王总",
+   "type": "",
+   "demand": "打招呼",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-08-17",
-   "month": "8月",
-   "customer": "13692814327",
-   "sales": "文凤",
-   "type": "其他",
-   "demand": "",
-   "channel": "国内抖音",
+   "date": "2026-10-04",
+   "month": "10月",
+   "customer": "TR 土耳其",
+   "sales": "王总",
+   "type": "",
+   "demand": "打招呼",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-08-14",
-   "month": "8月",
-   "customer": "18643338867",
-   "sales": "志良",
-   "type": "文旅",
-   "demand": "彩虹灯",
-   "channel": "国内抖音",
+   "date": "2026-10-04",
+   "month": "10月",
+   "customer": "Mohsin Bin Ahamad卡塔尔",
+   "sales": "王总",
+   "type": "",
+   "demand": "我有安全设备的需求。",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-08-12",
-   "month": "8月",
-   "customer": "加我微信13925475295",
-   "sales": "志良",
-   "type": "广告",
-   "demand": "需要广告投影灯",
-   "channel": "国内抖音",
+   "date": "2026-10-03",
+   "month": "10月",
+   "customer": "Brade葡萄牙",
+   "sales": "王总",
+   "type": "",
+   "demand": "打招呼",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-08-08",
-   "month": "8月",
-   "customer": "SF18163593333",
-   "sales": "俊彬",
-   "type": "交安",
-   "demand": "行人过街激光警示柱",
-   "channel": "国内抖音",
+   "date": "2026-10-01",
+   "month": "10月",
+   "customer": "Nadir A美国",
+   "sales": "王总",
+   "type": "",
+   "demand": "请给我提供更多关于安全灯的信息。",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-08-08",
-   "month": "8月",
-   "customer": "SleepingSun_125",
-   "sales": "俊彬",
-   "type": "文旅",
-   "demand": "商业街亮化",
-   "channel": "国内抖音",
+   "date": "2026-10-01",
+   "month": "10月",
+   "customer": "Sadek突尼斯",
+   "sales": "王总",
+   "type": "",
+   "demand": "我们对您的产品很感兴趣我们想拿到一份报价。 您能给我们发送产品目录，以便我们做出合适的选择吗?",
+   "channel": "",
    "source": "douyin"
   },
   {
-   "date": "2026-08-03",
-   "month": "8月",
-   "customer": "陈世利（13808806459）\nwxid_1ezq4mmiarwi22",
-   "sales": "文凤",
-   "type": "图案",
-   "demand": "150W的图案灯50台现在什么价格？\n四图全彩的DMX512",
-   "channel": "国内抖音",
+   "date": "2026-09-21",
+   "month": "9月",
+   "customer": "Tony Selvaggio \nPointe Dairy and Specialty Foods Company \nTroy, Michigan USA",
+   "sales": "谭佳婷",
+   "type": "",
+   "demand": "送奶的公司，可能是需要做车载的广告投影灯",
+   "channel": "",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-09-21",
+   "month": "9月",
+   "customer": "谢尔盖",
+   "sales": "谢晓萁",
+   "type": "",
+   "demand": "SergeilHome chef",
+   "channel": "",
    "source": "douyin"
   },
   {
@@ -186,6 +136,26 @@ window.WB_INQUIRY_SEED = {
    "source": "other"
   },
   {
+   "date": "2026-07-22",
+   "month": "7月",
+   "customer": "13307300579",
+   "sales": "文凤",
+   "type": "图案",
+   "demand": "门店广告投影灯",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-22",
+   "month": "7月",
+   "customer": "17351595886",
+   "sales": "小何/周鑫",
+   "type": "其他",
+   "demand": "",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
    "date": "2026-07-21",
    "month": "7月",
    "customer": "Y15913296676",
@@ -206,6 +176,16 @@ window.WB_INQUIRY_SEED = {
    "source": "douyin"
   },
   {
+   "date": "2026-07-21",
+   "month": "7月",
+   "customer": "vickymchou227",
+   "sales": "文凤",
+   "type": "图案",
+   "demand": "",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
    "date": "2026-07-18",
    "month": "7月",
    "customer": "zhao714582185",
@@ -214,6 +194,26 @@ window.WB_INQUIRY_SEED = {
    "demand": "励影系列和雷丘",
    "channel": "直接加微信",
    "source": "other"
+  },
+  {
+   "date": "2026-07-17",
+   "month": "7月",
+   "customer": "13692814327",
+   "sales": "文凤",
+   "type": "其他",
+   "demand": "",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-16",
+   "month": "7月",
+   "customer": "13147415331",
+   "sales": "小何/周鑫",
+   "type": "",
+   "demand": "感应联动声光报警，类似地下车库场景",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
   },
   {
    "date": "2026-07-15",
@@ -236,6 +236,46 @@ window.WB_INQUIRY_SEED = {
    "source": "douyin"
   },
   {
+   "date": "2026-07-14",
+   "month": "7月",
+   "customer": "18643338867",
+   "sales": "志良",
+   "type": "文旅",
+   "demand": "彩虹灯",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-14",
+   "month": "7月",
+   "customer": "18989325388",
+   "sales": "俊彬",
+   "type": "",
+   "demand": "300米道路",
+   "channel": "视频号",
+   "source": "other"
+  },
+  {
+   "date": "2026-07-12",
+   "month": "7月",
+   "customer": "加我微信13925475295",
+   "sales": "志良",
+   "type": "广告",
+   "demand": "需要广告投影灯",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-09",
+   "month": "7月",
+   "customer": "17773149256",
+   "sales": "小何/周鑫",
+   "type": "",
+   "demand": "小区单元楼牌号",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
    "date": "2026-07-08",
    "month": "7月",
    "customer": "915436646",
@@ -243,6 +283,36 @@ window.WB_INQUIRY_SEED = {
    "type": "文旅",
    "demand": "水纹灯",
    "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-08",
+   "month": "7月",
+   "customer": "SF18163593333",
+   "sales": "俊彬",
+   "type": "交安",
+   "demand": "行人过街激光警示柱",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-08",
+   "month": "7月",
+   "customer": "SleepingSun_125",
+   "sales": "俊彬",
+   "type": "文旅",
+   "demand": "商业街亮化",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-07",
+   "month": "7月",
+   "customer": "18235427861",
+   "sales": "志良",
+   "type": "",
+   "demand": "投射距离 37米",
+   "channel": "阿拉丁亮化投影/深圳源头厂家",
    "source": "douyin"
   },
   {
@@ -258,12 +328,52 @@ window.WB_INQUIRY_SEED = {
   {
    "date": "2026-07-03",
    "month": "7月",
+   "customer": "13123077970",
+   "sales": "小何/周鑫",
+   "type": "其他",
+   "demand": "",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-03",
+   "month": "7月",
    "customer": "17313888886",
    "sales": "文凤",
    "type": "文旅",
    "demand": "水纹灯",
    "channel": "阿拉丁投影灯（朗哥）",
    "source": "douyin"
+  },
+  {
+   "date": "2026-07-03",
+   "month": "7月",
+   "customer": "陈世利（13808806459）\nwxid_1ezq4mmiarwi22",
+   "sales": "文凤",
+   "type": "图案",
+   "demand": "150W的图案灯50台现在什么价格？\n四图全彩的DMX512",
+   "channel": "国内抖音",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-01",
+   "month": "7月",
+   "customer": "juemei2022",
+   "sales": "文凤",
+   "type": "",
+   "demand": "太阳能款投影灯",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-07-01",
+   "month": "7月",
+   "customer": "18806666630",
+   "sales": "文凤",
+   "type": "",
+   "demand": "换图，公司名称",
+   "channel": "小红书",
+   "source": "other"
   },
   {
    "date": "2026-06-27",
@@ -426,6 +536,16 @@ window.WB_INQUIRY_SEED = {
    "source": "other"
   },
   {
+   "date": "2026-06-05",
+   "month": "6月",
+   "customer": "18735450554",
+   "sales": "文凤",
+   "type": "其他",
+   "demand": "灯具维修",
+   "channel": "深圳阿拉丁亮化投影灯厂家",
+   "source": "douyin"
+  },
+  {
    "date": "2026-05-28",
    "month": "5月",
    "customer": "17367941888",
@@ -464,6 +584,16 @@ window.WB_INQUIRY_SEED = {
    "demand": "要灯片",
    "channel": "阿拉丁投影灯（朗哥）",
    "source": "douyin"
+  },
+  {
+   "date": "2026-05-23",
+   "month": "5月",
+   "customer": "其他",
+   "sales": "俊彬",
+   "type": "其他",
+   "demand": "",
+   "channel": "视频号",
+   "source": "other"
   },
   {
    "date": "2026-05-22",
@@ -638,6 +768,16 @@ window.WB_INQUIRY_SEED = {
   {
    "date": "2026-05-02",
    "month": "5月",
+   "customer": "13516807931",
+   "sales": "海凤",
+   "type": "其他",
+   "demand": "电影院",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": "2026-05-02",
+   "month": "5月",
    "customer": "17364415000",
    "sales": "海凤",
    "type": "其他",
@@ -666,6 +806,26 @@ window.WB_INQUIRY_SEED = {
    "source": "douyin"
   },
   {
+   "date": "2026-04-01",
+   "month": "4月",
+   "customer": "文旅",
+   "sales": "海凤",
+   "type": "文旅",
+   "demand": "請問水紋燈多小錢",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "3月",
+   "customer": "范泽春13882057118",
+   "sales": "小何/周鑫",
+   "type": "",
+   "demand": "川渝地区，丁字路口，想做斑马线试点，后续想做代理",
+   "channel": "阿拉丁投影灯厂家",
+   "source": "douyin"
+  },
+  {
    "date": null,
    "month": "3月",
    "customer": "杨建峰",
@@ -673,6 +833,16 @@ window.WB_INQUIRY_SEED = {
    "type": "文旅",
    "demand": "商场外墙亮化",
    "channel": "深圳阿拉丁亮化投影灯厂家",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "3月",
+   "customer": "夏然浩15962455049",
+   "sales": "丁楠",
+   "type": "",
+   "demand": "工厂投影",
+   "channel": "阿拉丁投影灯厂家",
    "source": "douyin"
   },
   {
@@ -688,11 +858,31 @@ window.WB_INQUIRY_SEED = {
   {
    "date": null,
    "month": "3月",
+   "customer": "邹佳俊：ZXZY1207",
+   "sales": "丁楠",
+   "type": "文旅",
+   "demand": "农业景区做路面亮化",
+   "channel": "直接加微信",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "3月",
    "customer": "侯文凤oneyvon",
    "sales": "志良",
    "type": "图案",
    "demand": "洗浴中心logo灯",
    "channel": "直接加微信",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "3月",
+   "customer": "18938678623",
+   "sales": "俊彬",
+   "type": "其他",
+   "demand": "灯咨询维修，不是我们公司的",
+   "channel": "直接打电话",
    "source": "other"
   },
   {
@@ -858,6 +1048,16 @@ window.WB_INQUIRY_SEED = {
   {
    "date": null,
    "month": "4月",
+   "customer": "15102470511",
+   "sales": "俊彬",
+   "type": "其他",
+   "demand": "能发个彩叶么",
+   "channel": "阿拉丁投影灯（朗哥）",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "4月",
    "customer": "15531210977",
    "sales": "志良",
    "type": "其他",
@@ -977,422 +1177,532 @@ window.WB_INQUIRY_SEED = {
   },
   {
    "date": null,
-   "month": "9月",
-   "customer": "0553 112 607",
+   "month": "7月",
+   "customer": "Abdelkader Bendouha",
    "sales": "李倩",
-   "type": "Abdelkader Bendouha",
+   "type": "",
    "demand": "",
    "channel": "Gobo projector aladdin（jack）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "9月",
-   "customer": "530855227",
+   "month": "7月",
+   "customer": "ليزر اسماء عرسان مكه",
    "sales": "谢晓萁",
-   "type": "ليزر اسماء عرسان مكه",
+   "type": "",
    "demand": "激光婚礼名称",
    "channel": "Gobo projector aladdin（jack）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "＋966503169501",
+   "month": "7月",
+   "customer": "akerke",
    "sales": "谭佳婷",
-   "type": "R",
-   "demand": "需要100瓦的 10个灯片",
-   "channel": "Gobo projector aladdin（jack）",
-   "source": "douyin"
-  },
-  {
-   "date": null,
-   "month": "10月",
-   "customer": "+96892627761",
-   "sales": "谭佳婷",
-   "type": "koshat_jalaan",
-   "demand": "车间斑马线/通道图案，LYP300W",
+   "type": "",
+   "demand": "哈萨克斯坦客户看到ins视频；\nViola 江苏常州优盾公司，背后客户是哈萨克斯坦",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "emin.karakulluk@suralsu.com.tr",
-   "sales": "谢晓萁",
-   "type": "Emin Karakulluk",
+   "month": "7月",
+   "customer": "Martin Rye",
+   "sales": "谭佳婷",
+   "type": "",
+   "demand": "车载款投影，IP65",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "-",
+   "sales": "李倩",
+   "type": "",
    "demand": "车载款投影",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "王总WhatsApp联系",
+   "month": "8月",
+   "customer": "R",
+   "sales": "谭佳婷",
+   "type": "",
+   "demand": "需要100瓦的 10个灯片",
+   "channel": "Gobo projector aladdin（jack）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "koshat_jalaan",
+   "sales": "谭佳婷",
+   "type": "",
+   "demand": "车间斑马线/通道图案，LYP300W",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "Emin Karakulluk",
+   "sales": "谢晓萁",
+   "type": "",
+   "demand": "车载款投影",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "umutilbey",
    "sales": "王总",
-   "type": "umutilbey",
+   "type": "",
    "demand": "土耳其客户，需要地面警示叉车标识1个灯",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
+   "month": "8月",
    "customer": "+968 9582 8684",
    "sales": "欧阳钰",
-   "type": "+968 9582 8684",
+   "type": "",
    "demand": "叉车边界灯",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "＋92 333 3429747",
+   "month": "8月",
+   "customer": "Abdul Rauf Patel",
    "sales": "欧阳钰",
-   "type": "Abdul Rauf Patel",
+   "type": "",
    "demand": "警示安全投影stop  励影 巴基斯坦客户",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "＋569656909615",
+   "month": "8月",
+   "customer": "Siempre TRABAJANDO",
    "sales": "谢晓萁",
-   "type": "Siempre TRABAJANDO",
+   "type": "",
    "demand": "工业警示投影需求 智利客户",
    "channel": "Aladdin projection light(FACEBOOK)",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "+201113155222",
+   "month": "8月",
+   "customer": "Maksab Samuel",
    "sales": "谢晓萁",
-   "type": "Maksab Samuel",
+   "type": "",
    "demand": "叉车投影 励影 埃及客户",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "美国+1 443998 1048",
+   "month": "8月",
+   "customer": "Chen Wanglee",
    "sales": "李倩",
-   "type": "remeo",
+   "type": "",
+   "demand": "/",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "remeo",
+   "sales": "李倩",
+   "type": "",
    "demand": "叉车投影灯的需求",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "rahul.gurule@jbmgroup.com\n9172303737",
+   "month": "8月",
+   "customer": "ahulgurule",
    "sales": "李倩",
-   "type": "ahulgurule",
+   "type": "",
    "demand": "叉车路口拐角雷达感应投影灯",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "+964770506 8700",
+   "month": "8月",
+   "customer": "Fouad",
    "sales": "王总",
-   "type": "Fouad",
+   "type": "",
    "demand": "This is Engineer Fouad from Iraqi Kurdistan.\n我是来自伊拉克库尔德斯坦的工程师福阿德。",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "972504444088",
+   "month": "8月",
+   "customer": "SAMI GANEM",
    "sales": "王总",
-   "type": "SAMI GANEM",
+   "type": "",
    "demand": "以色列 叉车投影灯的需求",
    "channel": "Aladdin projection light(FACEBOOK)",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "905322833110",
+   "month": "8月",
+   "customer": "Mustafa",
    "sales": "王总",
-   "type": "Mustafa",
+   "type": "",
    "demand": "土耳其",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "923333664588",
+   "month": "8月",
+   "customer": "Taha Shabbir",
    "sales": "王总",
-   "type": "Taha Shabbir",
+   "type": "",
    "demand": "巴基斯坦",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "918290600110",
+   "month": "8月",
+   "customer": "Parvind Joshi",
    "sales": "王总",
-   "type": "Parvind Joshi",
+   "type": "",
    "demand": "印度",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "31654942777",
+   "month": "8月",
+   "customer": "Ehab s.",
    "sales": "王总",
-   "type": "Ehab s.",
+   "type": "",
    "demand": "荷兰",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "351913952191",
+   "month": "8月",
+   "customer": "Fernando Carvalho",
    "sales": "王总",
-   "type": "Fernando Carvalho",
+   "type": "",
    "demand": "葡萄牙",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "919342270042",
+   "month": "8月",
+   "customer": "Vijayakumar Gunasekaran",
    "sales": "王总",
-   "type": "Vijayakumar Gunasekaran",
+   "type": "",
    "demand": "",
    "channel": "Aladdin projection light(FACEBOOK)",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "917827658755",
+   "month": "8月",
+   "customer": "Dee",
    "sales": "王总",
-   "type": "Dee",
+   "type": "",
    "demand": "印度有经销商吗?",
    "channel": "Aladdin projection light(FACEBOOK)",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "919818105435",
+   "month": "8月",
+   "customer": "Anand Prakash",
    "sales": "王总",
-   "type": "Anand Prakash",
+   "type": "",
    "demand": "印度",
    "channel": "Aladdin projection light(FACEBOOK)",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "96895488420",
+   "month": "8月",
+   "customer": "vasanthkumarraga",
    "sales": "王总",
-   "type": "vasanthkumarraga",
+   "type": "",
    "demand": "阿曼，Kindly share the product catalogue",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "918146607817",
+   "month": "8月",
+   "customer": "Bharat Deep",
    "sales": "王总",
-   "type": "Bharat Deep",
+   "type": "",
    "demand": "Any dealership in india For forklift lights",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
+   "month": "8月",
    "customer": "8801912864896",
    "sales": "王总",
    "type": "",
    "demand": "孟加拉，这些是什么颜色的?",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "32499406882",
+   "month": "8月",
+   "customer": "Agri Et Fils",
    "sales": "王总",
-   "type": "Agri Et Fils",
+   "type": "",
    "demand": "比利时，克拉克的保护套多少钱?",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "13888981374",
+   "month": "8月",
+   "customer": "/",
    "sales": "小何/周鑫",
-   "type": "/",
+   "type": "",
    "demand": "太阳能投影灯 要用12小时 打文字",
    "channel": "阿拉丁投影灯（朗哥）",
    "source": "douyin"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "962781251258",
+   "month": "8月",
+   "customer": "barjas ehs",
    "sales": "王总",
-   "type": "barjas ehs",
+   "type": "",
    "demand": "约旦,我会先查看一下手册，然后尽快与你联系。",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "918006398491",
+   "month": "8月",
+   "customer": "opin8006398491",
    "sales": "王总",
-   "type": "opin8006398491",
+   "type": "",
    "demand": "印度，边界灯",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "6799704944",
+   "month": "8月",
+   "customer": "joytish",
    "sales": "王总",
-   "type": "joytish",
+   "type": "",
    "demand": "斐济",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "966506725859",
+   "month": "8月",
+   "customer": "/",
    "sales": "王总",
-   "type": "/",
+   "type": "",
    "demand": "沙特，我想了解一下适合我需求的激光雕刻机。我目前拥有一台200瓦的Gubo设备，但正在寻找一款专门用于镜片加工的、价格实惠的激光雕刻机。我已阶\n上我的作品照片。",
    "channel": "Gobo projector aladdin（jack）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "60122215528",
+   "month": "8月",
+   "customer": "chong cw",
    "sales": "王总",
-   "type": "chong cw",
+   "type": "",
    "demand": "马来西亚,询价",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "94773215519",
+   "month": "8月",
+   "customer": "Mirek teczy'ski .",
+   "sales": "李倩",
+   "type": "",
+   "demand": "雷达感应警示投影灯",
+   "channel": "Aladdin projection light(FACEBOOK)",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "Hirantha",
    "sales": "王总",
-   "type": "Hirantha",
+   "type": "",
    "demand": "斯里兰卡，边界灯",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "923256616511",
+   "month": "8月",
+   "customer": "Shehroz khan",
    "sales": "王总",
-   "type": "Shehroz khan",
+   "type": "",
    "demand": "来自巴基斯坦NESRex能源系统的谢赫罗兹",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "18185105963",
+   "month": "8月",
+   "customer": "Viken Soulahian",
    "sales": "王总",
-   "type": "Viken Soulahian",
+   "type": "",
    "demand": "美国，看产品手册·",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "919670035254",
+   "month": "8月",
+   "customer": "chandanpandey211",
    "sales": "谭佳婷",
-   "type": "chandanpandey211",
+   "type": "",
    "demand": "印度，",
    "channel": "Aladdin Gobo Projector（INS）",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
+   "month": "8月",
+   "customer": "a_s_al_breiki",
+   "sales": "欧阳钰",
+   "type": "",
+   "demand": "沙特，叉车警示灯",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "nabilarizkyanastasia",
+   "sales": "谭佳婷",
+   "type": "",
+   "demand": "叉车车载投影灯",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
    "customer": "+91 93524 85503",
    "sales": "王总",
-   "type": "+91 93524 85503",
+   "type": "",
    "demand": "它在印度有售吗?",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
+   "month": "8月",
    "customer": "James Baird",
    "sales": "王总",
    "type": "",
    "demand": "你们是如何处理美国分销的?我在物料搬运行业工作了40年，最后几年在国家安全委员会和行人意识制造公司工作。产品是否通过匹认证?",
    "channel": "Aladdin projection light(FACEBOOK)",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "Vungandze",
+   "month": "8月",
+   "customer": "26876633134",
    "sales": "王总",
-   "type": "26876633134",
+   "type": "",
    "demand": "斯威士兰请问可以咨询一下您的产品吗?",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "Printing Solutions for Businesses",
+   "month": "8月",
+   "customer": "213549186062",
    "sales": "王总",
-   "type": "213549186062",
+   "type": "",
    "demand": "阿尔及利亚请问，我有一台激光机。我想学习怎么把不同颜色的图案片组合成一片完整的全彩图案片。\n如果你可以提供这种教学服务，或者有完整的培训课程，请告诉我价格，我可以付费学习",
    "channel": "咨询WhatsApp",
-   "source": "douyin"
+   "source": "other"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "SPNP SYSTEMS",
+   "month": "8月",
+   "customer": "+660814530823",
    "sales": "谢晓萁",
-   "type": "+660814530823",
+   "type": "",
    "demand": "泰国产品手册目录",
    "channel": "Gobo projector aladdin（jack）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "554191536463",
+   "sales": "王总",
+   "type": "",
+   "demand": "我在巴西哪里可以买到?",
+   "channel": "Gobo projector aladdin（jack）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "8月",
+   "customer": "ahmadmianabrar",
+   "sales": "李倩",
+   "type": "",
+   "demand": "INTRESTED please quote for six pieces.",
+   "channel": "Aladdin Gobo Projector（INS）",
+   "source": "other"
+  },
+  {
+   "date": null,
+   "month": "9月",
+   "customer": "Mohamed Mohd",
+   "sales": "欧阳钰",
+   "type": "",
+   "demand": "车载投影灯",
+   "channel": "",
    "source": "douyin"
   },
   {
    "date": null,
-   "month": "10月",
-   "customer": "Giselle",
+   "month": "9月",
+   "customer": "Faical Agrebi",
    "sales": "王总",
-   "type": "554191536463",
-   "demand": "我在巴西哪里可以买到?",
-   "channel": "Gobo projector aladdin（jack）",
+   "type": "",
+   "demand": "亲爱的相关人士，\n我们是突尼斯的瓦楞包装制造商，我们想提高我们工厂和仓库的又车安全性。我们看了你们的两种产品，都想要你们的报价。\n1.又车警告标志投影仪(卡车前方地板上红色“小心又车”标志)\n2.又车边界灯(货车周围红色区域线)\n我们车队有柴油又车，请确认每款车型支持的电压范围。\n请寄给我们:\n样品和大批量的单价",
+   "channel": "",
+   "source": "douyin"
+  },
+  {
+   "date": null,
+   "month": "9月",
+   "customer": "H",
+   "sales": "王总",
+   "type": "",
+   "demand": "法国您好，又车需要多少光照?",
+   "channel": "",
    "source": "douyin"
   }
  ]
