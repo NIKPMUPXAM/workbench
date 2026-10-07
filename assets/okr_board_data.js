@@ -3,7 +3,7 @@ window.WB_OKR_BOARD = {
  "doc": "市场部营销端OKR（2026）",
  "owner": "丁楠",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCN020X0lWlSkqbXrWY",
- "updated": "2026-10-06 09:23",
+ "updated": "2026-10-07 09:18",
  "ratings": {
   "1月": "B",
   "3月": "A-",
@@ -26,7 +26,8 @@ window.WB_OKR_BOARD = {
   "6月",
   "7月",
   "8月",
-  "9月"
+  "9月",
+  "10月"
  ],
  "data": {
   "1月": [
@@ -1105,6 +1106,57 @@ window.WB_OKR_BOARD = {
     "hasTarget": true,
     "hasDone": true,
     "showNums": true
+   }
+  ],
+  "10月": [
+   {
+    "month": "10月",
+    "metric": "外媒更新",
+    "name": "8个外媒平台每天同步更新1条视频或图文",
+    "target": [
+     8,
+     "个"
+    ],
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "10月",
+    "metric": "外媒更新",
+    "name": "新平台（X，THREAD，PIN,YOUTUBE,领英）收获询单3个",
+    "target": [
+     3,
+     "个"
+    ],
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "10月",
+    "metric": "平台运营",
+    "name": "链接获得10个询盘",
+    "target": [
+     10,
+     "个"
+    ],
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "10月",
+    "metric": "平台运营",
+    "name": "制造网链接补齐至 300+，提升链接内容质量与询单转化",
+    "target": null,
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
    }
   ]
  }
