@@ -3,7 +3,7 @@ window.WB_OKR_BOARD = {
  "doc": "市场部营销端OKR（2026）",
  "owner": "丁楠",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCN020X0lWlSkqbXrWY",
- "updated": "2026-11-03 09:17",
+ "updated": "2026-11-04 09:23",
  "ratings": {
   "1月": "B",
   "3月": "A-",
@@ -1274,7 +1274,17 @@ window.WB_OKR_BOARD = {
    {
     "month": "11月",
     "metric": "外媒运营",
-    "name": "WhatsApp业务主页完成信息，产品搭建，获得许总认可",
+    "name": "WhatsApp业务主页后台完成信息填写，产品搭建",
+    "target": null,
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "11月",
+    "metric": "平台运营",
+    "name": "用AI软件完成产品的主图附图生成",
     "target": null,
     "pct": null,
     "hasTarget": false,
@@ -1297,7 +1307,7 @@ window.WB_OKR_BOARD = {
    {
     "month": "11月",
     "metric": "平台运营",
-    "name": "上架链接获得10个询盘",
+    "name": "制造网上架链接获得10个询盘",
     "target": [
      10,
      "个"
@@ -1310,7 +1320,17 @@ window.WB_OKR_BOARD = {
    {
     "month": "11月",
     "metric": "平台运营",
-    "name": "检查TK小店后台所有基础公司信息填写，上架50个链接",
+    "name": "完成TK小店后台所有基础公司信息填写",
+    "target": null,
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "11月",
+    "metric": "平台运营",
+    "name": "TK小店上架50个链接",
     "target": [
      50,
      "个"
@@ -1323,7 +1343,7 @@ window.WB_OKR_BOARD = {
    {
     "month": "11月",
     "metric": "公司改造协助",
-    "name": "提出三个公司改造提案并落实完成，成果获得许总认可",
+    "name": "提出三个公司改造提案并落实完成，结果获得许总认可",
     "target": null,
     "pct": null,
     "hasTarget": false,
