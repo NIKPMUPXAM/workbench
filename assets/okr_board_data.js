@@ -3,7 +3,7 @@ window.WB_OKR_BOARD = {
  "doc": "市场部营销端OKR（2026）",
  "owner": "丁楠",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCN020X0lWlSkqbXrWY",
- "updated": "2026-11-04 09:23",
+ "updated": "2026-11-05 09:13",
  "ratings": {
   "1月": "B",
   "3月": "A-",
@@ -1261,9 +1261,42 @@ window.WB_OKR_BOARD = {
    {
     "month": "11月",
     "metric": "外媒运营",
-    "name": "8个外媒平台每天同步更新2条视频或图文，视频类型继续围绕询单多的进行，持续放大",
+    "name": "8个外媒平台每天同步更新2条视频或图文，视频类型继续围绕询单多的进行，持续放大室内斑马线，一字黄光，（工业配套方案，雷达激光警报），IKE网站的真实工业场景等专题项目（真人出镜视频不低于10条）",
     "target": [
-     8,
+     10,
+     "条"
+    ],
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "11月",
+    "metric": "外媒运营",
+    "name": "WhatsApp业务主页后台完成信息填写，产品搭建  WhatsApp目录完结，并下发给外媒客户，目录得到王总认可",
+    "target": null,
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "11月",
+    "metric": "外媒运营",
+    "name": "WhatsApp业务主页完成产品上架，围绕外媒热门产品上新，以及雷丘包邮引流",
+    "target": null,
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "11月",
+    "metric": "外媒运营",
+    "name": "针对外媒的零售咨询，落实3个点 提升转化率，实际转化率提升20%（没有数据也算没完成）",
+    "target": [
+     3,
      "个"
     ],
     "pct": null,
@@ -1274,8 +1307,24 @@ window.WB_OKR_BOARD = {
    {
     "month": "11月",
     "metric": "外媒运营",
-    "name": "WhatsApp业务主页后台完成信息填写，产品搭建",
-    "target": null,
+    "name": "\n研究外媒付费，至少花费500并成功获得5个询盘，关于付费的事宜， 找许总沟通2次，按实际落地效果为准",
+    "target": [
+     5,
+     "个"
+    ],
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "11月",
+    "metric": "外媒运营",
+    "name": "查看聊天记录100条以上，得出结论，并且更新关键词（外贸）（参考右图这种关键词就要通过看聊天记录收集起来），结论和关键词汇总得到许总认可",
+    "target": [
+     100,
+     "条"
+    ],
     "pct": null,
     "hasTarget": false,
     "hasDone": false,
@@ -1344,6 +1393,16 @@ window.WB_OKR_BOARD = {
     "month": "11月",
     "metric": "公司改造协助",
     "name": "提出三个公司改造提案并落实完成，结果获得许总认可",
+    "target": null,
+    "pct": null,
+    "hasTarget": false,
+    "hasDone": false,
+    "showNums": false
+   },
+   {
+    "month": "11月",
+    "metric": "公司改造协助",
+    "name": "年会+展会方案初步构思，各提交一个可以落地执行的初步方案，展会方案获得王总认可",
     "target": null,
     "pct": null,
     "hasTarget": false,
