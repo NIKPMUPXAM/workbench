@@ -3,7 +3,7 @@ window.WB_OKR_BOARD = {
  "doc": "市场部营销端OKR（2026）",
  "owner": "丁楠",
  "doc_url": "https://doc.weixin.qq.com/sheet/e3_ALoAtgY-ADQCN020X0lWlSkqbXrWY",
- "updated": "2026-11-05 09:13",
+ "updated": "2026-11-06 09:28",
  "ratings": {
   "1月": "B",
   "3月": "A-",
@@ -1307,7 +1307,7 @@ window.WB_OKR_BOARD = {
    {
     "month": "11月",
     "metric": "外媒运营",
-    "name": "\n研究外媒付费，至少花费500并成功获得5个询盘，关于付费的事宜， 找许总沟通2次，按实际落地效果为准",
+    "name": "研究外媒付费，至少花费500并成功获得5个询盘，关于付费的事宜， 找许总沟通2次，按实际落地效果为准",
     "target": [
      5,
      "个"
